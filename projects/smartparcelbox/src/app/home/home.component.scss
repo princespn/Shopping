@@ -1,0 +1,35 @@
+$border: 1px solid #E5E5E5;
+
+.mat-card-how-works {
+  padding: 0;
+}
+
+.how-works-img {
+  border-radius: 50%;
+  overflow: hidden;
+  max-height: 70px;
+  max-width: 70px !important;
+}
+
+.how-works-img img {
+  vertical-align: middle;
+  height: 70px;
+  width: 100px;
+}
+
+.box-style {
+  border: $border;
+  padding: 40px 0;
+}
+
+.home-app-section {
+  text-align: center;
+}
+
+.home-app-icons {
+  max-width: 150px;
+}
+
+.home-main {
+  min-height: 70vh;
+}

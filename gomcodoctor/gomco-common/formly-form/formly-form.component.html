@@ -1,0 +1,46 @@
+<ng-template #soleButtonTemplate>
+    <button [class.spinner]="loading" [disabled]="(!updateOnSubmit && form.invalid) || loading" [color]="color" mat-raised-button type="submit">
+        {{label}}
+    </button>
+</ng-template>
+
+<ng-template #button>
+    <ng-container *ngIf="captcha; else soleButtonTemplate;">
+        <re-captcha
+            #captchaRef
+            size="invisible"
+            (resolved)="$event && submitWithCaptcha($event)"
+        ></re-captcha>
+        <button (click)="captchaRef.execute()" [class.spinner]="loading" [disabled]="(!updateOnSubmit && form.invalid) || loading" [color]="color" mat-raised-button type="button">
+            {{label}}
+        </button>
+    </ng-container>
+</ng-template>
+
+<ng-template #loadingTemplate>
+  <gomco-rect-loading></gomco-rect-loading>
+</ng-template>
+
+<form *ngIf="!dataLoading; else loadingTemplate" [formGroup]="form" (ngSubmit)="submit()" [ngClass]="formClass"
+      [fxLayout]="fxLayoutDir" [fxLayoutGap]="fxLayoutGapForm" [fxLayoutAlign]="fxLayoutAlignForm">
+    <formly-form [fxFlex]="formlyFxFlex" [form]="form" [fields]="fields" [model]="model" [options]="options" ></formly-form>
+
+    <ng-container *ngIf="!stepper && showButton">
+        <div *ngIf="wrapButton; else button">
+            <ng-template [ngTemplateOutlet]="button"></ng-template>
+        </div>
+    </ng-container>
+
+    <ng-container *ngIf="stepper">
+        <div fxLayout="row" fxLayoutAlign="end end" fxLayoutGap="20px">
+            <button mat-stroked-button (click)="stepper.previous()">Back</button>
+            <button [class.spinner]="loading" [disabled]="(!updateOnSubmit && form.invalid) || loading" mat-flat-button [color]="color" type="submit">Next</button>
+            <button *ngIf="skipStep" (click)="stepper.next()" mat-flat-button [color]="color" type="button">Skip</button>
+        </div>
+    </ng-container>
+
+    <ng-container *ngIf="buttonTemplate">
+        <ng-template [ngTemplateOutletContext]="{form: form, submit: submitCall, soleButtonTemplate: soleButtonTemplate}" [ngTemplateOutlet]="buttonTemplate">
+        </ng-template>
+    </ng-container>
+</form>

@@ -1,0 +1,507 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "version": 1,
+  "newProjectRoot": "projects",
+  "projects": {
+    "smartparcelbox": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      },
+      "root": "projects/smartparcelbox",
+      "sourceRoot": "projects/smartparcelbox/src",
+      "prefix": "gomco",
+      "architect": {
+        "build": {
+          "builder": "@angular-builders/custom-webpack:browser",
+          "options": {
+            "outputPath": "dist/smartparcelbox/browser",
+            "index": "projects/smartparcelbox/src/index.html",
+            "main": "projects/smartparcelbox/src/main.ts",
+            "polyfills": "projects/smartparcelbox/src/polyfills.ts",
+            "tsConfig": "projects/smartparcelbox/tsconfig.app.json",
+            "aot": true,
+            "assets": [
+              "projects/smartparcelbox/src/favicon.ico",
+              "projects/smartparcelbox/src/assets",
+              "projects/smartparcelbox/src/_redirects",
+              "projects/smartparcelbox/src/manifest.webmanifest",
+              {
+                "glob": "**/*.svg",
+                "input": "node_modules/ionicons/dist/ionicons/svg",
+                "output": "./svg"
+              }
+            ],
+            "styles": [
+              "@vex/styles/tailwind.scss",
+              "projects/smartparcelbox/src/styles.scss",
+              {
+                "input": "node_modules/@ionic/angular/css/normalize.css"
+              },
+              {
+                "input": "node_modules/@ionic/angular/css/structure.css"
+              },
+              {
+                "input": "node_modules/@ionic/angular/css/core.css"
+              },
+              {
+                "input": "projects/smartparcelbox/src/theme/variables.css"
+              }
+            ],
+            "scripts": [],
+            "customWebpackConfig": {
+              "path": "webpack.config.js"
+            },
+            "allowedCommonJsDependencies": [
+              "simplebar",
+              "highlight.js",
+              "faker",
+              "showdown",
+              "core-js/modules/es.string.match",
+              "core-js/modules/es.array.for-each",
+              "core-js/modules/es.string.replace",
+              "core-js/modules/es.regexp.exec",
+              "core-js/modules/es.function.name",
+              "core-js/modules/es.string.name",
+              "core-js/modules/es.array.reduce",
+              "core-js/modules/web.dom-collections.iterator",
+              "core-js/modules/es.string.iterator",
+              "core-js/modules/es.weak-map",
+              "core-js/modules/es.parse-int",
+              "core-js/modules/es.object.to-string",
+              "core-js/modules/es.object.assign",
+              "core-js/modules/es.array.iterator",
+              "core-js/modules/es.array.filter",
+              "core-js/modules/web.dom-collections.for-each",
+              "dom-set",
+              "dom-plane",
+              "angular-calendar/date-adapters/date-fns",
+              "calendar-utils/date-adapters/date-fns",
+              "@mattlewis92/dom-autoscroller"
+            ]
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/smartparcelbox/src/environments/environment.ts",
+                  "with": "projects/smartparcelbox/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "3mb",
+                  "maximumError": "5mb"
+                }
+              ],
+              "customWebpackConfig": {
+                "path": "webpack.prod.config.js"
+              },
+              "serviceWorker": true,
+              "ngswConfigPath": "projects/smartparcelbox/ngsw-config.json"
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-builders/custom-webpack:dev-server",
+          "options": {
+            "browserTarget": "smartparcelbox:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "smartparcelbox:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "smartparcelbox:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-builders/custom-webpack:karma",
+          "options": {
+            "main": "projects/smartparcelbox/src/test.ts",
+            "polyfills": "projects/smartparcelbox/src/polyfills.ts",
+            "tsConfig": "projects/smartparcelbox/tsconfig.spec.json",
+            "karmaConfig": "projects/smartparcelbox/karma.conf.js",
+            "assets": [
+              "projects/smartparcelbox/src/favicon.ico",
+              "projects/smartparcelbox/src/assets",
+              "projects/smartparcelbox/src/manifest.webmanifest"
+            ],
+            "styles": [
+              "projects/smartparcelbox/src/styles.scss"
+            ],
+            "scripts": [],
+            "customWebpackConfig": {
+              "path": "webpack.config.js"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/smartparcelbox/tsconfig.app.json",
+              "projects/smartparcelbox/tsconfig.spec.json",
+              "projects/smartparcelbox/e2e/tsconfig.json",
+              "projects/smartparcelbox/tsconfig.server.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        },
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "projects/smartparcelbox/e2e/protractor.conf.js",
+            "devServerTarget": "smartparcelbox:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "smartparcelbox:serve:production"
+            }
+          }
+        },
+        "server": {
+          "builder": "@angular-devkit/build-angular:server",
+          "options": {
+            "outputPath": "dist/smartparcelbox/server",
+            "main": "projects/smartparcelbox/server.ts",
+            "tsConfig": "projects/smartparcelbox/tsconfig.server.json"
+          },
+          "configurations": {
+            "production": {
+              "outputHashing": "media",
+              "fileReplacements": [
+                {
+                  "replace": "projects/smartparcelbox/src/environments/environment.ts",
+                  "with": "projects/smartparcelbox/src/environments/environment.prod.ts"
+                }
+              ],
+              "sourceMap": false,
+              "optimization": true
+            }
+          }
+        },
+        "serve-ssr": {
+          "builder": "@nguniversal/builders:ssr-dev-server",
+          "options": {
+            "browserTarget": "smartparcelbox:build",
+            "serverTarget": "smartparcelbox:server"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "smartparcelbox:build:production",
+              "serverTarget": "smartparcelbox:server:production"
+            }
+          }
+        },
+        "prerender": {
+          "builder": "@nguniversal/builders:prerender",
+          "options": {
+            "browserTarget": "smartparcelbox:build:production",
+            "serverTarget": "smartparcelbox:server:production",
+            "routes": [
+              "/"
+            ]
+          },
+          "configurations": {
+            "production": {}
+          }
+        },
+        "ionic-cordova-serve": {
+          "builder": "@ionic/angular-toolkit:cordova-serve",
+          "options": {
+            "cordovaBuildTarget": "smartparcelbox:ionic-cordova-build",
+            "devServerTarget": "smartparcelbox:serve"
+          },
+          "configurations": {
+            "production": {
+              "cordovaBuildTarget": "smartparcelbox:ionic-cordova-build:production",
+              "devServerTarget": "smartparcelbox:serve:production"
+            }
+          }
+        },
+        "ionic-cordova-build": {
+          "builder": "@ionic/angular-toolkit:cordova-build",
+          "options": {
+            "browserTarget": "smartparcelbox:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "smartparcelbox:build:production"
+            }
+          }
+        }
+      }
+    },
+    "gomco": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      },
+      "root": "projects/gomco",
+      "sourceRoot": "projects/gomco/src",
+      "prefix": "gomco",
+      "architect": {
+        "build": {
+          "builder": "@angular-builders/custom-webpack:browser",
+          "options": {
+            "outputPath": "dist/gomco/browser",
+            "index": "projects/gomco/src/index.html",
+            "main": "projects/gomco/src/main.ts",
+            "polyfills": "projects/gomco/src/polyfills.ts",
+            "tsConfig": "projects/gomco/tsconfig.app.json",
+            "aot": true,
+            "assets": [
+              "projects/gomco/src/favicon.ico",
+              "projects/gomco/src/assets",
+              "projects/gomco/src/_redirects",
+              "projects/gomco/src/manifest.webmanifest",
+              {
+                "glob": "**/*.svg",
+                "input": "node_modules/ionicons/dist/ionicons/svg",
+                "output": "./svg"
+              }
+            ],
+            "styles": [
+              "@vex/styles/tailwind.scss",
+              "projects/gomco/src/styles.scss",
+              {
+                "input": "node_modules/@ionic/angular/css/normalize.css"
+              },
+              {
+                "input": "node_modules/@ionic/angular/css/structure.css"
+              },
+              {
+                "input": "node_modules/@ionic/angular/css/core.css"
+              },
+              {
+                "input": "projects/gomco/src/theme/variables.css"
+              }
+            ],
+            "scripts": [],
+            "customWebpackConfig": {
+              "path": "webpack.config.js"
+            },
+            "allowedCommonJsDependencies": [
+              "simplebar",
+              "highlight.js",
+              "faker",
+              "showdown",
+              "core-js/modules/es.string.match",
+              "core-js/modules/es.array.for-each",
+              "core-js/modules/es.string.replace",
+              "core-js/modules/es.regexp.exec",
+              "core-js/modules/es.function.name",
+              "core-js/modules/es.string.name",
+              "core-js/modules/es.array.reduce",
+              "core-js/modules/web.dom-collections.iterator",
+              "core-js/modules/es.string.iterator",
+              "core-js/modules/es.weak-map",
+              "core-js/modules/es.parse-int",
+              "core-js/modules/es.object.to-string",
+              "core-js/modules/es.object.assign",
+              "core-js/modules/es.array.iterator",
+              "core-js/modules/es.array.filter",
+              "core-js/modules/web.dom-collections.for-each",
+              "dom-set",
+              "dom-plane",
+              "angular-calendar/date-adapters/date-fns",
+              "calendar-utils/date-adapters/date-fns",
+              "@mattlewis92/dom-autoscroller"
+            ]
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/gomco/src/environments/environment.ts",
+                  "with": "projects/gomco/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "3mb",
+                  "maximumError": "5mb"
+                }
+              ],
+              "customWebpackConfig": {
+                "path": "webpack.prod.config.js"
+              },
+              "serviceWorker": true,
+              "ngswConfigPath": "projects/gomco/ngsw-config.json"
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-builders/custom-webpack:dev-server",
+          "options": {
+            "browserTarget": "gomco:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "gomco:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "gomco:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-builders/custom-webpack:karma",
+          "options": {
+            "main": "projects/gomco/src/test.ts",
+            "polyfills": "projects/gomco/src/polyfills.ts",
+            "tsConfig": "projects/gomco/tsconfig.spec.json",
+            "karmaConfig": "projects/gomco/karma.conf.js",
+            "assets": [
+              "projects/gomco/src/favicon.ico",
+              "projects/gomco/src/assets",
+              "projects/gomco/src/manifest.webmanifest"
+            ],
+            "styles": [
+              "projects/gomco/src/styles.scss"
+            ],
+            "scripts": [],
+            "customWebpackConfig": {
+              "path": "webpack.config.js"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/gomco/tsconfig.app.json",
+              "projects/gomco/tsconfig.spec.json",
+              "projects/gomco/e2e/tsconfig.json",
+              "projects/gomco/tsconfig.server.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        },
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "projects/gomco/e2e/protractor.conf.js",
+            "devServerTarget": "gomco:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "gomco:serve:production"
+            }
+          }
+        },
+        "server": {
+          "builder": "@angular-devkit/build-angular:server",
+          "options": {
+            "outputPath": "dist/gomco/server",
+            "main": "projects/gomco/server.ts",
+            "tsConfig": "projects/gomco/tsconfig.server.json"
+          },
+          "configurations": {
+            "production": {
+              "outputHashing": "media",
+              "fileReplacements": [
+                {
+                  "replace": "projects/gomco/src/environments/environment.ts",
+                  "with": "projects/gomco/src/environments/environment.prod.ts"
+                }
+              ],
+              "sourceMap": false,
+              "optimization": true
+            }
+          }
+        },
+        "serve-ssr": {
+          "builder": "@nguniversal/builders:ssr-dev-server",
+          "options": {
+            "browserTarget": "gomco:build",
+            "serverTarget": "gomco:server"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "gomco:build:production",
+              "serverTarget": "gomco:server:production"
+            }
+          }
+        },
+        "prerender": {
+          "builder": "@nguniversal/builders:prerender",
+          "options": {
+            "browserTarget": "gomco:build:production",
+            "serverTarget": "gomco:server:production",
+            "routes": [
+              "/"
+            ]
+          },
+          "configurations": {
+            "production": {}
+          }
+        },
+        "ionic-cordova-serve": {
+          "builder": "@ionic/angular-toolkit:cordova-serve",
+          "options": {
+            "cordovaBuildTarget": "gomco:ionic-cordova-build",
+            "devServerTarget": "gomco:serve"
+          },
+          "configurations": {
+            "production": {
+              "cordovaBuildTarget": "gomco:ionic-cordova-build:production",
+              "devServerTarget": "gomco:serve:production"
+            }
+          }
+        },
+        "ionic-cordova-build": {
+          "builder": "@ionic/angular-toolkit:cordova-build",
+          "options": {
+            "browserTarget": "gomco:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "gomco:build:production"
+            }
+          }
+        }
+      }
+    }
+  },
+  "defaultProject": "smartparcelbox",
+  "cli": {
+    "analytics": false
+  }
+}

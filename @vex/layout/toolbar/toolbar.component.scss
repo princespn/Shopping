@@ -1,0 +1,64 @@
+:host {
+  background: var(--toolbar-background);
+  box-sizing: border-box;
+  color: var(--toolbar-color);
+  display: block;
+  white-space: nowrap;
+  width: 100%;
+  z-index: var(--toolbar-z-index);
+}
+
+.toolbar {
+  height: var(--toolbar-height);
+}
+
+.mat-icon {
+  color: var(--toolbar-icon-color);
+}
+
+a {
+  color: var(--toolbar-color);
+  text-decoration: none;
+}
+
+.logo-img {
+  min-width: 100px;
+  width: 20px;
+}
+
+.generic-logo {
+  text-align: center;
+  color: #777777;
+  font-size: 24px;
+  font-weight: 900;
+  text-transform: uppercase;
+  font-family: 'Audiowide', cursive;
+}
+
+.generic-logo span {
+  color: rgb(var(--color-primary));
+}
+
+//.generic-logo > span {
+//  font-size: 10px;
+//  margin: 2px 0 0 0;
+//}
+//.rx-text-small{
+//  color: #777;
+//  top: 7px;
+//  position: relative;
+//  left: -10.7px;
+//  letter-spacing: -1.5px;
+//}
+//.generic-logo > span::after, .generic-logo > span::before {
+//  display: inline-block;
+//  content: "";
+//  width: 18px;
+//  margin: 3px 3px;
+//}
+//.generic-logo > span::after, .generic-logo > span::before {
+//  border-top: 3px solid rgb(var(--color-primary));
+//}
+//.generic-logo > span::before {
+//  border-top: 3px solid #777777;
+//}

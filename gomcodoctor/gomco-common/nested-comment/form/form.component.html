@@ -1,0 +1,9 @@
+<div fxLayout="row">
+    <div fxLayout="column" fxFlex="4" class="comment-user-img">
+        <img [src]="user?.profilePicUrl" alt="user-img"/>
+    </div>
+    <gomco-formly-form label="Send" fxFlex="96" fxLayoutAlignForm="center center"  fxLayoutDir="row" fxLayoutGapForm="10px" [snackbar]="false" [successCallback]="successCallback" #commentForm *ngIf="'create' | operation: 'articlecomments' | async" [model]="model"
+                       [resource]="'articlecomments'" formClass="without-hint"
+                       [wrapButton]="true" [captcha]="false" [updateOnSubmit]="true"
+                       [fields]="fields"></gomco-formly-form>
+</div>

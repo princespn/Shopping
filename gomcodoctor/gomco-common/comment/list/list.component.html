@@ -1,0 +1,84 @@
+<!--h2 class="body-2 m-0 pt-6 text-secondary" fxLayout="row" fxLayoutAlign="start center">
+        <ic-icon [icon]="icInsertComment" class="ltr:mr-4 rtl:ml-4" fxFlex="none" size="24px"></ic-icon>
+        <span fxFlex="auto">COMMENTS</span>
+    </h2-->
+<div fxLayout="column" fxLayoutGap="10px">
+    <gomco-comment-form *ngIf="showForm" [comments]="comments" [resource]="resource"
+                        [reviewSubject]="subject"></gomco-comment-form>
+
+    <mat-card fxLayout="column" fxLayoutGap="15px">
+        <!-- No review available start-->
+        <ng-template #noReview>
+            <mat-card fxLayout="column" fxLayoutAlign="center center" class="c-card no-review-card py-5">
+                <h6>Be the first to leave a review</h6>
+                <div>
+                    <button *ngIf="'create' | operation: resource | async"  (click)="showForm = true" mat-button color="primary">Write a review</button>
+                </div>
+            </mat-card>
+        </ng-template>
+        <!-- No review available end-->
+
+        <ng-container *ngIf="comments.length > 0; else noReview">
+            <div fxLayout="row" fxLayoutAlign="space-between center">
+                <h5 class="text-uppercase">Reviews</h5>
+                <button *ngIf="'create' | operation: resource | async" (click)="showForm = true" mat-button color="primary">
+                    Post Review
+                </button>
+            </div>
+            <div fxLayout="column" fxLayoutGap="15px grid">
+                <div fxLayout="row wrap" fxLayoutGap="15px grid">
+                    <div fxFlex.lt-md="100" fxFlex.lt-lg="50" fxFlex.gt-md="50"
+                         *ngFor="let comment of comments | paginate: { itemsPerPage: 10, currentPage: 1, totalItems: 20 }">
+                        <mat-card class="c-card" fxLayout="column">
+                            <div fxLayout="column" fxFlex="calc(1 0 auto)">
+                                <div fxLayout="row" fxLayoutAlign="space-between center" fxFlex="100">
+                                    <h5>{{comment.title}}</h5>
+                                    <p><small>{{comment.createdAt | date}}</small></p>
+                                </div>
+                                <bar-rating class="star-rating" [readOnly]="true" [rate]="comment.rating"
+                                            [max]="5"></bar-rating>
+                                <p class="review-text">{{comment.comment}}</p>
+                            </div>
+                            <div fxLayout="row" class="user-top-border">
+                                <div fxLayout="column" class="img-user-review mr-2" fxFlex.gt-md="10">
+                                    <img src="assets/img/avatars/3.jpg" alt="user"/>
+                                </div>
+                                <div fxLayout="column" fxFlex="calc(1 0 auto)">
+                                    <div fxLayout="row" fxLayoutAlign="space-between center" fxFlex="100">
+                                        <p>{{comment.author.fullName}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </mat-card>
+                    </div>
+                </div>
+                <gomco-pagination-controls (pageChange)="nextPage($event)" (pageBoundsCorrection)="nextPage($event)">
+                </gomco-pagination-controls>
+            </div>
+        </ng-container>
+    </mat-card>
+</div>
+
+<!--
+    <div class="ltr:ml-10 rtl:mr-10 mt-2">
+        <div *ngFor="let comment of form.get('comments').value" class="mt-4">
+            <div fxLayout="row" fxLayoutAlign="start center">
+                <img [src]="comment.from.imageSrc" class="avatar h-8 w-8 ltr:mr-3 rtl:ml-3">
+                <div>
+                    <h4 class="body-2 m-0 leading-snug">{{ comment.from.name }}</h4>
+                    <h5 class="caption text-secondary m-0 leading-snug">{{ comment.date | relativeDateTime }}</h5>
+                </div>
+            </div>
+
+            <p class="m-0 mt-2 caption text-secondary">{{ comment.message }}</p>
+        </div>
+
+        <div class="mt-6" fxLayout="row" fxLayoutAlign="start center">
+            <img class="avatar w-8 h-8 ltr:mr-3 rtl:ml-3" fxFlex="none" src="assets/img/avatars/1.jpg">
+            <mat-form-field appearance="outline" class="vex-dense-form-field vex-flex-form-field" fxFlex="auto">
+                <input [formControl]="commentCtrl" matInput placeholder="Write a comment ...">
+                <button (click)="addComment()" class="-top-1" color="primary" mat-button matSuffix type="button">SEND</button>
+            </mat-form-field>
+        </div>
+    </div>
+-->

@@ -1,0 +1,18 @@
+<ng-template #batchactions let-bulkPost="bulkPost" let-bulkDelete="bulkDelete">
+    <!--    <button mat-button>New to Store</button>-->
+    <!--    <button mat-button color="cyan" (click)="bulkDelete()">Remove from Store</button>-->
+</ng-template>
+
+<ng-template #datetime let-row="row">
+    {{row.createdAt|date:'medium'}}
+</ng-template>
+
+<ng-template #edit let-row="row">
+    <a [routerLink]="'admin_pages_edit' | namedRoutePipe: {id: row.code}">
+        <button mat-button color="primary">Edit</button>
+    </a>
+</ng-template>
+
+<gomco-common-list createNewRouteName="admin_pages_create" [templates]="{createdAt: datetime, edit: edit}" [fields]="fields" label="Pages" [columns]="columns"  [batchActions]="batchactions" routeName="admin_pages_list" resource="pages">
+
+</gomco-common-list>

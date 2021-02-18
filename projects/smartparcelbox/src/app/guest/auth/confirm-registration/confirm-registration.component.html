@@ -1,0 +1,66 @@
+<div [@fadeInUp]>
+    <div fxLayout="column" fxFlex.lt-md="100" fxFlex.gt-sm="calc(70%-15px)" fxLayoutGap="15px">
+        <mat-horizontal-stepper linear #stepper class="registration-stepper">
+            <ng-template matStepperIcon="edit">
+                <mat-icon>edit</mat-icon>
+            </ng-template>
+            <ng-template matStepperIcon="image">
+                <mat-icon>add_a_photo</mat-icon>
+            </ng-template>
+            <ng-template matStepperIcon="last">
+                <mat-icon>done_all</mat-icon>
+            </ng-template>
+
+            <mat-step label="Personal details" state="edit">
+                <div fxLayout="column">
+                    <h5 class="mb-3">Please fill the below form.</h5>
+                    <form>
+                        <div fxLayout="row wrap" fxLayoutGap="15px">
+                            <mat-form-field appearance="outline" fxFlex="calc(50-15px)">
+                                <mat-label>First name</mat-label>
+                                <input matInput placeholder="Manpreet">
+                            </mat-form-field>
+                            <mat-form-field appearance="outline" fxFlex="calc(50-15px)">
+                                <mat-label>Last name</mat-label>
+                                <input matInput placeholder="Kaur">
+                            </mat-form-field>
+                        </div>
+                        <div fxLayout="row wrap" fxLayoutGap="15px">
+                            <mat-form-field appearance="outline" fxFlex="calc(50-15px)">
+                                <mat-label>Mobile Number</mat-label>
+                                <input matInput placeholder="080373944">
+                            </mat-form-field>
+                        </div>
+                        <div fxLayout="row wrap" fxLayoutGap="15px" fxLayoutAlign="end" class="border-top-btn pt-5">
+                            <button mat-stroked-button>Skip</button>
+                            <button mat-flat-button color="primary">Next</button>
+                        </div>
+                    </form>
+                </div>
+            </mat-step>
+            <mat-step label="Profile Picture" state="image">
+                <div fxLayout="column" fxLayoutGap="15px">
+                    <gomco-formly-form [skipStep]="true" [reset]="false" fxFlex="1 0 auto" [param]="pharmacy"
+                                       method="update" [stepper]="stepper" [resource]="resource" formClass=""
+                                       fxLayoutDir="column" [fields]="picFields"></gomco-formly-form>
+                </div>
+            </mat-step>
+            <mat-step label="Done" state="last">
+                <div fxLayout="column" fxLayoutAlign="center center">
+                    <mat-icon color="primary" class="done-icon">check_circle_outline</mat-icon>
+                    <h2>Congratulations!</h2>
+                    <p class="my-5">Your account has been successfully created</p>
+
+                    <a [routerLink]="'/'">
+                        <button mat-flat-button color="primary">Go to Homepage</button>
+                    </a>
+
+                </div>
+            </mat-step>
+        </mat-horizontal-stepper>
+    </div>
+</div>
+
+<ng-template #loading>
+    <gomco-rect-loading></gomco-rect-loading>
+</ng-template>

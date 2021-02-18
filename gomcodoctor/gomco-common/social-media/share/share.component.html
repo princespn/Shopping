@@ -1,0 +1,21 @@
+<ng-container *ngFor="let button of buttons">
+    <button mat-icon-button
+            [shareButton]="button"
+            #fbBtn="shareButton"
+            [style.color]="shareService.prop[button]?.color">
+        <fa-icon *ngIf="fbBtn" [icon]="fbBtn.icon" size="lg"></fa-icon>
+    </button>
+</ng-container>
+
+<!--<button class="mr-3">-->
+<!--  <i class="fab fa-facebook-f"></i>-->
+<!--</button>-->
+<!--<button class="mr-3">-->
+<!--  <i class="fab fa-twitter"></i>-->
+<!--</button>-->
+<!--<button class="mr-3">-->
+<!--  <i class="fab fa-google-plus-g"></i>-->
+<!--</button>-->
+<!--<button class="mr-3">-->
+<!--  <i class="fab fa-instagram"></i>-->
+<!--</button>-->

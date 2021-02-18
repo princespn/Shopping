@@ -1,0 +1,85 @@
+.file-drop-wrapper {
+  padding: 20px;
+}
+
+.file-uploader .file-drop-wrapper {
+  background: none !important;
+}
+
+#dropZone {
+  border: none !important;
+}
+
+ngx-file-picker {
+  margin-bottom: 20px;
+  height: auto;
+}
+
+.content-top-text {
+  font-size: 18px;
+  font-weight: bold;
+  color: #5b5b7b;
+}
+.content-center-text {
+  color: #90a0bc;
+  font-size: 14px;
+}
+
+.preview-existing {
+  height: 100px;
+}
+
+.img-wraps {
+  position: relative;
+  display: inline-block;
+  font-size: 0;
+}
+
+.img-wraps .closes {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  z-index: 100;
+  background-color: #FFF;
+  padding: 4px 3px;
+
+  color: #000;
+  font-weight: bold;
+  cursor: pointer;
+
+  text-align: center;
+  font-size: 22px;
+  line-height: 10px;
+  border-radius: 50%;
+  border:1px solid;
+}
+
+.img-wraps:hover .closes {
+  opacity: 1;
+}
+
+
+
+.upload-pic-hover {
+  background: rgba(0, 0, 0, 0.7);
+  position: absolute;
+  height: 250px;
+  width: 250px;
+  display: none;
+  text-align: center;
+}
+
+.upload-pic-hover button {
+  top: 44%;
+}
+
+.profile-pic:hover + .upload-pic-hover {
+  display: block;
+}
+
+.profile-pic-size {
+  width: 250px;
+  height: 250px;
+  cursor: pointer;
+}
+

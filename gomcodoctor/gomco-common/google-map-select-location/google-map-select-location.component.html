@@ -1,0 +1,23 @@
+<mat-dialog-content class="dialog-box-content">
+    <div fxLayout="column wrap">
+        <mat-google-maps-autocomplete appearance="outline" [country]="['IN']"
+                                      (onAutocompleteSelected)="onAutocompleteSelected($event)"
+                                      (onLocationSelected)="onLocationSelected($event)"
+                                      (onGermanAddressMapped)="onGermanAddressMapped($event)">
+        </mat-google-maps-autocomplete>
+        <div class="map-border" fxFlex>
+            <agm-map (centerChange)="markerDragEnd($event)" [mapDraggable]="true" [usePanning]="true" [latitude]="lat"
+                     [longitude]="long" [zoom]="15" [disableDefaultUI]="false">
+                <!--<agm-marker (dragEnd)="markerDragEnd($event)" [latitude]="lat" [longitude]="long" [markerDraggable]="true"></agm-marker>-->
+            </agm-map>
+            <div class="map-center-overlay">
+                <img src="../../../assets/marker.svg" width="30" height="30">
+            </div>
+        </div>
+    </div>
+</mat-dialog-content>
+<mat-dialog-actions>
+    <button mat-flat-button mat-dialog-close>Cancel</button>
+    <!-- The mat-dialog-close directive optionally accepts a value as a result for the dialog. -->
+    <button mat-flat-button color="cyan" (click)="successCallback()">Done</button>
+</mat-dialog-actions>

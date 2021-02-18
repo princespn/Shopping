@@ -1,0 +1,43 @@
+<div class="footer" fxLayout="column">
+    <div fxHide.lt-lg="true" fxLayout="row wrap" vexContainer>
+        <div fxFlex.gt-md="calc(100/4)">
+            <h5>KNOW US</h5>
+            <ul>
+                <li><a [routerLink]="'pages_page_detail' | namedRoutePipe: {id: 'about-us'}">About Us</a></li>
+                <li><a [routerLink]="'support_contactus' | namedRoutePipe">Contact Us</a></li>
+                <li><a [routerLink]="'pages_page_detail' | namedRoutePipe: {id: 'terms-and-condtions'}">Terms and
+                    Conditions</a></li>
+                <li><a [routerLink]="'pages_page_detail' | namedRoutePipe: {id: 'privacy-policy'}">Privacy Policy</a>
+                </li>
+            </ul>
+        </div>
+        <div fxFlex.gt-md="calc(100/4)">
+            <h5>CATEGORIES</h5>
+            <ul>
+                <li>Family Care</li>
+                <li>Lifestyle</li>
+                <li>Personal care</li>
+                <li>Treatments</li>
+            </ul>
+        </div>
+        <div fxFlex.gt-md="calc(100/4)">
+            <h5>SOCIAL</h5>
+            <ul>
+                <li>Facebook</li>
+                <li>Twitter</li>
+                <li>LinkedIn</li>
+                <li>Youtube</li>
+            </ul>
+        </div>
+        <div fxFlex.gt-md="calc(100/4)">
+            <h5>Download App</h5>
+            <ul class="footer-app-icon">
+                <li><img src="assets/images/img/apple.png" alt="app icon"></li>
+                <li><img src="assets/images/img/google.png" alt="app icon"></li>
+            </ul>
+        </div>
+    </div>
+    <div class="second-footer" fxFlex="100" fxLayout="row" fxLayoutAlign="start center">
+        <div>Copyright© 2021 RxDOST | All rights reserved</div>
+    </div>
+</div>

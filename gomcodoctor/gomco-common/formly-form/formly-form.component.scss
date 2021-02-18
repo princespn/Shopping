@@ -1,0 +1,48 @@
+mat-checkbox {
+  display: block;
+}
+
+@media only screen and (min-width: 600px) {
+  .display-flex {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+}
+
+.flex-1 { flex: 1; }
+
+.flex-2 { flex: 2; }
+
+.flex-3 { flex: 3; }
+
+.flex-4 { flex: 4; }
+
+.flex-5 { flex: 5; }
+
+.flex-6 { flex: 6; }
+
+//formly-group [class*="flex-"] {
+  //padding-left: 10px;
+  //padding-right: 10px;
+//}
+
+//formly-group [class*="flex-"]:first-child {
+//  padding-left: 0;
+//}
+
+//formly-group [class*="flex-"]:last-child {
+//  padding-right: 0;
+//}
+
+.without-hint .mat-form-field-wrapper {
+  margin-bottom: -1.25em;
+}
+
+.without-hint .mat-form-field {
+  margin-bottom: 0px;
+}
+
+.without-hint .mat-form-field-flex {
+  padding-top: 0!important;
+}

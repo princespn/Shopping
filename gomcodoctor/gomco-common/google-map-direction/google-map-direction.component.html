@@ -1,0 +1,18 @@
+<mat-dialog-content>
+    <div fxLayout="column wrap" fxLayoutAlign="center">
+        <div class="map" fxFlex>
+            <agm-map [mapDraggable]="true" [usePanning]="true" [latitude]="origin.lat" [longitude]="origin.lng" [zoom]="15" [disableDefaultUI]="false">-->
+                <!--            <agm-marker (dragEnd)="markerDragEnd($event)" [latitude]="lat" [longitude]="long" [markerDraggable]="true"></agm-marker>-->
+                <agm-direction [origin]="origin"
+                        [destination]="destination">
+                </agm-direction>
+            </agm-map>
+        </div>
+    </div>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+    <button mat-button mat-dialog-close>Cancel</button>
+    <!-- The mat-dialog-close directive optionally accepts a value as a result for the dialog. -->
+<!--    <button mat-button color="primary" (click)="successCallback()">Done</button>-->
+</mat-dialog-actions>

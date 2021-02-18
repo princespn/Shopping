@@ -1,0 +1,20 @@
+<div>
+	<mat-form-field>
+		<mat-label>{{label}}</mat-label>
+		<span matPrefix [innerHTML]="prefix"></span>
+
+		<input #inlineEditControl (click)="edit()" [readonly]="!editing" matInput [required]="required" (keypress)="keypress($event)" [formControl]="control" type="number"/>
+
+		<span matSuffix fxLayout="row"  *ngIf="editing && !processing">
+			<button mat-icon-button [color]="confirmColor" (click)="confirm($event)"><mat-icon>done</mat-icon></button>
+			<button mat-icon-button [color]="cancelColor" (click)="cancel($event)"><mat-icon>clear</mat-icon></button>
+		</span>
+<!--		<span matSuffix  *ngIf="!editing && !processing">-->
+<!--			<button mat-icon-button [color]="'primary'" (click)="edit()"><mat-icon>mode_edit</mat-icon></button>-->
+<!--		</span>-->
+		<span matSuffix *ngIf="success && !editing">
+			<mat-icon class="green-icon">done</mat-icon>
+		</span>
+		<mat-spinner matSuffix *ngIf="processing" mode="indeterminate" diameter="17"></mat-spinner>
+	</mat-form-field>
+</div>

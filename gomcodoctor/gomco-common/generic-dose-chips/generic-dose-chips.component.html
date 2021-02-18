@@ -1,0 +1,5 @@
+<mat-chip-list aria-label="Generic">
+    <mat-chip class="chip-box" [routerLink]="'generic_detail' | namedRoutePipe: genericdose.generic"  *ngFor="let genericdose of brand.genericdoses; let i=index;">
+        {{genericdose.name}}
+    </mat-chip>
+</mat-chip-list>

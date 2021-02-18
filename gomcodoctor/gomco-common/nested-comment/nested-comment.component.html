@@ -1,0 +1,71 @@
+<ng-template let-comment="comment" let-isChild="isChild" #commentTemplate>
+    <div class="mt-2" fxLayout="column" fxFlex="100">
+        <div fxLayout="row" fxFlex="100">
+            <div fxLayout="column" fxFlex="4" class="comment-user-img">
+                <img [src]="comment?.author.profilePicUrl" alt="user-img"/>
+            </div>
+            <div fxLayout="column" fxFlex="96">
+                <div fxLayout="row">
+                    <div fxFlex="100" fxLayout="column" class="comment-section-right">
+                        <div fxLayout="row" fxLayoutAlign="space-between start">
+                            <a [routerLink]="'users_detail' | namedRoutePipe: comment?.author" class="color-primary">
+                                <h6>{{comment?.author.fullName}}</h6>
+                            </a>
+
+                            <p><small>{{comment.createdAt | date}}</small></p>
+                        </div>
+                        <p>{{comment.comment}}</p>
+                    </div>
+                    <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+                        <mat-icon>more_horiz</mat-icon>
+                    </button>
+                    <mat-menu #menu="matMenu">
+                        <button mat-menu-item>
+                            <mat-icon>spam</mat-icon>
+                            <span>Report Spam</span>
+                        </button>
+<!--                        <button mat-menu-item disabled>-->
+<!--                            <mat-icon>voicemail</mat-icon>-->
+<!--                            <span>Check voice mail</span>-->
+<!--                        </button>-->
+<!--                        <button mat-menu-item>-->
+<!--                            <mat-icon>notifications_off</mat-icon>-->
+<!--                            <span>Disable alerts</span>-->
+<!--                        </button>-->
+                    </mat-menu>
+                </div>
+                <div fxLayout="row" fxFlex="100" class="comment-icons"
+                     fxLayoutAlign="space-between start">
+                    <div fxLayoutGap="10px">
+<!--                        <button>-->
+<!--                            <mat-icon inline="true">thumb_up_alt</mat-icon>-->
+<!--                            Like-->
+<!--                        </button>-->
+                        <button (click)="reply()">
+                            <mat-icon inline="true">reply</mat-icon>
+                            Reply
+                        </button>
+                    </div>
+<!--                    <button>-->
+<!--                        <mat-icon inline="true">delete</mat-icon>-->
+<!--                        Delete-->
+<!--                    </button>-->
+                </div>
+
+                <ng-container *ngFor="let child of comment.enabledChildren">
+                    <ng-template [ngTemplateOutletContext]="{comment: child, isChild: true}" [ngTemplateOutlet]="commentTemplate">
+                    </ng-template>
+                </ng-container>
+
+                <ng-container *ngIf="showCommentForm && !isChild">
+                    <gomco-nested-comment-form #commentForm [comment]="comment"></gomco-nested-comment-form>
+                </ng-container>
+
+                <!--                <a href="#" class="read-more-text mt-1">View more comments</a>-->
+            </div>
+        </div>
+    </div>
+</ng-template>
+
+<ng-template [ngTemplateOutletContext]="{comment: comment, isChild: false}" [ngTemplateOutlet]="commentTemplate">
+</ng-template>

@@ -1,0 +1,16 @@
+<pagination-template  #p="paginationApi"
+                      [id]="id"
+                      [maxSize]="maxSize"
+                      (pageChange)="pageChange.emit($event)"
+                      (pageBoundsCorrection)="pageBoundsCorrection.emit($event)">
+
+    <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="15px" fxFlex>
+        <button [disabled]="p.isFirstPage()" (click)="p.previous()" fxFlex.xs="50" fxFlex.lt-lg="25" fxFlex.gt-md="15" mat-button mat-flat-button >
+            <i class="fas fa-long-arrow-alt-left"></i>
+            Previous
+        </button>
+        <button [disabled]="p.isLastPage()" (click)="p.next()" fxFlex.xs="50" fxFlex.lt-lg="25" fxFlex.gt-md="15" mat-button mat-flat-button>Next <i
+                class="fas fa-long-arrow-alt-right"></i></button>
+
+    </div>
+</pagination-template>
