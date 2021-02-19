@@ -1,8 +1,8 @@
 export const environment = {
   production: true,
   apiPath: {
-    baseApiUrl: 'https://mpconnectorapi.centcorner.com/',
-    apiHost: 'https://mpconnectorapi.centcorner.com',
+    baseApiUrl: 'https://homescapes.lamne.com/',
+    apiHost: 'https://homescapes.lamne.com',
   },
   snackBarTimeOut: {
     httpError: 5000, // 5 sec

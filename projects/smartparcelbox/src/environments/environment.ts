@@ -5,8 +5,8 @@
 export const environment = {
   production: false,
   apiPath: {
-    baseApiUrl: 'https://mpconnectorapi.centcorner.com/index_dev.php/',
-    apiHost: 'https://mpconnectorapi.centcorner.com',
+    baseApiUrl: 'https://homescapes.lamne.com/',
+    apiHost: 'https://homescapes.lamne.com',
   },
   snackBarTimeOut: {
     httpError: 5000, // 5 sec
@@ -16,7 +16,8 @@ export const environment = {
 /*
  * For easier debugging in development mode, you can import the following file
  * to ignore zone related error stack frames such as `zone.run`, `zoneDelegate.invokeTask`.
- *
+ *https://homescapes.lamne.com/api/login_check
+username, password
  * This import should be commented out in production mode because it will have a negative impact
  * on performance if an error is thrown.
  */

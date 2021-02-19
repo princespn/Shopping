@@ -3,7 +3,7 @@ export function jwtOptionsFactory(tokenService) {
         tokenGetter: () => {
             return tokenService.token;
         },
-        allowedDomains: ['genericpedia.lamne.com', 'mpconnectorapi.centcorner.com'],
+        allowedDomains: ['genericpedia.lamne.com', 'homescapes.lamne.com'],
         skipWhenExpired: true,
         throwNoTokenError: false,
     };
