@@ -45,8 +45,8 @@ export class ChangePasswordComponent implements OnInit {
           type: 'visiblePassword',
           templateOptions: {
             // label: 'query',
-            label: 'Repeat Password',
-            placeholder: 'Repeat Password',
+            label: 'Retype New Password',
+            placeholder: 'Retype New Password',
             required: true,
             appearance: 'outline'
           },

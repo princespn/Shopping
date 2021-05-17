@@ -1,0 +1,128 @@
+<header class="container-fluid bg-light">
+  <div class="container">
+    <div  fxLayoutAlign="space-between center" class="h-20">
+      <div class="logo"><img class="logo-img h-16 w-16" src="assets/images/img/rxdost-logo-small.svg"></div>
+      <label for="toggle-1" class="toggle-menu"><ul><li></li> <li></li> <li></li></ul></label>
+      <input type="checkbox" id="toggle-1">
+      <nav>
+        <ul>
+          <li><a href="#features"> Features</a></li>
+          <li><a href="#devices"> Devices</a></li>
+          <li><a href="#reviews"> Reviews</a></li>
+          <li><a href="#couriers"> Couriers</a></li>
+          <li><a href="#contact"> Contact</a></li>
+        </ul>
+
+      </nav>
+    </div>
+  </div>
+</header>
+
+<!--slider-->
+
+<div class="container-fluid bg-slider">
+  <div fxLayout="column" class="container pt-40 pb-40" fxLayoutGap="15px">
+    <h1 class="text-white">All your orders  in one place</h1>
+    <h3 class="text-white">Shopping Manager integrates all your shipments into a single app</h3>
+
+    <div fxLayout="row" fxLayoutGap="20px" class="mt-8">
+      <button color="primary" mat-raised-button="" class="mat-focus-indicator mat-raised-button mat-button-base mat-primary" >
+        <span class="mat-button-wrapper">Download iOS</span>
+        <span matripple="" class="mat-ripple mat-button-ripple"></span>
+        <span class="mat-button-focus-overlay"></span>
+      </button>
+      <button color="primary" mat-raised-button="" class="mat-focus-indicator mat-raised-button mat-button-base mat-primary" >
+        <span class="mat-button-wrapper">Download Android</span>
+        <span matripple="" class="mat-ripple mat-button-ripple"></span>
+        <span class="mat-button-focus-overlay"></span>
+      </button>
+    </div>
+
+  </div>
+</div>
+
+<!--highlight points-->
+<div class="container pt-20 pb-20" fxLayout="column" fxLayout.md="row" fxLayout.lg="row" fxLayoutGap="30px">
+  <div fxLayoutGap="10px" fxLayout="column">
+    <h2>Get Notified</h2>
+    <p class="text-secondary">ParcelTrack keeps you up to date on the status of your shipment,
+      delivery forecasts and who accepted a parcel in your absense.
+      You decide on how close you want to follow the progress your shipment makes on it's way.
+    </p>
+  </div>
+  <div fxLayoutGap="10px" fxLayout="column">
+    <h2>Wherever you are</h2>
+    <p class="text-secondary">Whether you are at home with your tablet, in the car with your mobile or at the desk in your office,
+      ParcelTrack is available on all your devices.
+      The synchronization of all your devices keeps all you orders in one clean place.
+    </p>
+  </div>
+  <div fxLayoutGap="10px" fxLayout="column">
+    <h2>For all your shipments</h2>
+    <p class="text-secondary">Regardless of the delivery service that ships your package,
+      ParcelTrack provides a single beautiful interface to keep track of your shipments.
+      Spare yourself the hassle of visiting various tracking sites and
+      getting lost in technical details of their tracking systems.
+    </p>
+  </div>
+  <div fxLayoutGap="10px" fxLayout="column">
+    <h2>In real time</h2>
+    <p class="text-secondary">Follow your package in real-time with the finger on the map, as ParcelTrack makes use of the
+      GPS-location of the delivery van. This is the closest you can get to your shipments in
+      delivery. Never miss your package again.
+    </p>
+  </div>
+</div>
+
+<!--footer-->
+<footer id="footer" class="container-fluid bg-light pt-12 pl-1 pr-1 pb-8">
+  <div class="max-w-3xl mx-auto">
+    <div  fxLayoutAlign="space-between center" fxLayout="column" fxLayoutGap="10px" class="mb-8">
+      <h3 class="text-2xl">Contact Us</h3>
+      <h6>Questions, ideas or suggestions? Drop us a line and help further improve ParcelTrack</h6>
+    </div>
+
+    <div  fxLayoutAlign="space-between" fxLayout="column" fxLayoutGap="15px" class="mb-8">
+      <h3>Shopping Manager by Smart Parcel Box</h3>
+      <h6 fxLayout="row" > <ic-icon [icon]="icLocationOn" class="mr-4 " size="26px"></ic-icon> Units 12-14 Waterfall Lane Trading Estate
+        Waterfall Ln, Cradley Heath
+        B64 6PU</h6>
+      <h6 fxLayout="row" ><ic-icon [icon]="icPhoneInTalk" class="mr-4 " size="26px"></ic-icon> 0121 368 0051</h6>
+      <h6><a fxLayout="row"  href="mailto:support@smartparcelbox.com"><ic-icon [icon]="icMail" class="mr-4 " size="26px"></ic-icon> support@smartparcelbox.com</a></h6>
+    </div>
+
+    <div  fxLayoutAlign="space-around center" class="mb-8" fxLayout="column" fxLayoutGap="15px">
+      <button type="button" class="mat-focus-indicator  mat-raised-button mat-button-primary mt-3 bg-primary text-contrast-white">
+        <span class="mat-button-wrapper">Send us mail</span>
+        <span matripple="" class="mat-ripple mat-button-ripple"></span>
+        <span class="mat-button-focus-overlay"></span>
+      </button>
+
+      <h6> Or follow us on social platform</h6>
+
+      <div fxLayout="row" fxLayoutAlign="space-between"  fxLayoutGap="15px">
+
+        <a class="bg-facebook text-white rounded-full mt-2 p-3">
+          <ic-icon [icon]="faFacebook" size="20px"></ic-icon>
+        </a>
+
+        <a class="bg-twitter text-white rounded-full mt-2 p-3">
+          <ic-icon [icon]="faTwitter" size="20px"></ic-icon>
+        </a>
+
+        <a class="bg-instagram text-white rounded-full mt-2 p-3">
+          <ic-icon [icon]="faInstagram" size="20px"></ic-icon>
+        </a>
+
+      </div>
+
+
+    </div>
+
+    <div  fxLayoutAlign="space-between center" fxLayout="column" fxLayoutGap="10px" >
+      <h5>© Copyright 2021, All rights reserved to Shopping Manager</h5>
+      <a href="#">Privacy Policy</a>
+    </div>
+
+  </div>
+</footer>

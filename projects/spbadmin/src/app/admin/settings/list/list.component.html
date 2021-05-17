@@ -1,0 +1,34 @@
+<mat-card>
+
+  <div class="border-b pb-8 mb-5">
+    <a [routerLink]="'account_edit' | namedRoutePipe">
+      <div fxLayoutAlign="start center" fxLayoutGap="15px">
+        <img class="h-24 w-24" mat-card-avatar
+             [src]="user.profilePicUrl ? user.profilePicUrl : 'assets/img/avatars/account-thumbnail.svg'"
+             alt="user-image"/>
+        <div fxLayout="column" fxLayoutGap="5px">
+          <h6>{{user.username}}</h6>
+          <p>{{user.email}}</p>
+          <p class="text-primary">View & Edit Profile</p>
+        </div>
+      </div>
+    </a>
+  </div>
+
+
+  <mat-list>
+    <div *ngFor="let row of optionsList" class=" pb-4">
+      <a [routerLink]="row.code | namedRoutePipe">
+        <div fxLayout="row" fxLayoutAlign="start center">
+          <div fxLayout="column" fxLayoutGap="5px">
+            <h3>{{row.name}}</h3>
+            <h6>{{row.description}}</h6>
+          </div>
+          <span fxFlex></span>
+          <mat-icon>keyboard_arrow_right</mat-icon>
+        </div>
+      </a>
+    </div>
+  </mat-list>
+
+</mat-card>

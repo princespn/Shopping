@@ -1,0 +1,13 @@
+<spb-back-button label="Register Your Smart Parcel Box"></spb-back-button>
+
+<mat-card>
+  <h3 class="mt-5 mb-4">Address & Location of Smart Parcel Box</h3>
+
+  <gomco-formly-form  [multipart]="true" label="Submit"
+                     [redirect]="'admin_' + resourcePath +'_detail'"
+                     [debug]="false" [fields]="fields"
+                     [resource]="resource"  [showDeleteButton]="false" formClass="w-full" ></gomco-formly-form>
+
+
+</mat-card>
+

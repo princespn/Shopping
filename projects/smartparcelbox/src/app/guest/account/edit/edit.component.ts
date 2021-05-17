@@ -6,7 +6,7 @@ import {FormlyFieldConfig} from '@ngx-formly/core';
   templateUrl: './edit.component.html',
   styleUrls: ['./edit.component.scss']
 })
-export class EditComponent implements OnInit {
+export class EditComponent{
 
   fields: FormlyFieldConfig[] = [
     {
@@ -89,10 +89,5 @@ export class EditComponent implements OnInit {
       },
     }
   ];
-
-  constructor() { }
-
-  ngOnInit(): void {
-  }
 
 }

@@ -1,0 +1,9 @@
+<ng-template #rowTemplate let-index="index" let-row="row" let-onDeletion="onDeletion">
+  <gomco-order-row [row]="row"  [onDeletion]="onDeletion" [index]="index"></gomco-order-row>
+</ng-template>
+
+
+<gomco-common-list [label]="'Orders'" [filters]="" [resourcePath]="resourcePath" [resource]="resource"
+                   [rowTemplate]="rowTemplate"
+                   [showHeader]="">
+</gomco-common-list>

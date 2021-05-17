@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ConfigService} from '@vexs/services/config.service';
 import {ConfigName} from '@vexs/interfaces/config-name.model';
 import {Style, StyleService} from '@vexs/services/style.service';
@@ -10,7 +10,7 @@ import {AuthService} from '@gomcodoctor/services/auth';
   templateUrl: './layout.component.html',
   styleUrls: ['./layout.component.scss']
 })
-export class LayoutComponent implements OnInit {
+export class LayoutComponent implements OnInit, OnDestroy {
 
   constructor(private configService: ConfigService, private authService: AuthService,
               private styleService: StyleService, private navigationItemProviderService: NavigationItemProviderService) {
@@ -20,9 +20,16 @@ export class LayoutComponent implements OnInit {
 
   ngOnInit(): void {
     this.navigationItemProviderService.emitGuestItems();
-    this.authService.user.subscribe((value) => {
-      this.navigationItemProviderService.emitGuestItems();
-    });
+    // this.authService.user.subscribe((value) => {
+    //   // this.navigationItemProviderService.emitGuestItems();
+    // });
+
   }
+
+  ngOnDestroy() {
+    // console.log('I am destr');
+    // this.authService.user.unsubscribe();
+  }
+
 
 }

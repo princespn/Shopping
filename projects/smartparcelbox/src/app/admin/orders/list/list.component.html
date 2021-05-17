@@ -1,0 +1,82 @@
+<!--Order Row Template-->
+<ng-template #rowTemplate let-index="index" let-row="row" let-onDeletion="onDeletion"
+             let-updateRowConst="updateRowConst">
+  <gomco-order-row [row]="row" [updateRowConst]="updateRowConst" [onDeletion]="onDeletion"
+                   [index]="index"></gomco-order-row>
+</ng-template>
+
+
+<!--Add order form-->
+<ng-template #createForm let-dialogRef="dialogRef">
+  <gomco-formly-form (successful)="listComponent.addRow($event)" formClass="" [subscribeRoute]="false"
+                     [dialogRef]="dialogRef"
+                     [debug]="false" [fields]="addFields" [model]="model"
+                     [resource]="resource" [showDeleteButton]="false"></gomco-formly-form>
+</ng-template>
+
+<!--Order list-->
+<gomco-common-list #listComponent metaTitle="My Orders" [label]="'Orders'" [filters]="fields"
+                   [resourcePath]="resourcePath"
+                   [resource]="'orders-search'"
+                   [rowTemplate]="rowTemplate"
+                   [listClass]="'pb-12'"
+                   [noDataTemplate]="noDataTamplete"
+                   [noSearchResultTemplate]="noSearchDataTemplate"
+                   [showHeader]="" [showHeading]="false" [bulk]="false" [createNewDialogTemplate]="createForm"
+                   createButtonName="Add Orders to Track">
+</gomco-common-list>
+
+<!--no item block-->
+<ng-template #noDataTamplete>
+  <mat-card fxLayoutGap="40px" class="text-center mt-5 pt-20 pb-12" fxLayout="column" fxLayoutAlign="center">
+    <h3>Welcome to Shopping Manager!</h3>
+    <img class="w-64 mx-auto" src="./assets/images/tracking-img.png">
+
+    <p class="text-base">You're not tracking any parcels right now. Click "Add Orders to Track" button to track a
+      parcel</p>
+    <ng-container>
+      <ng-template #addItemForm let-dialogRef="dialogRef" let-index="index">
+        <gomco-formly-form formClass="" (successful)="listComponent.getList()" [subscribeRoute]="false"
+                           [dialogRef]="dialogRef"
+                           [model]="model"
+                           [debug]="false" [fields]="addFields"
+                           [resource]="resource"></gomco-formly-form>
+      </ng-template>
+
+      <gomco-dialog-button icon="add"
+                           [matConfirmDialogData]="{dialogueContent: addItemForm, title: 'Add Order', showActionButtons: false}"
+                           [label]="'Add Orders to Track'" [textColor]="'primary'"></gomco-dialog-button>
+    </ng-container>
+  </mat-card>
+</ng-template>
+
+<!--no search item block-->
+<ng-template #noSearchDataTemplate>
+
+  <mat-card fxLayoutGap="40px" class="text-center mt-5 pt-20 pb-12" fxLayout="column" fxLayoutAlign="center">
+
+    <img class="w-64 mx-auto" src="./assets/images/not_found.png">
+    <h4 class="text-base">Sorry... nothing matches your search :(</h4>
+    <h6 class="text-base">please try searching with another term</h6>
+
+  </mat-card>
+</ng-template>
+
+<!--add order to track float button-->
+<ng-container>
+  <ng-template #addItemForm let-dialogRef="dialogRef" let-index="index">
+    <gomco-formly-form formClass="" (successful)="listComponent.getList()" [subscribeRoute]="false"
+                       [dialogRef]="dialogRef"
+                       [model]="model"
+                       [debug]="false" [fields]="addFields"
+                       [resource]="resource"></gomco-formly-form>
+  </ng-template>
+
+  <gomco-dialog-button icon="add"
+                       class="fixed bottom-4  right-4 rounded-full hide-below-md shadow-2 bg-white text-primary hidden-sm"
+                       fxHide.gt-sm
+                       [matConfirmDialogData]="{dialogueContent: addItemForm, title: 'Add Order', showActionButtons: false}"
+                       [label]="'Add Orders to Track'" [textColor]="'primary'"></gomco-dialog-button>
+</ng-container>
+
+

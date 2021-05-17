@@ -1,7 +1,7 @@
 import {FormlyFieldConfig} from "@ngx-formly/core";
 
 export function validateRequired(err, field: FormlyFieldConfig) {
-    return `${field.key}  is required`;
+    return `${field.templateOptions.label}  is required`;
 }
 export function validateMinLength(err, field: FormlyFieldConfig) {
     return `Should have atleast ${field.templateOptions.minLength} characters`;

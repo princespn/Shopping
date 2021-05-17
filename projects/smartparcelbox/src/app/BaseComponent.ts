@@ -20,6 +20,9 @@ export class BaseComponent implements OnInit {
     protected fetchData = true;
     protected method = 'getOne';
 
+    protected metaTitleField = 'title';
+    protected metaTitle;
+
     protected resource = null;
 
     galleryOptions: NgxGalleryOptions[] = [
@@ -49,7 +52,10 @@ export class BaseComponent implements OnInit {
         if (this.queryParams.id){
             this.apiService[this.method]({id: this.queryParams.id}, this.resource).subscribe((response) => {
                 this.processData(response);
-            });
+            },
+              (error) => {
+                this.loading = false;
+              });
         }
         else if (this.queryParams.slug){
             this.getDataBySlug();
@@ -71,9 +77,11 @@ export class BaseComponent implements OnInit {
     protected processData(response){
         this.loading = false;
         this.data = response;
-        if (this.data.name) { this.meta.setTitle(`${this.data.name}`); }
 
-        if (this.data.title) { this.meta.setTitle(`${this.data.title}`); }
+        if (this.data[this.metaTitleField]) { this.meta.setTitle(`${this.data[this.metaTitleField]}`); }
+        else if (this.metaTitle) { this.meta.setTitle(`${this.metaTitle}`); }
+
+        else if (this.data.title) { this.meta.setTitle(`${this.data.title}`); }
 
         if (this.data.images){
             this.data.images.map(image => {

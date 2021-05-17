@@ -1,0 +1,80 @@
+
+<!--Item Condition-->
+<ng-template let-receiptRow="row" let-receiptRowIndex="index" let-updateRowConst="updateRowConst"  let-value="value" #conditiontamplate>
+  <ng-template let-dialogRef="dialogRef" #itemList  >
+
+    <!--Create Condition-->
+    <ng-template #createConditionForm let-dialogRef="dialogRef" let-row="row">
+      <div>{{getRow(receiptRow)}}</div>
+      <gomco-formly-form  [subscribeRoute]="false" [fields]="conditionFields" [model]="{}"  (successful)="conditionList.addRow($event)"
+                          [dialogRef]="dialogRef" [successMessage]="'Add  Successfully'"
+                          [debug]="false" [modelModifierBeforeCall]="createConditionModelModifierBeforeCall"
+                          [resource]="resource"></gomco-formly-form>
+    </ng-template>
+    <!--Create Condition-->
+
+    <!--Edit Condition-->
+    <ng-template #editConditionButtonTemplate let-row="row" let-rowIndex="index" let-updateRowConst="updateRowConst">
+      <div>{{getRow(receiptRow)}}</div>
+      <ng-template #editForm let-dialogRef="dialogRef">
+        <gomco-formly-form formClass="" [model]="row" (successful)="updateRowConst(rowIndex, $event)" [subscribeRoute]="false" [dialogRef]="dialogRef"
+                           [debug]="false" [fields]="conditionFields" [modelModifierBeforeCall]="createConditionModelModifierBeforeCall"
+                           [resource]="resource" [param]="{id: row['@id']}" [update]="true" [showDeleteButton]="false"></gomco-formly-form>
+      </ng-template>
+
+
+      <gomco-dialog-button
+        [matConfirmDialogData]="{dialogueContent: editForm, title: 'Edit Item Condition', showActionButtons: false}"
+        [label]="'Edit'" [textColor]="'primary'" ></gomco-dialog-button>
+    </ng-template>
+    <!--Edit Condition-->
+
+    <mat-dialog-content>
+
+
+
+      <gomco-common-list #conditionList [subscribeRoute]="false"  [createButton]="false" [defaultFilterParam]="{'parentType.code': receiptRow.code}"
+                         [resourcePath]="resourcePath" [resource]="resource" [actions]="[{type: 'template', template: editConditionButtonTemplate}, {type: 'delete'}]"
+                         [columns]="columns" [createNewDialogTemplate]="createConditionForm" [createButtonName]="'Add Condition'"
+                         [showHeader]="true" [bulk]="false" >
+      </gomco-common-list>
+    </mat-dialog-content>
+  </ng-template>
+  <gomco-dialog-button
+    [matConfirmDialogData]="{dialogueContent: itemList, title: value + ' Conditions', showActionButtons: false}"
+    [label]="value" [textColor]="'primary'" [isButton]="false" [row]="receiptRow"></gomco-dialog-button>
+</ng-template>
+<!--Item Condition-->
+
+
+
+<!--Return Reason-->
+<!--Edit Reasons-->
+<ng-template #editButtonTemplate let-row="row" let-rowIndex="index" let-updateRowConst="updateRowConst">
+
+  <ng-template #editForm let-dialogRef="dialogRef">
+    <gomco-formly-form formClass="" [model]="row" (successful)="updateRowConst(rowIndex, $event)" [subscribeRoute]="false" [dialogRef]="dialogRef"
+                       [debug]="false" [fields]="fields"
+                       [resource]="resource" [param]="{id: row['@id']}" [update]="true" [showDeleteButton]="false"></gomco-formly-form>
+  </ng-template>
+
+
+  <gomco-dialog-button
+    [matConfirmDialogData]="{dialogueContent: editForm, title: 'Edit Reason', showActionButtons: false}"
+    [label]="'Edit'" [textColor]="'primary'" ></gomco-dialog-button>
+</ng-template>
+<!--Edit Reasons-->
+
+<!--Reason List-->
+<ng-template #createForm let-dialogRef="dialogRef">
+  <gomco-formly-form  (successful)="listComponent.addRow($event)" [subscribeRoute]="false" [fields]="fields"
+                      [dialogRef]="dialogRef" [successMessage]="'Add  Successfully'"
+                      [debug]="false"
+                      [resource]="resource"></gomco-formly-form>
+</ng-template>
+<gomco-common-list #listComponent [filters]="fieldnams" [resourcePath]="resourcePath" [resource]="resource" [templates]="{'name': conditiontamplate}"
+                   [showHeader]="true" [showHeading]="false" [bulk]="true" [createNewDialogTemplate]="createForm" [actions]="[{type: 'template', template: editButtonTemplate}, {type: 'delete'}]"
+                   [createButtonName]="'Add Reason for return'" class="w-full" [columns]="columns"  >
+</gomco-common-list>
+<!--Reason List-->
+<!--Return Reason-->

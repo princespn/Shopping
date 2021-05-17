@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {BaseButtonComponent} from '@gomcodoctor/admin/buttons/base-button.component';
 import {BaseService} from '@gomcodoctor/services/base.service';
 
@@ -7,10 +7,9 @@ import {BaseService} from '@gomcodoctor/services/base.service';
   templateUrl: './edit-button.component.html',
   styleUrls: ['./edit-button.component.scss']
 })
-export class EditButtonComponent extends BaseButtonComponent{
-
-  constructor(baseService: BaseService) {
-    super(baseService);
+export class EditButtonComponent extends BaseButtonComponent implements OnInit{
+  ngOnInit() {
+    super.ngOnInit();
     this.label = 'Edit';
   }
 }

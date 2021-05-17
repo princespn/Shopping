@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {BaseButtonComponent} from '@gomcodoctor/admin/buttons/base-button.component';
 import {BaseService} from '@gomcodoctor/services/base.service';
 import {ConfirmationDialogService} from '@gomcodoctor/services/confirmation-dialog/confirmation-dialog.service';
@@ -8,14 +8,14 @@ import {ConfirmationDialogService} from '@gomcodoctor/services/confirmation-dial
   templateUrl: './bulk-delete-button.component.html',
   styleUrls: ['./bulk-delete-button.component.scss']
 })
-export class BulkDeleteButtonComponent extends BaseButtonComponent{
+export class BulkDeleteButtonComponent extends BaseButtonComponent implements OnInit{
 
   @Input() selected: [];
 
   @Output() deleted: EventEmitter<any> = new EventEmitter();
 
-  constructor(baseService: BaseService, private confirmationDialogService: ConfirmationDialogService) {
-    super(baseService);
+  ngOnInit() {
+    super.ngOnInit();
     this.name = 'Items';
     this.label = 'Delete';
   }

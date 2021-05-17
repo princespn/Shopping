@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BaseService } from '@gomcodoctor/services/base.service';
-import {AuthLoader, AuthStaticLoader} from '@gomcodoctor/services/auth';
-import {environment} from '@environments/environment';
+
 
 @Injectable({
   providedIn: 'root',

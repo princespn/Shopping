@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { MenuItem } from '../interfaces/menu-item.interface';
-import { trackById } from '@vexs/utils/track-by';
+import { trackById } from '@vex/utils/track-by';
 import icPerson from '@iconify/icons-ic/twotone-person';
 import icSettings from '@iconify/icons-ic/twotone-settings';
 import icAccountCircle from '@iconify/icons-ic/twotone-account-circle';
@@ -11,10 +11,12 @@ import icVerifiedUser from '@iconify/icons-ic/twotone-verified-user';
 import icLock from '@iconify/icons-ic/twotone-lock';
 import icNotificationsOff from '@iconify/icons-ic/twotone-notifications-off';
 import { Icon } from '@visurel/iconify-angular';
-import { PopoverRef } from '@vexs/components/popover/popover-ref';
+import { PopoverRef } from '@vex/components/popover/popover-ref';
 import {AuthService} from '@gomcodoctor/services/auth/auth.service';
 import {NavigationStart, Router, RouterEvent} from '@angular/router';
 import {filter} from 'rxjs/operators';
+import icShoppingCart from '@iconify/icons-ic/twotone-shopping-cart';
+import {NavigationItemProviderService} from '@gomcodoctor/services/route/navigation-item/navigation-item-provider.service';
 
 export interface OnlineStatus {
   id: 'online' | 'away' | 'dnd' | 'offline';
@@ -30,41 +32,8 @@ export interface OnlineStatus {
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ToolbarUserDropdownComponent implements OnInit {
-
-  items: MenuItem[] = [
-    {
-      id: '1',
-      icon: icAccountCircle,
-      label: 'My Profile',
-      description: 'Personal Information',
-      colorClass: 'text-teal',
-      route: '/account/edit'
-    },
-    // {
-    //   id: '2',
-    //   icon: icMoveToInbox,
-    //   label: 'My Inbox',
-    //   description: 'Messages & Latest News',
-    //   colorClass: 'text-primary',
-    //   route: '/apps/chat'
-    // },
-    // {
-    //   id: '3',
-    //   icon: icListAlt,
-    //   label: 'My Projects',
-    //   description: 'Tasks & Active Projects',
-    //   colorClass: 'text-amber',
-    //   route: '/apps/scrumboard'
-    // },
-    // {
-    //   id: '4',
-    //   icon: icTableChart,
-    //   label: 'Billing Information',
-    //   description: 'Pricing & Current Plan',
-    //   colorClass: 'text-purple',
-    //   route: '/pages/pricing'
-    // }
-  ];
+  icShoppingCart = icShoppingCart;
+  items: MenuItem[] = [];
 
   trackById = trackById;
   icPerson = icPerson;
@@ -80,7 +49,7 @@ export class ToolbarUserDropdownComponent implements OnInit {
   constructor(private cd: ChangeDetectorRef,
               private popoverRef: PopoverRef<ToolbarUserDropdownComponent>,
               private authService: AuthService,
-              private router: Router) { }
+              private router: Router, private navigationItemProviderService: NavigationItemProviderService) { }
 
   ngOnInit() {
     this.authService.user.subscribe((user) => {
@@ -94,6 +63,7 @@ export class ToolbarUserDropdownComponent implements OnInit {
       this.close();
     });
 
+    this.items = this.navigationItemProviderService.dropDownToolbarNavigationItems();
   }
 
   // setStatus(status: OnlineStatus) {

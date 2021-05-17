@@ -1,49 +1,19 @@
-import { Component, OnInit } from '@angular/core';
-import {FormlyFieldConfig} from '@ngx-formly/core';
+import { Component } from '@angular/core';
+import {LayoutComponent} from '@app/admin/layout/layout.component';
 
 @Component({
   selector: 'gomco-pages-list',
   templateUrl: './list.component.html',
   styleUrls: ['./list.component.scss']
 })
-export class ListComponent implements OnInit {
+export class ListComponent {
+  resourcePath = 'pages';
+  resource = 'pages';
 
-  fields: FormlyFieldConfig[] = [
-    {
-      fieldGroupClassName: 'display-flex',
-      fieldGroup: [
-        {
-          className: 'flex-1',
-          key: 'title',
-          type: 'input',
-          templateOptions: {
-            // label: 'query',
-            placeholder: 'Title',
-            required: false,
-          },
-        },
-      ]
-    }
-  ];
-
-  columns = [
-    {
-      key: 'title',
-      label: 'Title',
-    },
-    {
-      key: 'createdAt',
-      label: 'CreatedAt',
-    },
-    {
-      key: 'edit',
-      label: 'Edit',
-    },
-  ];
-
-  constructor() { }
-
-  ngOnInit(): void {
+  // tslint:disable-next-line:use-lifecycle-interface
+  ngOnInit() {
+    // this.customComponent.titleObserver.next('Help');
   }
+
 
 }

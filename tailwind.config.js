@@ -41,7 +41,7 @@ module.exports = {
       },
       green: {
         light: 'rgba(76, 175, 80, 0.1)',
-        default: 'rgb(76, 175, 80)',
+        default: 'rgb(40, 199, 111)',
       },
       teal: {
         light: 'rgba(0, 150, 136, 0.1)',

@@ -1,0 +1,74 @@
+<div fxLayout="column" fxLayoutGap="40px" class="container pb-8 pt-8">
+
+  <h1 class="text-center text-2xl mb-3">Register your parcel Box</h1>
+
+  <div>
+    <h3 class="text-xl mb-2">Why Should I register my Smart Parcel Box?</h3>
+    <p>The Shopping Manager App (developed by the Smart Parcel Box) helps to communicate with the retailer and the
+      courier to instruct them to drop the parcels to your Smart Parcel Box. It further reminds them that scanning or
+      taking picture of your unique barcode will act as a proof of delivery and replaces the need of your signatures. By
+      registering yours and by using the app, you can leave this instruction with much ease.
+    </p>
+    <p>Each Smart Parcel Box is supplied with and identified by a unique barcode. Registering your box helps to assign a
+      specific geographic coordinate to your parcel box. This means that your unique Smart Parcel Box barcode is an
+      identifier of your address.
+    </p>
+    <p>This geographical coordinate linked unique code is designed to be used by postal workers and courier companies to
+      ascertain that the delivery has been made to the correct address.
+    </p>
+    <p>By registering the Smart Parcel Box, the owner of the Smart Parcel Box also indemnifies the courier company from
+      handing over the package personally to an individual at the address and authorises them to deliver the parcel to
+      the
+      Smart Parcel Box instead.</p>
+    <p>Some delivery services may require your signature for special signed for deliveries, we would still recommend
+      registration of your Smart Parcel Box as more and more retailers and couriers are moving towards a contact free
+      delivery and would like to have an alternative safe place to deliver your package and an alternative way to
+      replace
+      your signatures. </p>
+    <p>Also, should you need to replace the barcode or change your address for any reason, you can easily make these
+      changes if your parcel box has been registered by the original owner.</p>
+  </div>
+
+
+  <div>
+    <h3 class="text-xl mb-2">How to Register?</h3>
+    <p> You can use the shopping manager app to register your Smart Parcel Box or you could use the Smart Parcel Box
+      website. For the using the app download the app…. </p>
+    <p>For registering on the website, the first step is to have an account. If you have an account then please login,
+      if not then please create an account. Once logged into your account, you will have the option to register or to
+      make changes to your registration details.</p>
+  </div>
+  <div fxLayout="row" fxLayoutAlign="space-around center">
+
+    <div fxLayout="column" fxLayoutGap="20px">
+
+      <div>
+        <h3 class="text-xl">Already have an account</h3>
+        <p>Please click below to sign in account</p>
+      </div>
+
+      <button [routerLink]="['/login']" color="primary"
+              class="mat-focus-indicator mat-raised-button mat-button-base mat-primary">
+        <span class="mat-button-wrapper">Sign In</span>
+        <span matripple="" class="mat-ripple mat-button-ripple"></span>
+        <span class="mat-button-focus-overlay"></span>
+      </button>
+
+    </div>
+
+    <div fxLayout="column" fxLayoutGap="20px">
+
+      <div>
+        <h3 class="text-xl">Don’t have an account?</h3>
+        <p>Please click below to create an account</p>
+      </div>
+
+      <button [routerLink]="['/register']" color="primary"
+              class="mat-focus-indicator mat-raised-button mat-button-base bg-gray-light">
+        <span class="mat-button-wrapper">Create an account</span>
+        <span matripple="" class="mat-ripple mat-button-ripple"></span>
+        <span class="mat-button-focus-overlay"></span>
+      </button>
+    </div>
+  </div>
+</div>

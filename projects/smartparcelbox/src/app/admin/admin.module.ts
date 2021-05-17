@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { AdminRoutingModule } from './admin-routing.module';
 import {SharedModule} from '@app/shared.module';
 import {ContainerModule} from '@vexs/directives/container/container.module';
-import {FlexLayoutModule} from '@angular/flex-layout';
+import {FlexModule} from '@angular/flex-layout';
 import {MatChipsModule} from '@angular/material/chips';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
@@ -19,6 +19,7 @@ import {MatSelectModule} from '@angular/material/select';
 import {MatDividerModule} from '@angular/material/divider';
 
 
+
 @NgModule({
   declarations: [LayoutComponent],
     imports: [
@@ -26,7 +27,7 @@ import {MatDividerModule} from '@angular/material/divider';
         AdminRoutingModule,
         SharedModule,
         ContainerModule,
-        FlexLayoutModule,
+        FlexModule,
         MatChipsModule,
         MatFormFieldModule,
         MatInputModule,
@@ -40,4 +41,4 @@ import {MatDividerModule} from '@angular/material/divider';
         MatDividerModule
     ]
 })
-export class AdminModule { }
+export class AdminModule {}

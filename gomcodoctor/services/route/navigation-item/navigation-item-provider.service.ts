@@ -27,6 +27,10 @@ export class NavigationItemProviderService {
     return this.config.GuestItems(this.namedRoutesService, this.authService.isAuthenticated);
   }
 
+  dropDownToolbarNavigationItems(){
+    return this.config.DropDownToolbarNavigationItems(this.namedRoutesService, this.authService.isAuthenticated);
+  }
+
   emitGuestItems(){
     this.navigationService.navigationItemsSubject.next(this.guestItems());
   }

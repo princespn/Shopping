@@ -9,9 +9,6 @@ import {BaseService} from '@gomcodoctor/services/base.service';
 })
 export class ToggleButtonComponent extends BaseButtonComponent implements OnInit{
 
-  constructor(baseService: BaseService) {
-    super(baseService);
-  }
 
   ngOnInit(): void {
   }

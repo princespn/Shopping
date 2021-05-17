@@ -1,0 +1,17 @@
+<ng-template #editButtonTemplate let-row="row" let-rowIndex="index" let-updateRowConst="updateRowConst">
+
+  <ng-template #editForm let-dialogRef="dialogRef">
+    <gomco-formly-form [model]="row" (successful)="updateRowConst(rowIndex, $event)" [subscribeRoute]="false" [dialogRef]="dialogRef"
+                       [debug]="false" [fields]="editFields"
+                       [resource]="resource" [param]="{id: row['@id']}" [update]="true" [showDeleteButton]="false"></gomco-formly-form>
+  </ng-template>
+
+
+  <gomco-dialog-button
+    [matConfirmDialogData]="{dialogueContent: editForm, title: 'Edit Product', showActionButtons: false}"
+    [label]="'Edit'" [textColor]="'primary'" ></gomco-dialog-button>
+</ng-template>
+
+<gomco-common-list   [resourcePath]="'products'" [columns]="columns"  [actions]="[{type: 'template', template: editButtonTemplate}, {type: 'delete'}]"
+                     [fields]="fields" routeName="admin_products_list" resource="products" [createButton]="false">
+</gomco-common-list>

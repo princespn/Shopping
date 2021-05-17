@@ -3,10 +3,6 @@ import { Routes, RouterModule } from '@angular/router';
 import {RoutesConfig as AdminRoutesConfig} from '@app/admin/routesConfig';
 
 const routes: Routes = [
-    // {
-    //     ...AdminRoutesConfig.dashboard,
-    //     loadChildren: () => import('./../pages/dashboards/dashboard-analytics/dashboard-analytics-routing.module').then(m => m.DashboardAnalyticsRoutingModule),
-    // },
     {
       ...AdminRoutesConfig.account,
       loadChildren: () => import('./account/account.module').then(m => m.AccountModule),
@@ -16,53 +12,48 @@ const routes: Routes = [
         loadChildren: () => import('./user/user.module').then(m => m.UserModule),
     },
     {
-      ...AdminRoutesConfig.user_group,
-      loadChildren: () => import('./user-group/user-group.module').then(m => m.UserGroupModule),
+      ...AdminRoutesConfig.order,
+      loadChildren: () => import('./orders/orders.module').then(m => m.OrdersModule),
+    }, {
+      ...AdminRoutesConfig.orderItemSelection,
+      loadChildren: () => import('./order-item-selection/order-item-selection.module').then(m => m.OrderItemSelectionModule),
     },
-    {
-      ...AdminRoutesConfig.channels,
-      loadChildren: () => import('./channel/channel.module').then(m => m.ChannelModule),
+  {
+      ...AdminRoutesConfig.servicerequests,
+      loadChildren: () => import('./servicerequests/servicerequests.module').then(m => m.OrdersModule),
     },
-    {
-      ...AdminRoutesConfig.channelProducts,
-      loadChildren: () => import('./channel-product/channel-product.module').then(m => m.ChannelProductModule),
+  {
+      ...AdminRoutesConfig.storeconnections,
+      loadChildren: () => import('./storeconnections/storeconnections.module').then(m => m.StoreconnectionsModule),
     },
-    {
-      ...AdminRoutesConfig.channelSettings,
-      loadChildren: () => import('./channel-setting/channel-setting.module').then(m => m.ChannelSettingModule),
+  {
+      ...AdminRoutesConfig.helpfeedbackrequests,
+      loadChildren: () => import('./helpfeedback/helpfeedback.module').then(m => m.HelpfeedbackModule),
     },
-    {
-      ...AdminRoutesConfig.supplierSettings,
-      loadChildren: () => import('./supplier-setting/supplier-setting.module').then(m => m.SupplierSettingModule),
+  {
+      ...AdminRoutesConfig.settingsrequests,
+      loadChildren: () => import('./settings/settings.module').then(m => m.SettingsModule),
     },
-    {
-      ...AdminRoutesConfig.supplier,
-      loadChildren: () => import('./supplier/supplier.module').then(m => m.SupplierModule),
+  {
+      ...AdminRoutesConfig.signoutrequests,
+      loadChildren: () => import('./signout/signout.module').then(m => m.SignoutModule),
     },
-    {
-      ...AdminRoutesConfig.supplierProducts,
-      loadChildren: () => import('./supplier-product/supplier-product.module').then(m => m.SupplierProductModule),
-    },
-    {
-      ...AdminRoutesConfig.products,
-      loadChildren: () => import('./product/product.module').then(m => m.ProductModule),
-    },
+  {
+    ...AdminRoutesConfig.faqs,
+    loadChildren: () => import('./faqs/faqs.module').then(m => m.FaqsModule),
+  },
+  {
+    ...AdminRoutesConfig.smartParcelBox,
+    loadChildren: () => import('./smart-parcel-box/smart-parcel-box.module').then(m => m.SmartParcelBoxModule),
+  },
     {
         ...AdminRoutesConfig.pages,
         loadChildren: () => import('./page/page.module').then(m => m.PageModule),
     },
-    {
-      ...AdminRoutesConfig.channelRequestLogs,
-      loadChildren: () => import('./channel-request-log/channel-request-log.module').then(m => m.ChannelRequestLogModule),
-    },
-    {
-      ...AdminRoutesConfig.cronLogs,
-      loadChildren: () => import('./cron-log/cron-log.module').then(m => m.CronLogModule),
-    },
-    {
-      ...AdminRoutesConfig.feeds,
-      loadChildren: () => import('./feed/feed.module').then(m => m.FeedModule),
-    }
+  {
+    ...AdminRoutesConfig.adminAboutUs,
+    loadChildren: () => import('./about-us/about-us.module').then(m => m.AboutUsModule),
+  }
   ];
 
 @NgModule({

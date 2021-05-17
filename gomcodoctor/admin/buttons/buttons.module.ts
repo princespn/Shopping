@@ -8,22 +8,36 @@ import {MatButtonModule} from '@angular/material/button';
 import {NullishCoalesceModule} from '@gomcodoctor/_helper/nullish-coalesce/nullish-coalesce.module';
 import {RouterModule} from '@angular/router';
 import {NamedRouteModule} from '@gomcodoctor/_helper/named-route/named-route.module';
+import {MatIconModule} from '@angular/material/icon';
+import {IconModule} from '@visurel/iconify-angular';
+import {DialogFormButtonComponent} from '@gomcodoctor/admin/buttons/dialog-form-button/dialog-form-button.component';
+import {UpdateButtonComponent} from '@gomcodoctor/admin/buttons/update-button/update-button.component';
+import {MatMenuModule} from '@angular/material/menu';
+import {FlexModule} from "@angular/flex-layout";
+import {LoadingModule} from "@gomcodoctor/gomco-common/loading/loading.module";
 
 
 @NgModule({
-  declarations: [DeleteButtonComponent, EditButtonComponent, ToggleButtonComponent, BulkDeleteButtonComponent],
+  declarations: [DeleteButtonComponent, EditButtonComponent, ToggleButtonComponent, BulkDeleteButtonComponent, DialogFormButtonComponent, UpdateButtonComponent],
   exports: [
+    DialogFormButtonComponent,
     DeleteButtonComponent,
     EditButtonComponent,
     BulkDeleteButtonComponent,
-    ToggleButtonComponent
+    ToggleButtonComponent,
+    UpdateButtonComponent
   ],
-  imports: [
-    CommonModule,
-    MatButtonModule,
-    NullishCoalesceModule,
-    RouterModule,
-    NamedRouteModule
-  ]
+    imports: [
+        CommonModule,
+        MatButtonModule,
+        NullishCoalesceModule,
+        RouterModule,
+        NamedRouteModule,
+        MatIconModule,
+        IconModule,
+        MatMenuModule,
+        FlexModule,
+        LoadingModule
+    ]
 })
 export class ButtonsModule { }

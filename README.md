@@ -20,3 +20,14 @@
 `ng generate service _helper/confirmation-dialog-service`
 
 `ng build --prod=true`
+
+`----------------to build deploy app on production-----------------`
+`ng build --prod`
+`firebase login`
+`firebase init`
+`public directory = dist`
+`firebase deploy`
+`npm install -g firebase-tools`
+
+`Change path in firebase.json file`
+`"public": "dist/smartparcelbox/browser"`

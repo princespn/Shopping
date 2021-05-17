@@ -1,0 +1,54 @@
+<ng-template let-dialogRef="dialogRef" #itemList>
+
+  <ng-template let-selection="selection" let-row="row" #rowTemplate>
+    <div fxLayout="row" fxLayoutAlign=" center" class="m-5">
+      <img class="rounded h-12 w-12" onerror="this.src='./assets/images/placeholder.png' " src="{{row.imageUrl}}" alt="test">
+      <h4 class="ml-5">{{row.title}}</h4>
+    </div>
+  </ng-template>
+
+
+
+    <mat-horizontal-stepper [linear]="true" #stepper class="registration-stepper" *ngIf="isFirstStep">
+
+
+      <mat-step label="Select Items" state="edit" *ngIf="isFirstStep">
+
+        <mat-dialog-content class="content">
+          <gomco-common-list #list   [columns]="columns" [templates]="{title: rowTemplate}" [showNavigation]="false" [dataList]="order.items" [subscribeRoute]="false"  [createButton]="false"
+                             [resourcePath]="resourcePath" [resource]="resource"
+                             [showHeader]="false" [bulk]="true" [actions]="[]" [batchActions]="[]">
+          </gomco-common-list>
+        </mat-dialog-content>
+
+        <mat-dialog-actions class="pt-6 pb-6 pl-0 pr-0  min-h-0">
+          <button color="primary" mat-raised-button (click)="next(list.selection) && stepper.next()" mat-button>Next</button>
+        </mat-dialog-actions>
+
+      </mat-step>
+
+      <mat-step label="Tracking Detail" state="number">
+        <div fxLayout="column" fxLayoutGap="15px">
+
+          <gomco-formly-form [subscribeRoute]="false" formClass="w-full" [stepper]="stepper" [dialogRef]="dialogRef" [model]="model" [fields]="fields" [resource]="resource"
+                             [modelModifierBeforeCall]="modelModifierBeforeCall"
+                             [successCallback]="successCallback"></gomco-formly-form>
+
+        </div>
+      </mat-step>
+    </mat-horizontal-stepper>
+
+  <div fxLayout="column" fxLayoutGap="15px" *ngIf="!isFirstStep">
+
+    <gomco-formly-form [subscribeRoute]="false" formClass="w-full"  [dialogRef]="dialogRef" [model]="model" [fields]="fields" [resource]="resource"
+                       [modelModifierBeforeCall]="modelModifierBeforeCall"
+                       [successCallback]="successCallback"></gomco-formly-form>
+
+  </div>
+
+
+
+</ng-template>
+
+<gomco-dialog-button [icon]="icon" [matConfirmDialogData]="{dialogueContent: itemList, title: title, showActionButtons: false}"
+                     [label]="lable" class="text-{{textColor}}"></gomco-dialog-button>

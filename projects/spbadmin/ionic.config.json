@@ -1,0 +1,12 @@
+{
+  "defaultProject": "gomco",
+  "projects": {
+    "gomco": {
+      "name": "gomco",
+      "integrations": {
+        "capacitor": {}
+      },
+      "type": "angular"
+    }
+  }
+}

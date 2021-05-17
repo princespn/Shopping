@@ -104,7 +104,7 @@ export class ConfigPanelComponent implements OnInit {
   footerPositionChange(change: MatRadioChange) {
     this.configService.updateConfig({
       footer: {
-        fixed: change.value === 'fixed'
+        fixed: change.value === 'static'
       }
     });
   }

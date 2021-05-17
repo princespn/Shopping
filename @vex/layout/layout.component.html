@@ -36,9 +36,13 @@
     <mat-sidenav-content class="sidenav-content">
       <ng-container *ngTemplateOutlet="toolbarRef"></ng-container>
       <main class="content">
-        <ng-container *ngTemplateOutlet="contentRef"></ng-container>
+        <div>
+          <ng-container *ngTemplateOutlet="contentRef"></ng-container>
+          <ng-container *ngTemplateOutlet="footerRef"></ng-container>
+        </div>
       </main>
-      <ng-container *ngTemplateOutlet="footerRef"></ng-container>
     </mat-sidenav-content>
   </mat-sidenav-container>
+
 </div>
+

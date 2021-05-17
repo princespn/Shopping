@@ -1,0 +1,35 @@
+$border: 1px solid #E5E5E5;
+
+.upload-pic-hover {
+  background: rgba(0, 0, 0, 0.7);
+  position: absolute;
+  height: 250px;
+  width: 250px;
+  display: none;
+  text-align: center;
+}
+
+.upload-pic-hover button {
+  top: 44%;
+}
+
+.profile-pic:hover + .upload-pic-hover {
+  display: block;
+}
+
+.profile-pic-size {
+  width: 250px;
+  height: 250px;
+  cursor: pointer;
+}
+
+////////////////
+
+.card-spacing {
+  padding-bottom: 5px !important;
+}
+
+.card-h5 {
+  border-bottom: $border;
+  padding-bottom: 10px;
+}

@@ -89,6 +89,10 @@ export class LayoutComponent implements OnInit, AfterViewInit {
       filter(([event, matches]) => !matches),
       untilDestroyed(this)
     ).subscribe(() => this.sidenav.close());
+
+    this.isFooterFixed$.subscribe(value => console.log(value));
+    this.isFooterVisible$.subscribe(value => console.log(value));
+
   }
 
   ngAfterViewInit(): void {

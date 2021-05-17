@@ -1,0 +1,212 @@
+@import "~simplebar/dist/simplebar.css";
+@import "~highlight.js/styles/androidstudio.css";
+// Vex Core
+@import "@vex/styles/core";
+//@import "./embryo/styles/utilities/utilities";
+@import "./styles/loading_button";
+@import "~@ng-select/ng-select/themes/material.theme.css";
+//@import "~@ng-select/ng-select/themes/default.theme.css";
+@import '~quill/dist/quill.core.css';
+@import '~quill/dist/quill.bubble.css';
+@import '~quill/dist/quill.snow.css';
+@import '~ngx-bar-rating/themes/br-default-theme';
+@import '~ngx-sharebuttons/themes/circles/circles-dark-theme';
+
+.ngx-gallery {
+  display: inline-block;
+  margin-bottom: 20px;
+}
+
+.ngx-gallery-thumbnails .ngx-gallery-thumbnail {
+  border: none !important;
+}
+
+.ng-select {
+  &.ng-select-focused {
+    .ng-select-container {
+      &:after {
+        border-width: 0px;
+      }
+    }
+  }
+}
+
+.mat-card {
+  border-radius: 6px !important;
+}
+
+/*
+  You can override any CSS Variable or style here
+  Example:
+  :root {
+   --sidenav-background: #333333;
+  }
+  All possible variables can be found in @vex/styles/core or by simply inspecting the element you want to change
+  in Chrome/Firefox DevTools
+*/
+
+/**
+  Uncomment the below code and adjust the values to fit your colors, the application will automatically adjust
+ */
+:root {
+  // --color-primary: blue;
+  // --color-primary-contrast: white;
+
+  // --color-accent: yellow;
+  // --color-accent-contrast: black;
+
+  // --color-warn: yellow;
+  // --color-warn-contrast: black;
+}
+
+html {
+  overflow: auto;
+}
+
+body, p, a, mat-chip.mat-chip.mat-focus-indicator.mat-primary.mat-standard-chip {
+  font-size: 13.5px;
+  font-weight: normal;
+  letter-spacing: 0;
+  line-height: 28px;
+}
+
+.mat-raised-button{
+  font-family: inherit;
+}
+
+::before, ::after {
+  border-color: #212121;
+}
+
+$accent: #fff;
+$text-color: #666666;
+$heading-color: #444;
+$border: 1px solid #E5E5E5;
+$light-bg: #F4F4F4;
+$cyan-hover: #008494;
+$white: #ffffff;
+
+h1, h2, h3, h4, h5, h6 {
+  color: $heading-color;
+  font-weight: normal;
+}
+.br-50{
+  border-radius: 50px;
+}
+h5, h6 {
+  color:$text-color;
+}
+
+
+.mat-button.mat-cyan, .mat-icon.mat-cyan {
+  color: rgb(var(--color-primary));
+}
+
+.mat-button.mat-cyan:hover, .mat-icon.mat-cyan:hover {
+  color: $cyan-hover;
+}
+
+.mat-raised-button.mat-cyan, .mat-flat-button.mat-cyan {
+  background-color: rgb(var(--color-primary));
+  color: $white;
+}
+
+.mat-raised-button.mat-cyan:hover, .mat-flat-button.mat-cyan:hover {
+  background-color: $cyan-hover;
+  color: $white;
+}
+
+.mat-card {
+  color: $text-color;
+}
+
+mat-chip {
+  border-radius: 5px !important;
+}
+
+.brand-tablet-price div {
+  padding: 8px 0;
+  text-align: center;
+  margin: 0 5px 0 0;
+}
+
+.bg-light {
+  background: $light-bg;
+}
+
+.red-icon {
+  color: rgb(var(--color-primary));
+}
+
+//.mat-form-field-appearance-fill .mat-form-field-flex {
+//  background: #fff;
+//}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 30px $white inset !important;
+}
+
+.mat-checkbox-label {
+  white-space: normal;
+}
+
+
+
+.full-width-dialog .mat-dialog-container {
+  max-width: 100vw !important;
+}
+
+.full-width-dialog .mat-dialog-content {
+  max-height: 100vw !important;
+}
+
+
+
+.chip-box {
+  height: auto;
+}
+
+body {
+  position: relative !important;
+  overflow: auto !important;
+}
+
+.bg-pattern{
+  background-image: url("assets/images/img/bg-img.webp") !important;
+  background-size: auto;
+}
+
+.checkbox {
+  .mat-form-field-appearance-standard .mat-form-field-flex {
+    padding-top:0 !important;
+  }
+  .mat-form-field-infix {
+    padding: 0;
+    border-top: none;
+  }
+  .mat-checkbox-layout {
+    display: inline-block;
+  }
+}
+// Social
+$color-facebook: #3b5998;
+$color-twitter: #00aced;
+$color-instagram: #cd486b;
+
+.bg-facebook {
+  background: $color-facebook;
+  color: white;
+}
+
+.bg-twitter {
+  background: $color-twitter;
+  color: white;
+}
+
+.bg-instagram {
+  background: $color-instagram;
+  color: white;
+}

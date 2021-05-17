@@ -1,0 +1,11 @@
+.mat-expansion-panel-header{
+  padding: 0 15px;
+}
+$breakpoint-mobile: 639px;
+
+@media (max-width: $breakpoint-mobile) {
+  .mat-expansion-panel-header{
+    padding: 10px;
+    height: auto;
+  }
+}

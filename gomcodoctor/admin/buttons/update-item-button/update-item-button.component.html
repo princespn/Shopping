@@ -1,0 +1,11 @@
+<div *ngIf="!matMenu">
+<button [disabled]="loading" [class.spinner]="loading" (click)="showConfirmDialog ? updateRow(id, data) : update(data)" mat-button color="primary">
+  {{label}}
+</button>
+</div>
+
+<div *ngIf="matMenu">
+  <button mat-menu-item [disabled]="loading" [class.spinner]="loading" (click)="showConfirmDialog ? updateRow(id, data) : update(data)" >
+    {{label}}
+  </button>
+</div>

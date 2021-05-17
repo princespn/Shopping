@@ -1,0 +1,35 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "paths": {
+      "@app/*": ["src/app/*"],
+      "@environments/*": ["src/environments/*"],
+      "@helper/*":["src/app/_helper/*"],
+      "@vexs/*":["../../@vex/*"],
+      "@vex/*":["../../@vex/*"],
+      "@gomcodoctor/*":["../../gomcodoctor/*"]
+    },
+    "baseUrl": "./",
+    "outDir": "./dist/out-tsc",
+    "sourceMap": true,
+    "declaration": false,
+    "downlevelIteration": true,
+    "experimentalDecorators": true,
+    "module": "es2020",
+    "moduleResolution": "node",
+    "importHelpers": true,
+    "target": "es2015",
+    "allowSyntheticDefaultImports": true,
+    // "strictFunctionTypes": true,
+    // "noImplicitReturns": true,
+    "typeRoots": ["./src/types", "node_modules/@types"],
+    "lib": [
+      "es2018",
+      "dom"
+    ]
+  },
+  "angularCompilerOptions": {
+    "fullTemplateTypeCheck": false,
+    "strictInjectionParameters": false
+  }
+}

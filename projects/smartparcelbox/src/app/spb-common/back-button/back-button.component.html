@@ -1,0 +1,24 @@
+<mat-card fxLayout="row" fxLayoutAlign="space-between center"  fxLayoutGap="15px" class="mb-4">
+  <div (click)="onBackPressed()" style="cursor: pointer" fxLayout="row" fxLayoutAlign=" center" fxLayoutGap="15px">
+    <mat-icon [icIcon]="icArrowBack"></mat-icon>
+    <h4>{{label}}</h4>
+  </div>
+
+  <div *ngIf="moreDetailTemplate">
+    <button [matMenuTriggerFor]="chatMenu"
+            mat-icon-button
+            style="width: 38px; height: 38px;"
+            type="button">
+      <mat-icon [icIcon]="icMoreVert" class="text-secondary"></mat-icon>
+    </button>
+    <mat-menu #chatMenu="matMenu" xPosition="before" yPosition="below">
+      <ng-container [ngTemplateOutletContext]="{ order: order}"
+                    [ngTemplateOutlet]="moreDetailTemplate"></ng-container>
+
+    </mat-menu>
+
+  </div>
+</mat-card>
+
+
+

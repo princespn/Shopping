@@ -17,10 +17,13 @@ import {MatTabsModule} from '@angular/material/tabs';
 import {MatChipsModule} from '@angular/material/chips';
 import { ChangePasswordComponent } from './change-password/change-password.component';
 import { ActivityComponent } from './activity/activity.component';
+import { ChangeEmailUserNameComponent } from './change-email-user-name/change-email-user-name.component';
+import {SpbCommonModule} from '@app/spb-common/spb-common.module';
+import {DetailModule} from '@gomcodoctor/gomco-common/detail/detail.module';
 
 
 @NgModule({
-  declarations: [EditComponent, ChangePasswordComponent, ActivityComponent],
+  declarations: [EditComponent, ChangePasswordComponent, ActivityComponent, ChangeEmailUserNameComponent],
     imports: [
         CommonModule,
         AccountRoutingModule,
@@ -35,7 +38,9 @@ import { ActivityComponent } from './activity/activity.component';
         MatIconModule,
         FormlyFormModule,
         MatTabsModule,
-        MatChipsModule
+        MatChipsModule,
+        SpbCommonModule,
+        DetailModule
     ]
 })
 export class AccountModule { }

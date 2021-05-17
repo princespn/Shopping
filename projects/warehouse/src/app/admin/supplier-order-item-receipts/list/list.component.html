@@ -1,0 +1,60 @@
+
+<ng-template let-receiptRow="row" let-receiptRowIndex="index" let-updateRowConst="updateRowConst"  let-value="value" #externalInvoiceNumber>
+  {{value}}
+
+  <ng-template let-dialogRef="dialogRef" #itemList>
+    <ng-template let-itemRow="row" let-index="index" #select>
+      <gomco-update-button (updated)="dialogRef.close() || updateRowConst(receiptRowIndex, $event)" [row]="receiptRow" [data]="{orderItem: itemRow['@id']}" label="Select"></gomco-update-button>
+    </ng-template>
+
+    <mat-dialog-content>
+      <gomco-common-list [subscribeRoute]="false" [defaultFilterParam]="{barcode: receiptRow.barcode}" [createButton]="false"
+                         [resourcePath]="itemResourcePath" [resource]="itemResource"
+                         [columns]="itemColumns"
+                         [showHeader]="false" [bulk]="false" [actions]="[{type: 'template', template: select}]">
+      </gomco-common-list>
+    </mat-dialog-content>
+  </ng-template>
+
+  <gomco-dialog-button
+    [matConfirmDialogData]="{dialogueContent: itemList, title: 'Select one of purchase order', showActionButtons: false}"
+    [label]="'Change Purchase Order Number'" [textColor]="'primary'" [isButton]="false"></gomco-dialog-button>
+</ng-template>
+
+
+<ng-template let-receiptRow="row" let-receiptRowIndex="index" let-updateRowConst="updateRowConst"  let-value="value" #quantityPerBox>
+  <gomco-list-row-input (updated)="updateRowConst(receiptRowIndex, $event)" [fieldName]="'newQuantityPerBox'" [row]="receiptRow" [label]="'Quantity Per Box'" [prefix]="'<b></b>&nbsp;'"></gomco-list-row-input>
+</ng-template>
+
+
+<ng-template #batchActionsTemplate let-bulkPost="bulkPost">
+
+  <button (click)="bulkPost({enabled: true})" mat-button>Approve</button>
+
+</ng-template>
+
+<ng-template  #approveButton let-receiptRow="row" let-receiptRowIndex="index" let-updateRowConst="updateRowConst"  let-value="value" >
+    <gomco-update-button (updated)=" updateRowConst(receiptRowIndex, $event)" [row]="receiptRow" [data]="{enabled: true}" [label]="receiptRow.enabled ? 'Disapprove' : 'Approve'"></gomco-update-button>
+</ng-template>
+
+<ng-template #editButtonTemplate let-row="row" let-rowIndex="index" let-updateRowConst="updateRowConst">
+
+  <ng-template #editForm let-dialogRef="dialogRef">
+    <gomco-formly-form formClass="" [model]="row" (successful)="updateRowConst(rowIndex, $event)" [subscribeRoute]="false" [dialogRef]="dialogRef"
+                       [debug]="false" [fields]="editFields"
+                       [resource]="resource" [param]="{id: row['@id']}" [update]="true" [showDeleteButton]="false"></gomco-formly-form>
+  </ng-template>
+
+
+  <gomco-dialog-button
+    [matConfirmDialogData]="{dialogueContent: editForm, title: 'Edit Order Item Receipts', showActionButtons: false}"
+    [label]="'Edit'" [textColor]="'primary'" ></gomco-dialog-button>
+</ng-template>
+
+<vex-scrollbar class="h-full relative">
+  <gomco-common-list [batchActions]="[]" [batchActionsTemplate]="batchActionsTemplate" [templates]="{'orderItem.order.externalInvoiceNumber': externalInvoiceNumber, quantityPerBox: quantityPerBox}" [createButton]="false"
+                     [label]="'Supplier Order Item Receipts'" [resourcePath]="resourcePath" [resource]="resource"
+                     [columns]="columns" [filters]="fields"
+                     [actions]="[{type: 'template', template: approveButton}, {type: 'template', template: editButtonTemplate}]">
+  </gomco-common-list>
+</vex-scrollbar>

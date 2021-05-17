@@ -1,18 +1,38 @@
-<ng-template #batchactions let-bulkPost="bulkPost" let-bulkDelete="bulkDelete">
-    <!--    <button mat-button>New to Store</button>-->
-    <!--    <button mat-button color="cyan" (click)="bulkDelete()">Remove from Store</button>-->
-</ng-template>
 
-<ng-template #datetime let-row="row">
-    {{row.createdAt|date:'medium'}}
-</ng-template>
 
-<ng-template #edit let-row="row">
-    <a [routerLink]="'admin_pages_edit' | namedRoutePipe: {id: row.code}">
-        <button mat-button color="primary">Edit</button>
-    </a>
-</ng-template>
+<mat-card class="mb-4">
+  <a [routerLink]="'admin_faqs' | namedRoutePipe" fxLayout="row" fxLayoutAlign="space-between center">
+    <h5>Frequently Asked Questions</h5>
+    <mat-icon>keyboard_arrow_right</mat-icon>
+  </a>
+</mat-card>
 
-<gomco-common-list createNewRouteName="admin_pages_create" [templates]="{createdAt: datetime, edit: edit}" [fields]="fields" label="Pages" [columns]="columns"  [batchActions]="batchactions" routeName="admin_pages_list" resource="pages">
 
-</gomco-common-list>
+
+<mat-card class="mb-4">
+  <a [routerLink]="'admin_about-us' | namedRoutePipe" fxLayout="row" fxLayoutAlign="space-between center">
+    <h5>About</h5>
+    <mat-icon>keyboard_arrow_right</mat-icon>
+  </a>
+</mat-card>
+
+<mat-card class="mb-4">
+  <a [routerLink]="'/admin/pages/detail/terms-and-condtions'" fxLayout="row" fxLayoutAlign="space-between center">
+    <h5>Terms & Conditions</h5>
+    <mat-icon>keyboard_arrow_right</mat-icon>
+  </a>
+</mat-card>
+
+<mat-card class="mb-4">
+  <a [routerLink]="'/admin/pages/detail/privacy-policy'" fxLayout="row" fxLayoutAlign="space-between center">
+    <h5>Privacy Policy</h5>
+    <mat-icon>keyboard_arrow_right</mat-icon>
+  </a>
+</mat-card>
+
+<mat-card class="mb-4">
+  <a [routerLink]="'/admin/helpfeedback/list'" fxLayout="row" fxLayoutAlign="space-between center">
+    <h5>Feedback</h5>
+    <mat-icon>keyboard_arrow_right</mat-icon>
+  </a>
+</mat-card>

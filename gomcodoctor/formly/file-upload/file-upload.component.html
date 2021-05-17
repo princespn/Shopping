@@ -1,44 +1,61 @@
-<div *ngIf="multiple() && this.formControl.value && this.formControl.value.length > 0" class="m-10" fxLayout="row" fxLayoutGap="20px">
+<div *ngIf="multiple() && this.formControl.value && this.formControl.value.length > 0" class="m-10" fxLayout="row"
+     fxLayoutGap="20px">
   <ng-container *ngFor="let originalImage of this.formControl.value; let i = index">
     <ng-container *ngIf="originalImage.fileUrl">
       <div class="img-wraps">
-        <span  class="closes" (click)="removeImage(i)" title="Delete">&times;</span>
+        <span class="closes" (click)="removeImage(i)" title="Delete">&times;</span>
         <img class="preview-existing" [src]="originalImage.fileUrl" alt="">
       </div>
     </ng-container>
   </ng-container>
 </div>
-<ngx-awesome-uploader #uploader class="min-w-full mb-1 file-uploader"
+<ngx-awesome-uploader  [accept]="to.accept" [fileExtensions]="to.fileExtensions"  #uploader class="min-w-full mb-1 file-uploader h-auto"
                       [captions]="captions" [enableAutoUpload]="enableAutoUpload"
                       (fileRemoved)="onFileRemoved($event)"
                       [adapter]="adapter" (uploadSuccess)="onUploadSuccess($event)"
                       (fileAdded)="fileAdded($event)" [showPreviewContainer]="multiple()"
 >
   <div fxLayout="column" fxLayoutAlign="center center" class="dropzoneTemplate">
-    <div *ngIf="!preview; else previewTemplate;" fxLayout="column" fxLayoutAlign="center center">
+
+
+
+    <div *ngIf="!preview; else previewTemplate;" fxLayout="column" fxLayoutAlign="center center" class="cursor-pointer">
       <!--                <cloud-icon></cloud-icon>-->
-      <span class="material-icons">cloud_upload</span>
-      <div class="content-top-text">
+      <ic-icon [icon]="faCamera" size="20px" fontSet="fa"></ic-icon>
+      <div class="font-medium text-md">
         {{captions?.dropzone?.title}}
       </div>
-      <div class="content-center-text">
+      <!--<div class="content-center-text">
         {{captions?.dropzone?.or}}
       </div>
       <div>
         <button color="primary" mat-flat-button type="button">
           {{captions?.dropzone?.browse}}
         </button>
-      </div>
+      </div>-->
     </div>
     <ng-template #previewTemplate>
-      <div class="profile-pic-size" fxLayout="column" fxLayoutAlign="center center">
+      <div *ngIf="profilePic" class="profile-pic-size" fxLayout="column" fxLayoutAlign="center center">
         <div class="profile-pic">
-          <img [src]="singleFileSrc || model[field.key + 'Url']" alt="Photo"/>
+          <img class="h-24 w-24" mat-card-avatar
+               [src]="(singleFileSrc || model[field.key + 'Url']) || './assets/images/placeholder.png'" alt="Photo"/>
+
         </div>
-        <div class="upload-pic-hover">
-          <button type="button" mat-flat-button color="primary">Change Profile Picture</button>
+        <div class="ml-20" style="margin-top: -1rem">
+          <img class="w-8" [src]="'./assets/images/img/image-upload-profile.png'" alt="Photo"/>
+        </div>
+      </div>
+      <div *ngIf="!profilePic" class="profile-pic-size" fxLayout="column" fxLayoutAlign="center center">
+        <div class="profile-pic">
+          <img class="h-56 w-56" mat-card-avatar
+               [src]="(singleFileSrc || model[field.key + 'Url']) || './assets/images/placeholder.png'" alt="Photo"/>
+
+        </div>
+        <div class="ml-20" style="margin-top: -1rem">
+          <img class="w-8" [src]="'./assets/images/img/image-upload-profile.png'" alt="Photo"/>
         </div>
       </div>
     </ng-template>
+
   </div>
 </ngx-awesome-uploader>

@@ -35,9 +35,9 @@ export class AuthService {
     this._redirectUrl = value;
   }
 
-  setRedirectRoute(routeName, params = {}){
-    this._redirectUrl = '.' + this._namedRoutesService.getRoute(routeName, params);
-  }
+  // setRedirectRoute(routeName, params = {}){
+  //   this._redirectUrl = '.' + this._namedRoutesService.getRoute(routeName, params);
+  // }
 
   get defaultUrl(): string {
     return this.loader.defaultUrl;
@@ -63,11 +63,15 @@ export class AuthService {
 
   public getUser(){
     if (this.isAuthenticated){
-      this.user$.next(false);
-      this.apiSerivce.getOne({id: 'me'}, 'myprofile').subscribe((response) => {
-        this.user$.next(response);
-      });
+      this.user$.next(null);
+      this.forceUserUpdate();
     }
+  }
+
+  public forceUserUpdate(){
+    this.apiSerivce.getOne({id: 'me'}, 'myprofile').subscribe((response) => {
+      this.user$.next(response);
+    });
   }
 
   authenticate(res) {
@@ -78,18 +82,18 @@ export class AuthService {
     if (token) {
       this._token = token;
       this.cookiesService.putObject(
-          this.loader.storageKey,
-          {
-            username: '',
-            token
-          },
-          {
-            expires: this.jwtHelper.getTokenExpirationDate(token)
-          }
+        this.loader.storageKey,
+        {
+          username: '',
+          token
+        },
+        {
+          expires: this.jwtHelper.getTokenExpirationDate(token)
+        }
       );
 
       this.getUser();
-
+      // console.log(this._redirectUrl);
       this.router.navigateByUrl(this._redirectUrl || this.loader.defaultUrl).then(() => true);
     }
   }

@@ -5,8 +5,10 @@ import {ReactiveFormsModule} from '@angular/forms';
 import {FormlyModule} from '@ngx-formly/core';
 import {FlexLayoutModule} from '@angular/flex-layout';
 import {MatButtonModule} from '@angular/material/button';
-import {RecaptchaModule} from "ng-recaptcha";
+import {RecaptchaModule} from 'ng-recaptcha';
 import {LoadingModule} from '@gomcodoctor/gomco-common/loading/loading.module';
+import {MatDialogModule} from '@angular/material/dialog';
+import {ButtonsModule} from "@gomcodoctor/admin/buttons/buttons.module";
 
 
 @NgModule({
@@ -21,7 +23,9 @@ import {LoadingModule} from '@gomcodoctor/gomco-common/loading/loading.module';
         FlexLayoutModule,
         MatButtonModule,
         RecaptchaModule,
-        LoadingModule
+        LoadingModule,
+        MatDialogModule,
+        ButtonsModule
     ]
 })
 export class FormlyFormModule { }

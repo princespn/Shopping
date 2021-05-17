@@ -1,0 +1,53 @@
+<ng-template #rowTemplate let-row="row" let-index="index">
+  <!--  <div>-->
+  <!--    <h2 class="text-xl mb-5 mt-5 ml-5">{{row.category}}</h2>-->
+  <!--  </div>-->
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>{{row.question}}</mat-panel-title>
+      </mat-expansion-panel-header>
+      <p>{{row.answer}}</p>
+    </mat-expansion-panel>
+  </mat-accordion>
+</ng-template>
+
+
+<h2 class="text-xl mb-3 mt-2"> My Orders</h2>
+<gomco-common-list [filters]="[]" [resourcePath]="resourcePath" [resource]="resource" [rowTemplate]="rowTemplate"
+                   [showHeader]="false" [showNavigation]="false" [bulk]="false"
+                   [defaultFilterParam]="{'category': 'My Orders'}">
+</gomco-common-list>
+
+<h2 class="text-xl mb-3 mt-8">Tracking my deliveries</h2>
+<gomco-common-list [filters]="[]" [resourcePath]="resourcePath" [resource]="resource" [rowTemplate]="rowTemplate"
+                   [showHeader]="false" [showNavigation]="false" [bulk]="false"
+                   [defaultFilterParam]="{'category': 'Tracking my deliveries'}">
+</gomco-common-list>
+
+<h2 class="text-xl mb-3 mt-8">Returns Management</h2>
+<gomco-common-list [filters]="[]" [resourcePath]="resourcePath" [resource]="resource" [rowTemplate]="rowTemplate"
+                   [showHeader]="false" [showNavigation]="false" [bulk]="false"
+                   [defaultFilterParam]="{'category': 'Returns Management'}">
+</gomco-common-list>
+
+
+<h2 class="text-xl mb-3 mt-8">Smart Parcel Box</h2>
+<gomco-common-list [filters]="[]" [resourcePath]="resourcePath" [resource]="resource" [rowTemplate]="rowTemplate"
+                   [showHeader]="false" [showNavigation]="false" [bulk]="false"
+                   [defaultFilterParam]="{'category': 'Smart Parcel Box'}">
+</gomco-common-list>
+
+<h2 class="text-xl mb-3 mt-8">Integrated Stores</h2>
+<gomco-common-list [filters]="[]" [resourcePath]="resourcePath" [resource]="resource" [rowTemplate]="rowTemplate"
+                   [showHeader]="false" [showNavigation]="false" [bulk]="false"
+                   [defaultFilterParam]="{'category': 'Integrated Stores'}">
+</gomco-common-list>
+
+<h2 class="text-xl mb-3 mt-8 ">My Privacy & Security</h2>
+<gomco-common-list [filters]="[]" [resourcePath]="resourcePath" [resource]="resource" [rowTemplate]="rowTemplate"
+                   [showHeader]="false" [showNavigation]="false" [bulk]="false"
+                   [defaultFilterParam]="{'category': 'My Privacy Security'}">
+</gomco-common-list>
+
+

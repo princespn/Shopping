@@ -3,48 +3,55 @@
      [class.collapsed]="collapsed"
      [class.open]="collapsed && collapsedOpen$ | async"
      class="sidenav flex flex-col">
-    <div class="sidenav-toolbar flex-none flex items-center">
-        <img class="logo-img" src="assets/images/img/rxdost-logo-small.svg">
-        <!--p class="generic-logo">
-          &#8478;<span>D</span>
-        </p-->
-        <!--img [src]="imageUrl$ | async" class="w-6 select-none flex-none"-->
-        <div class="title ltr:pl-4 rtl:pr-4 select-none flex-auto"></div>
-        <!--    <h2 class="title ltr:pl-4 rtl:pr-4 select-none flex-auto">{{ title$ | async }}</h2>-->
-        <button (click)="toggleCollapse()"
-                *ngIf="showCollapsePin$ | async"
-                class="w-8 h-8 -mr-2 leading-none flex-none hidden lg:block"
-                mat-icon-button
-                type="button">
-            <mat-icon *ngIf="!collapsed" [icIcon]="icRadioButtonChecked" size="14px"></mat-icon>
-            <mat-icon *ngIf="collapsed" [icIcon]="icRadioButtonUnchecked" size="14px"></mat-icon>
-        </button>
+  <div class="sidenav-toolbar flex-none flex items-center">
+    <a href="/" fxLayout="row" fxLayoutAlign="center center">
+      <img class="logo-img" src="{{ globalConfig.image }}">
+      <!--p class="generic-logo">
+        &#8478;<span>D</span>
+      </p-->
+      <!--img [src]="imageUrl$ | async" class="w-6 select-none flex-none"-->
+
+      <h2 class="title font-normal ltr:pl-4 rtl:pr-4 select-none flex-auto">{{ globalConfig.title }}</h2>
+    </a>
+    <button (click)="toggleCollapse()"
+            *ngIf="showCollapsePin$ | async"
+            class="w-8 h-8 -mr-2 leading-none flex-none hidden lg:block"
+            mat-icon-button
+            type="button">
+      <mat-icon *ngIf="!collapsed" [icIcon]="icRadioButtonChecked" size="14px"></mat-icon>
+      <mat-icon *ngIf="collapsed" [icIcon]="icRadioButtonUnchecked" size="14px"></mat-icon>
+    </button>
+  </div>
+
+  <vex-scrollbar class="flex-auto">
+    <div class="sidenav-items">
+
+
+      <!--                <form fxLayout="column" class="mx-6 mt-2">-->
+      <!--                    <mat-form-field appearance="outline" fxLayout="row wrap" fxFlex="100"-->
+      <!--                                    class="input-search search-with-select top-bar-search" color="cyan">-->
+      <!--                        <input autocomplete="off" type="search" aria-label="Number" matInput-->
+      <!--                               placeholder="Search Medicine | Lab investigation ...">-->
+      <!--                    </mat-form-field>-->
+      <!--                    <button class="search-btn top-bar-btn" color="primary"-->
+      <!--                            mat-flat-button aria-label="search">-->
+      <!--                        Search-->
+      <!--                    </button>-->
+      <!--                </form>-->
+
+
+      <vex-sidenav-item *ngFor="let item of items; trackBy: trackByRoute"
+                        [item]="item"
+                        [level]="0">
+
+      </vex-sidenav-item>
     </div>
+  </vex-scrollbar>
 
-    <vex-scrollbar class="flex-auto">
-        <div class="sidenav-items">
-            <a href="#" class="ml-6 mb-4">
-                <mat-icon inline="true">reply</mat-icon>
-                Back to Website</a>
-
-<!--                <form fxLayout="column" class="mx-6 mt-2">-->
-<!--                    <mat-form-field appearance="outline" fxLayout="row wrap" fxFlex="100"-->
-<!--                                    class="input-search search-with-select top-bar-search" color="cyan">-->
-<!--                        <input autocomplete="off" type="search" aria-label="Number" matInput-->
-<!--                               placeholder="Search Medicine | Lab investigation ...">-->
-<!--                    </mat-form-field>-->
-<!--                    <button class="search-btn top-bar-btn" color="primary"-->
-<!--                            mat-flat-button aria-label="search">-->
-<!--                        Search-->
-<!--                    </button>-->
-<!--                </form>-->
-
-
-            <vex-sidenav-item *ngFor="let item of items; trackBy: trackByRoute"
-                              [item]="item"
-                              [level]="0">
-
-            </vex-sidenav-item>
-        </div>
-    </vex-scrollbar>
+  <div *ngIf="globalConfig.backToWebsite || globalConfig.copyrightText" class="text-center copyright-nav flex-none flex p-4" fxLayout="column" fxLayoutGap="15px">
+    <a *ngIf="globalConfig.backToWebsite" href="/" target="_blank" fxLayout="row" fxLayoutAlign="center center">
+      <mat-icon [icIcon]="icReply" size="18px"></mat-icon> {{globalConfig.backToWebsite}}
+    </a>
+ <span *ngIf="globalConfig.copyrightText" class="text-xs text-gray">{{globalConfig?.copyrightText}}</span>
+  </div>
 </div>

@@ -1,0 +1,26 @@
+{
+  "extends": "./tsconfig.base.json",
+  "compilerOptions": {
+    "outDir": "./out-tsc/app",
+    "typeRoots": ["./src/types", "node_modules/@types"],
+    "types": [
+      "googlemaps"
+    ],
+    "paths": {
+      "@app/*": ["src/app/*"],
+      "@environments/*": ["src/environments/*"],
+      "@helper/*":["src/app/_helper/*"],
+      "@vexs/*":["../../@vex/*"],
+      "@vex/*":["../../@vex/*"],
+      "@gomcodoctor/*":["../../gomcodoctor/*"]
+    },
+    "baseUrl": "./"
+  },
+  "include": [
+    "src/**/*.ts"
+  ],
+  "exclude": [
+    "src/test.ts",
+    "src/**/*.spec.ts"
+  ]
+}

@@ -1,0 +1,415 @@
+<ng-template #template let-data="data">
+  <div *ngIf="data">
+    <ng-template #itemRow let-row="row">
+      <div fxLayout="row" fxLayoutGap="15px" fxLayoutAlign="center">
+        <img class="rounded h-24 w-24" onerror="this.src='./assets/images/placeholder.png' " src="{{row.imageUrl}}"
+             alt="">
+        <div fxLayout="column" fxLayoutGap="5px">
+          <h5>{{row.title}}</h5>
+          <Span *ngIf="row.sku">SKU: {{row.sku}}</Span>
+          <span>QTY: {{row.quantity}}</span>
+
+          <div fxLayout="row" fxLayoutAlign=" center" [ngSwitch]="row.orderStatus?.code">
+
+          <span *ngSwitchCase="'in-transit'"
+                class="bg-warn-light text-warn font-medium text-sm  pl-2 pr-2 mr-3 br-50 lh-20">
+            {{row.orderStatus?.name}}
+          </span>
+            <span *ngSwitchCase="'return-requested'"
+                  class="bg-green-light font-medium text-green text-sm  pl-2 pr-2 mr-3 br-50 lh-20">
+            {{row.orderStatus?.name}}
+          </span>
+            <span *ngSwitchCase="'pending'"
+                  class="bg-gray-light  text-sm font-medium text-black pl-2 pr-2 mr-3 br-50 lh-20">
+            {{row.orderStatus?.name}}
+          </span>
+            <span *ngSwitchCase="'expired'"
+                  class="bg-red-light text-sm font-medium text-red  pl-2 pr-2 mr-3 br-50 lh-20">
+            {{row.orderStatus?.name}}
+          </span>
+            <span *ngSwitchCase="'delivered'"
+                  class="bg-green text-sm font-medium text-contrast-white  pl-2 pr-2 mr-3 br-50 lh-20">
+            {{row.orderStatus?.name}}
+          </span>
+            <span *ngSwitchCase="'out-for-delivery'"
+                  class="bg-purple text-sm font-medium text-contrast-white  pl-2 pr-2 mr-3 br-50 lh-20">
+            {{row.orderStatus?.name}}
+          </span>
+            <span *ngSwitchCase="'canceled'"
+                  class="bg-purple text-sm font-medium text-contrast-white  pl-2 pr-2 mr-3 br-50 lh-20">
+            {{row.orderStatus?.name}}
+          </span>
+            <span *ngSwitchCase="'refunded'"
+                  class="bg-purple text-sm font-medium text-contrast-white  pl-2 pr-2 mr-3 br-50 lh-20">
+            {{row.orderStatus?.name}}
+          </span>
+            <span *ngSwitchCase="'processing'"
+                  class="bg-purple text-sm font-medium text-contrast-white  pl-2 pr-2 mr-3 br-50 lh-20">
+            {{row.orderStatus?.name}}
+          </span>
+          </div>
+        </div>
+      </div>
+    </ng-template>
+
+    <ng-template #trackingRow let-row="row">
+      <div fxLayout="row" fxLayoutGap="25px" class="mb-5">
+        <img mat-card-avatar src="{{getImagePath(row.status.code | lowercase)}}">
+        <div fxLayout="column" fxLayoutGap="1px">
+          <h5 class="font-medium">{{row.message}}</h5>
+          <p>{{row.status.name}}</p>
+          <p>{{row.scanDateTime | date: 'd MMM, y'}}</p>
+        </div>
+      </div>
+    </ng-template>
+    <ng-template #trackingSeeMore let-size="size" let-row="row">
+      <div fxLayout="row" fxLayoutGap="25px" class="mb-5">
+        <img mat-card-avatar src="{{getImagePath('notshipped' | lowercase)}}">
+        <div fxLayout="column" fxLayoutGap="1px">
+          <h5 class="font-medium text-primary">See all updates ( {{size}} )</h5>
+        </div>
+      </div>
+    </ng-template>
+
+    <spb-back-button [label]="'#' + data.channelOrderId | titlecase " [order]="data"
+                     [moreDetailTemplate]="chatMenu"></spb-back-button>
+    <div class="mt-4" fxLayout="column">
+
+      <mat-card *ngIf="data.items.length > 0">
+        <div fxLayout="row" fxLayoutAlign="space-between center">
+
+
+          <div fxLayout="row" fxLayoutAlign=" center" fxLayoutGap="15px">
+
+            <img *ngIf="data.channel" class="h-8" src="{{data.channel.logoUrl}}">
+            <span>{{data.createdAt | date:'d MMM, y'}}</span>
+          </div>
+          <h4 class="font-medium"
+              *ngIf="data.total > 0"> {{multiplayer.multiplay(data.total) | currency: data.finalCurrencyCode}}</h4>
+
+
+        </div>
+
+        <div fxLayout="column" *ngIf="data.items?.length > 0" class="mt-5">
+          <div *ngFor="let row of data.items; let index = index" fxLayout="row" fxLayoutAlign="space-between"
+               class="mt-5">
+
+
+            <a *ngIf="!data.managed">
+              <ng-container [ngTemplateOutletContext]="{ row: row }"
+                            [ngTemplateOutlet]="itemRow"></ng-container>
+            </a>
+
+            <div *ngIf="data.managed">
+              <ng-container [ngTemplateOutletContext]="{ row: row }"
+                            [ngTemplateOutlet]="itemRow"></ng-container>
+            </div>
+
+            <div fxLayout="column" fxLayoutAlign="space-between end">
+              <h4 class="font-medium"> {{multiplayer.multiplay(row.unitPrice) | currency: row.finalCurrencyCode}}</h4>
+              <div *ngIf="!data.managed" fxLayout="row" fxLayoutAlign="right">
+
+
+                <ng-container>
+                  <ng-template #editForm let-dialogRef="dialogRef">
+                    <gomco-formly-form (deleted)="onDeletion(index)" formClass="" [model]="row"
+                                       (successful)="rowUpdated(index, $event)" [subscribeRoute]="false"
+                                       [dialogRef]="dialogRef"
+                                       [debug]="false" [fields]="addItemFields" [modelModifier]="itemModelModifier"
+                                       [showDeleteButton]="true"
+                                       [resource]="itemResource" [param]="{id: row['@id']}"
+                                       [update]="true"></gomco-formly-form>
+                  </ng-template>
+
+
+                  <gomco-dialog-button icon="edit" [isButton]="false"
+                                       [matConfirmDialogData]="{dialogueContent: editForm, title: 'Edit Item Details', showActionButtons: false}"
+                                       [label]="''" [textColor]="'primary'"></gomco-dialog-button>
+                </ng-container>
+
+
+                <gomco-delete-button class="" [id]="row['@id']" [resource]="resourceItem"
+                                     (deleted)="reloadScreen()">
+                </gomco-delete-button>
+
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </mat-card>
+
+      <div *ngIf="!data.managed && data.items.length > 0" fxLayout="column" fxLayoutAlign="center center"
+           fxLayoutGap="20px"
+           class="mt-5 text-center">
+
+
+        <ng-container>
+          <ng-template #addItemForm let-dialogRef="dialogRef" let-index="index">
+            <gomco-formly-form formClass="" (successful)="detailRef.processDataFetching()" [subscribeRoute]="false"
+                               [dialogRef]="dialogRef"
+                               [debug]="false" [fields]="addItemFields"
+                               [modelModifierBeforeCall]="itemModelModifierBeforeCall"
+                               [resource]="itemResource" [model]="{order: data['@id']}"></gomco-formly-form>
+          </ng-template>
+
+
+          <gomco-dialog-button icon="add"
+                               [matConfirmDialogData]="{dialogueContent: addItemForm, title: 'Add Item', showActionButtons: false}"
+                               [label]="'Add another item'" [textColor]="'primary'"></gomco-dialog-button>
+        </ng-container>
+
+
+        <div fxLayout="column" fxLayoutGap="5px">
+          <p>This merchant isn't currently connected with Shopping Manager. Request to get this merchant connected and receive order details in the future</p>
+          <p><a class="text-primary font-medium" href="{{sendEmailToRetailer('manoj@homescapesonline.com')}}">
+            Request to get this merchant connected</a></p>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="mt-4" fxLayout="column" *ngIf="data?.shipments.length > 0">
+
+      <h3 class="ml-5">My Parcel's Journey</h3>
+
+      <div *ngFor="let row_shipment of data.shipments; let i = index">
+
+        <mat-card class="mt-5">
+          <div fxLayout="row" class="mb-2" fxLayoutAlign="space-between"
+               *ngIf="row_shipment.courierTracking?.checkpoints?.length >= 0">
+            <a (click)="openDialog(data, i)" class="cursor-pointer">
+              <div>
+                <div fxLayout="row" fxLayoutAlign="space-between center">
+                <img *ngIf="row_shipment.courierTracking?.courier?.logoUrl" mat-card-avatar src="{{row_shipment.courierTracking?.courier?.logoUrl}}">
+                <h4 class="mb-2 ml-3"> {{row_shipment.courierTracking?.courier?.name}}</h4>
+                </div>
+                <h5>#{{row_shipment.courierTracking?.number}}</h5>
+
+              </div>
+            </a>
+          </div>
+          <span *ngIf="row_shipment.courierTracking?.checkpoints.length == 0">
+            <span *ngIf="setMessage(row_shipment.courierTracking) !== 'Delivered'">
+          <p class="mb-2 font-medium">
+            {{setMessage(row_shipment.courierTracking)}}  <a (click)="openDialog(data, i)" class="cursor-pointer text-primary font-medium">View more..</a>
+          </p>
+          <span class="text-primary h-10"
+                *ngIf="row_shipment.courierTracking?.trackingUrl">
+            <a class=" font-medium" href="{{row_shipment.courierTracking?.trackingUrl}}" target="_blank">
+              Track status on courier website
+            </a>
+          </span>
+          </span>
+
+          <p *ngIf="setMessage(row_shipment.courierTracking) === 'Delivered'" class="mb-2 font-medium">
+            {{setMessage(row_shipment.courierTracking)}} <a (click)="openDialog(data, i)" class="cursor-pointer text-primary font-medium"> View more..</a>
+          </p>
+          </span>
+
+
+          <a (click)="openDialog(data, i)" class="cursor-pointer">
+            <div *ngIf="row_shipment.units?.length > 0">
+              <div *ngFor="let row_order_item of row_shipment.units">
+                <h6 class="mt-2">{{row_order_item.orderItem.title}}</h6>
+              </div>
+            </div>
+
+
+            <div class="mt-5" *ngIf="row_shipment.courierTracking?.checkpoints?.length > 0">
+              <div *ngFor="let row of row_shipment.courierTracking?.checkpoints; let i = index" fxLayout="column">
+
+                <div *ngIf="row_shipment.courierTracking?.checkpoints.length >4">
+                  <div *ngIf="i === 0 || i === 1 || (row_shipment.courierTracking?.checkpoints.length-1) === i">
+                    <ng-container [ngTemplateOutletContext]="{ row: row }"
+                                  [ngTemplateOutlet]="trackingRow"></ng-container>
+                  </div>
+
+                  <div *ngIf="(row_shipment.courierTracking?.checkpoints.length-2) === i">
+                    <ng-container
+                      [ngTemplateOutletContext]="{ size: row_shipment.courierTracking?.checkpoints.length, row: row_shipment.courierTracking}"
+                      [ngTemplateOutlet]="trackingSeeMore"></ng-container>
+                  </div>
+                </div>
+
+                <div *ngIf="row_shipment.courierTracking?.checkpoints.length <= 3">
+                  <ng-container [ngTemplateOutletContext]="{ row: row }"
+                                [ngTemplateOutlet]="trackingRow"></ng-container>
+                </div>
+              </div>
+            </div>
+
+          </a>
+        </mat-card>
+
+        <div *ngIf="haveParcelBox" class="mt-8 mb-4 md:mt-16" fxLayout="column" fxLayoutAlign="space-between center">
+          <h3 class="ml-5">Own a Smart Parcel Box?</h3>
+          <span class="ml-5 text-center">Instruct the courier to drop the parcel at my SMART PARCEL BOX</span>
+          <a
+            href="{{sendEmailToCourier(row_shipment.courierTracking?.number, row_shipment.courierTracking?.courier.email)}}">
+            <div fxLayout="row" fxLayoutAlign=" center">
+              <ic-icon [icon]="faGlobeEurope" size="20px" fontSet="fa"></ic-icon>
+              <h3 class="ml-2 text-primary">Contact Courier</h3>
+            </div>
+          </a>
+        </div>
+
+      </div>
+
+      <div *ngIf="!haveParcelBox" class="mt-8 mb-4 md:mt-16" fxLayout="column" fxLayoutAlign="space-between center"
+           fxLayoutGap="20px">
+        <div class="text-center">
+          <h3 class="ml-5">Never Miss a Parcel Again</h3>
+          <span
+            class="ml-5 text-sm text-center">Receive letters & parcels when you are away no more "sorry, we missed you" cards.</span>
+        </div>
+        <div fxLayout="row" fxLayoutAlign=" center">
+          <ic-icon [icon]="faGlobeEurope" size="20px" fontSet="fa"></ic-icon>
+          <p class="ml-2 text-primary font-medium">
+            <a class="text-lg" href="https://www.smartparcelbox.co.uk/buy-online.html">Explore
+              Smart Parcel Box</a>
+          </p>
+        </div>
+      </div>
+
+    </div>
+
+    <div fxLayout="column" *ngIf="data.items?.length == 0">
+      <mat-card fxLayout="column" fxLayoutAlign="space-between" class="mt-5">
+        <div fxLayout="row" fxLayoutAlign=" center">
+          <img *ngIf="data.channel" class="pr-3 h-8" src="{{data.channel.logoUrl}}">
+          <h4>#{{data.channelOrderId}}</h4>
+          <span class="pl-3">{{data.createdAt | date:'d MMM, y'}}</span>
+        </div>
+        <span *ngIf="data.managed">Item details are not available. This merchant isn't currently connected with Shopping Manager.</span>
+
+        <div *ngIf="!data.managed" fxLayout="column">
+
+
+            <p class="mt-2">Item details are not available. </p>
+
+            <div class="mb-2">
+              <ng-container>
+                <ng-template #addItemForm let-dialogRef="dialogRef" let-index="index">
+
+                  <gomco-formly-form formClass="" (successful)="detailRef.processDataFetching()"
+                                     [subscribeRoute]="false"
+                                     [dialogRef]="dialogRef"
+                                     [debug]="false" [fields]="addItemFields"
+                                     [modelModifierBeforeCall]="itemModelModifierBeforeCall"
+                                     [resource]="itemResource" [model]="{order: data['@id']}"></gomco-formly-form>
+                </ng-template>
+
+
+                <gomco-dialog-button [isButton]="false" buttonClass="font-medium"
+                                     [matConfirmDialogData]="{dialogueContent: addItemForm, title: 'Add Item', showActionButtons: false}"
+                                     [label]="'Add items in your order'" [textColor]="'primary'"></gomco-dialog-button>
+              </ng-container>
+            </div>
+
+          <p>This merchant isn't currently connected with Shopping Manager. Request to get this merchant connected and
+            receive order details in the future</p>
+          <div *ngIf="!data.managed" fxLayoutGap="5px">
+
+
+            <a *ngIf="!data.managed" href="{{sendEmailToRetailer('manoj@homescapesonline.com')}}">
+              <p class="text-primary font-medium">Request to get this merchant connected</p>
+            </a>
+          </div>
+        </div>
+
+      </mat-card>
+
+
+      <div *ngIf="!data.managed && data.shipments?.length == 0" class="mt-8" fxLayout="column"
+           fxLayoutAlign="space-between center"
+           fxLayoutGap="10px">
+        <div class="text-center">
+          <h3>You're not tracking any parcels right now</h3>
+        </div>
+        <div fxLayout="colunn" fxLayoutAlign="center center">
+
+          <gomco-add-tracking icon="add" [textColor]="'primary'" [order]="data" [code]="0" [orderId]="data['@id']"
+                              [lable]="'Add Tracking'"
+                              [successCallback]="successCallback" [title]="'Add tracking'"></gomco-add-tracking>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <ng-template #chatMenu let-order="order">
+
+    <div *ngIf="!order.managed">
+      <div *ngIf="!order.managed" fxLayout="column">
+        <ng-container>
+          <ng-template #editForm let-dialogRef="dialogRef">
+            <gomco-formly-form (deleted)="deleteOrderCallback()" formClass="" [model]="order"
+                               (successful)="orderUpdated" [subscribeRoute]="false" [dialogRef]="dialogRef"
+                               [debug]="false" [fields]="editFields" [modelModifier]="orderModelModifier"
+                               [showDeleteButton]="true" metaTitleField="channelOrderId"
+                               [resource]="resource" [param]="{id: order['@id']}" [update]="true"></gomco-formly-form>
+          </ng-template>
+
+
+          <gomco-dialog-button
+            [matConfirmDialogData]="{dialogueContent: editForm, title: 'Edit Order Details', showActionButtons: false}"
+            [label]="'Edit Order'" [textColor]="'default'"></gomco-dialog-button>
+        </ng-container>
+
+
+        <ng-container>
+          <ng-template #addItemForm let-dialogRef="dialogRef">
+            <gomco-formly-form formClass="" [model]="{order: order['@id']}"
+                               (successful)="detailRef.processDataFetching()"
+                               [subscribeRoute]="false"
+                               [dialogRef]="dialogRef"
+                               [debug]="false" [fields]="addItemFields"
+                               [modelModifierBeforeCall]="itemModelModifierBeforeCall"
+                               [resource]="itemResource">
+
+            </gomco-formly-form>
+          </ng-template>
+
+
+          <gomco-dialog-button [matMenu]="true"
+                               [matConfirmDialogData]="{dialogueContent: addItemForm, title: 'Add Item', showActionButtons: false}"
+                               [label]="'Add Item'" [textColor]="'default'"></gomco-dialog-button>
+        </ng-container>
+
+
+      </div>
+
+      <gomco-add-tracking [order]="order" [code]="0" [orderId]="order['@id']" [lable]="'Add Tracking'"
+                          [textColor]="'black'" [successCallback]="successCallback"
+                          [title]="'Add tracking'"></gomco-add-tracking>
+
+    </div>
+
+    <div *ngIf="order.items.length > 0">
+      <div *ngIf="order.managed && !isAllItemReturnInitiated(order)">
+        <gomco-process-return [order]="order" [code]="2" [orderId]="order['@id']"
+                              [lable]="'Process Return'" [title]="'Process Return'"></gomco-process-return>
+      </div>
+
+      <div *ngIf="order.orderStatus.code != 'canceled'">
+        <gomco-add-tracking [order]="order" [code]="1" [orderId]="order['@id']" [lable]="'Return Tracking'"
+                            [textColor]="'black'" [successCallback]="successCallback"
+                            [title]="'Return tracking'"></gomco-add-tracking>
+      </div>
+    </div>
+    <a
+      href="{{contactRetailer(order.channel?.supportEmail)}}">
+      <div fxLayout="row" fxLayoutAlign="center">
+        <span class="font-medium">Contact Retailer</span>
+      </div>
+    </a>
+
+  </ng-template>
+
+</ng-template>
+
+<gomco-detail-component #detailRef [template]="template" [resource]="resource"
+                        [metaTitleField]="metaTitleField"></gomco-detail-component>

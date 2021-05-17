@@ -46,7 +46,7 @@ export class PaginationControlsComponent {
   @Output() pageBoundsCorrection: EventEmitter<number> = new EventEmitter<number>();
 
   private _directionLinks = true;
-  private _autoHide = false;
+  private _autoHide = true;
   private _responsive = false;
 
 }

@@ -38,6 +38,8 @@ export class LoginComponent implements OnInit {
     }
   ];
   queryParams;
+  successful = false;
+
 
 
   constructor(protected _route: ActivatedRoute, protected readonly auth: AuthService) {
@@ -46,8 +48,7 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   successCallback = (response) => {
     this.auth.authenticate(response);

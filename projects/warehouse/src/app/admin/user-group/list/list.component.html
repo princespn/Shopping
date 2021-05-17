@@ -1,0 +1,23 @@
+<ng-template #editButtonTemplate let-row="row" let-rowIndex="index" let-updateRowConst="updateRowConst">
+
+  <ng-template #editForm let-dialogRef="dialogRef">
+    <gomco-formly-form [model]="row" (successful)="updateRowConst(rowIndex, $event)" [subscribeRoute]="false" [dialogRef]="dialogRef"
+                       [debug]="false" [fields]="editFields"
+                       [resource]="resource" [param]="{id: row['@id']}" [update]="true" [showDeleteButton]="false"></gomco-formly-form>
+  </ng-template>
+
+
+  <gomco-dialog-button
+    [matConfirmDialogData]="{dialogueContent: editForm, title: 'Edit User Group', showActionButtons: false}"
+    [label]="'Edit'" [textColor]="'primary'" ></gomco-dialog-button>
+</ng-template>
+
+<ng-template #createForm let-dialogRef="dialogRef">
+  <gomco-formly-form (successful)="listComponent.addRow($event)" formClass="" [subscribeRoute]="false" [dialogRef]="dialogRef"
+                     [debug]="false" [fields]="editFields"
+                     [resource]="resource" [showDeleteButton]="false"></gomco-formly-form>
+</ng-template>
+
+<gomco-common-list #listComponent [resourcePath]="resourcePath" [actions]="[{type: 'template', template: editButtonTemplate}, {type: 'delete'}]"
+                   [filters]="fields" [resource]="resource" [columns]="columns" [createNewDialogTemplate]="createForm" createButtonName="Add User Group">
+</gomco-common-list>

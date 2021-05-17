@@ -1,0 +1,20 @@
+<div class="max-w-3/4 me" fxFlexAlign="end" fxLayout="column" fxLayoutGap="10px" class="shadow-2 p-3  bg-card">
+  <div fxLayout="row" fxLayoutGap="15px" *ngFor="let row of row.orderItems">
+    <p><img class="rounded h-24 w-24" src="{{row.orderItem.imageUrl}}">
+
+    <div>
+      <p>{{ row.orderItem.title}}</p>
+      <p fxLayout="row" fxLayoutGap="15px">
+        <span>SKU: {{ row.orderItem.sku}} </span>
+        <span>QTY: {{ row.orderItem.quantity}}</span>
+      </p>
+    </div>
+
+
+  </div>
+  <div>
+    <p>Reason: This is test reason</p>
+    <p>Condition: Damaged</p>
+    <p>Resolution Req: Replace</p>
+  </div>
+</div>

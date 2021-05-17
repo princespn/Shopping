@@ -10,7 +10,7 @@ const defaultConfig: Config = {
   layout: 'horizontal',
   boxed: false,
   sidenav: {
-    title: 'Genericpedia',
+    title: 'Shopping Manager',
     imageUrl: 'assets/img/small-logo.png',
     showCollapsePin: true,
     state: 'expanded'

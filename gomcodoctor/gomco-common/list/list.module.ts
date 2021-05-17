@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {ListComponent} from '@gomcodoctor/gomco-common/list/list.component';
-import {FlexLayoutModule} from '@angular/flex-layout';
+import {FlexLayoutModule, FlexModule} from '@angular/flex-layout';
 import {FormlyFormModule} from '@gomcodoctor/gomco-common/formly-form/formly-form.module';
 import {RouterModule} from '@angular/router';
 import {GenericDoseChipsModule} from '@gomcodoctor/gomco-common/generic-dose-chips/generic-dose-chips.module';
@@ -33,6 +33,7 @@ import {FormsModule} from '@angular/forms';
   imports: [
     CommonModule,
     FlexLayoutModule,
+    FlexModule,
     FormlyFormModule,
     RouterModule,
     GenericDoseChipsModule,

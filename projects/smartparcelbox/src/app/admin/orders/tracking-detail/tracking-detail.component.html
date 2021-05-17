@@ -1,0 +1,135 @@
+<div fxLayout="column" *ngIf="data.orderData">
+
+  <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="15px">
+    <div (click)="onBackPressed()" style="cursor: pointer" fxLayout="row" fxLayoutAlign=" center" fxLayoutGap="15px">
+      <mat-icon [icIcon]="icArrowBack"></mat-icon>
+      <h4>Tracking details.</h4>
+    </div>
+
+
+    <div>
+      <button [matMenuTriggerFor]="chatMenu"
+              mat-icon-button
+              style="width: 38px; height: 38px;"
+              type="button">
+        <mat-icon [icIcon]="icMoreVert" class="text-secondary"></mat-icon>
+      </button>
+      <mat-menu #chatMenu="matMenu" xPosition="before" yPosition="below">
+        <ng-container [ngTemplateOutletContext]="{ order: data.orderData.shipments[data.position]}"
+                      [ngTemplateOutlet]="optionMenu"></ng-container>
+
+      </mat-menu>
+
+    </div>
+  </div>
+
+
+  <div class="mt-5 tracking-details">
+    <div fxLayout="row" fxLayoutAlign="space-between"
+         *ngIf="data.orderData.shipments[data.position].courierTracking?.checkpoints?.length >= 0">
+      <div>
+        <div fxLayout="row" fxLayoutAlign="space-between center">
+          <img *ngIf="data.orderData.shipments[data.position].courierTracking?.courier?.logoUrl" mat-card-avatar src="{{data.orderData.shipments[data.position].courierTracking?.courier?.logoUrl}}">
+          <h4 class="mb-2"> {{data.orderData.shipments[data.position].courierTracking?.courier?.name}}</h4>
+        </div>
+<!--        <h4 class="mb-2"> {{data.orderData.shipments[data.position].courierTracking?.courier?.name}}</h4>-->
+        <h5>#{{data.orderData.shipments[data.position].courierTracking?.number}}</h5>
+        <h6>Last updated: {{data.orderData.shipments[data.position].courierTracking?.updatedAt | date: 'd MMM, y'}}</h6>
+      </div>
+
+      <div fxLayout="row" fxLayoutAlign="space-between">
+        <div *ngIf="data.orderData.shipments[data.position].courierTracking?.courier?.phone"
+             class="w-10 h-10 rounded-full bg-gray-light text-secondary ltr:mr-3 rtl:ml-3 flex items-center justify-center">
+          <a href="tel:{{data.orderData.shipments[data.position].courierTracking?.courier.phone}}">
+            <ic-icon [icon]="icPhone" size="20px"></ic-icon>
+          </a>
+        </div>
+        <div *ngIf="data.orderData.shipments[data.position].courierTracking?.courier?.email"
+             class="w-10 h-10 rounded-full bg-gray-light text-secondary ltr:mr-3 rtl:ml-3 flex items-center justify-center">
+          <a href="mailto:{{data.orderData.shipments[data.position].courierTracking?.courier.email}}">
+            <ic-icon [icon]="icMail" size="20px"></ic-icon>
+          </a>
+        </div>
+        <div *ngIf="data.orderData.shipments[data.position].courierTracking?.courier?.website"
+             class="w-10 h-10 rounded-full bg-gray-light text-secondary ltr:mr-3 rtl:ml-3 flex items-center justify-center">
+          <a href="{{data.orderData.shipments[data.position].courierTracking?.courier?.website}}">
+            <ic-icon [icon]="faGlobeEurope" size="20px" fontSet="fa"></ic-icon>
+          </a>
+        </div>
+      </div>
+    </div>
+
+
+    <div [ngSwitch]="getCode(data.orderData.shipments[data.position].courierTracking)">
+
+      <div *ngSwitchCase="'in-transit'"
+           class="bg-warn-light text-white font-medium text-lg pt-2 pb-2 pl-5 pr-5 mt-5 mb-5">
+        {{setMessage(data.orderData.shipments[data.position].courierTracking)}}
+      </div>
+
+      <div *ngSwitchCase="'return-requested'"
+           class="bg-green-light font-medium text-white text-lg pt-2 pb-2 pl-5 pr-5 mt-5 mb-5">
+        {{setMessage(data.orderData.shipments[data.position].courierTracking)}}
+      </div>
+
+      <div *ngSwitchCase="'pending'"
+           class="bg-red-light  text-sm text-red  pt-2 pb-2 pl-5 pr-5 mt-5 mb-5">
+        {{setMessage(data.orderData.shipments[data.position].courierTracking)}}
+      </div>
+      <div *ngSwitchCase="'expired'"
+           class="bg-red-light font-medium text-white text-lg pt-2 pb-2 pl-5 pr-5 mt-5 mb-5">
+        {{setMessage(data.orderData.shipments[data.position].courierTracking)}}
+      </div>
+      <div *ngSwitchCase="'delivered'"
+           class="bg-green text-sm font-medium text-white text-lg pt-2 pb-2 pl-5 pr-5 mt-5 mb-5">
+        {{setMessage(data.orderData.shipments[data.position].courierTracking)}}
+      </div>
+      <div *ngSwitchCase="'out-for-delivery'"
+           class="bg-purple text-sm font-medium text-white text-lg pt-2 pb-2 pl-5 pr-5 mt-5 mb-5">
+        {{setMessage(data.orderData.shipments[data.position].courierTracking)}}
+      </div>
+      <div *ngSwitchCase="'canceled'"
+           class="bg-purple text-sm font-medium text-white text-lg pt-2 pb-2 pl-5 pr-5 mt-5 mb-5">
+        {{setMessage(data.orderData.shipments[data.position].courierTracking)}}
+      </div>
+      <div *ngSwitchCase="'refunded'"
+           class="bg-purple text-sm font-medium text-white text-lg pt-2 pb-2 pl-5 pr-5 mt-5 mb-5">
+        {{setMessage(data.orderData.shipments[data.position].courierTracking)}}
+      </div>
+      <div *ngSwitchCase="'processing'"
+           class="bg-purple text-sm font-medium text-white text-lg pt-2 pb-2 pl-5 pr-5 mt-5 mb-5">
+        {{setMessage(data.orderData.shipments[data.position].courierTracking)}}
+      </div>
+    </div>
+
+
+    <mat-dialog-content class="content">
+      <div *ngIf="data.orderData.shipments[data.position].courierTracking?.checkpoints?.length > 0">
+        <div *ngFor="let row of data.orderData.shipments[data.position].courierTracking?.checkpoints; let i = index"
+             fxLayout="column" >
+          <div fxLayout="row" fxLayoutGap="25px" class="mb-5">
+            <img mat-card-avatar src="{{getImagePath(row.status?.code | lowercase)}}">
+            <div fxLayout="column" fxLayoutGap="1px">
+              <h5 class="font-medium">{{row.message}}</h5>
+              <p>{{row.status?.name}}</p>
+              <p>{{row.scanDateTime | date: 'd MMM, y'}}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </mat-dialog-content>
+  </div>
+</div>
+
+<ng-template #optionMenu>
+
+  <gomco-delete-button class="mt-6" [id]="data.orderData.shipments[data.position]['@id']" [resource]="'shipments'"
+                       [label]="'Delete'" [matMenu]="true" (deleted)="onShipmentDeleted()"></gomco-delete-button>
+  <gomco-update-item-button
+    *ngIf="data.orderData.shipments[data.position]?.courierTracking?.tag?.code != 'delivered' && data.orderData.shipments[data.position]?.courierTracking?.checkpoints[0]?.status?.code != 'Delivered'"
+    class="mt-6" [showConfirmDialog]="true" [data]="finalData" titleDialog="'Mark as delivered?'"
+    [id]="data.orderData.shipments[data.position].courierTracking['@id']" [resource]="'trackings'"
+    [label]="'Mark as delivered'" [matMenu]="true" (updated)="onShipmentDeleted()"></gomco-update-item-button>
+</ng-template>
+
+

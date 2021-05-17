@@ -1,6 +1,23 @@
-<h1 matDialogTitle>{{title}}</h1>
-<div mat-dialog-content>{{confirmMessage}}</div>
-<div mat-dialog-actions class="pt-10">
-  <button mat-raised-button class="mat-accent" [mat-dialog-close]="true">{{confirmTextButton}}</button>
-  <button mat-button mat-dialog-close>{{cancelTextButton}}</button>
+<div class="mb-3" fxLayout="row" fxLayoutAlign="space-between center">
+  <h1 class="mb-0" mat-dialog-title>{{title}} </h1>
+  <button class="text-secondary" mat-dialog-close  type="button">
+    <mat-icon [icIcon]="icClose"></mat-icon>
+  </button>
+</div>
+
+<!--<div mat-dialog-content>{{confirmMessage}}</div>-->
+<div *ngIf="dialogueContent; else plainMessage">
+  <ng-template [ngTemplateOutlet]="dialogueContent" [ngTemplateOutletContext]="{dialogRef: dialogRef}"></ng-template>
+</div>
+
+<ng-template #plainMessage>
+  <div mat-dialog-content>{{confirmMessage}}</div>
+</ng-template>
+
+<div *ngIf="(showConfirmButton || showCancelButton) && showActionButtons" mat-dialog-actions class="pt-6 pb-6" fxLayout="row" fxLayoutAlign="space-between">
+  <button *ngIf="showCancelButton" mat-raised-button class="bg-gray-light" mat-button mat-dialog-close>{{cancelTextButton}}</button>
+
+  <button *ngIf="showConfirmButton" mat-raised-button class="mat-warn"
+          [mat-dialog-close]="true">{{confirmTextButton}}</button>
+
 </div>

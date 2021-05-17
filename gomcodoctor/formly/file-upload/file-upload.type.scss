@@ -3,11 +3,13 @@
 }
 
 .file-uploader .file-drop-wrapper {
+  border:1px dashed #ccc;
   background: none !important;
 }
 
 #dropZone {
   border: none !important;
+  padding: 0 !important;
 }
 
 ngx-file-picker {
@@ -15,11 +17,7 @@ ngx-file-picker {
   height: auto;
 }
 
-.content-top-text {
-  font-size: 18px;
-  font-weight: bold;
-  color: #5b5b7b;
-}
+
 .content-center-text {
   color: #90a0bc;
   font-size: 14px;
@@ -78,8 +76,7 @@ ngx-file-picker {
 }
 
 .profile-pic-size {
-  width: 250px;
-  height: 250px;
+margin: 1rem auto;
   cursor: pointer;
 }
 

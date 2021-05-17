@@ -251,6 +251,502 @@
         }
       }
     },
+    "warehouse": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      },
+      "root": "projects/warehouse",
+      "sourceRoot": "projects/warehouse/src",
+      "prefix": "gomco",
+      "architect": {
+        "build": {
+          "builder": "@angular-builders/custom-webpack:browser",
+          "options": {
+            "outputPath": "dist/warehouse/browser",
+            "index": "projects/warehouse/src/index.html",
+            "main": "projects/warehouse/src/main.ts",
+            "polyfills": "projects/warehouse/src/polyfills.ts",
+            "tsConfig": "projects/warehouse/tsconfig.app.json",
+            "aot": true,
+            "assets": [
+              "projects/warehouse/src/favicon.ico",
+              "projects/warehouse/src/assets",
+              "projects/warehouse/src/_redirects",
+              "projects/warehouse/src/manifest.webmanifest",
+              {
+                "glob": "**/*.svg",
+                "input": "node_modules/ionicons/dist/ionicons/svg",
+                "output": "./svg"
+              }
+            ],
+            "styles": [
+              "@vex/styles/tailwind.scss",
+              "projects/warehouse/src/styles.scss",
+              {
+                "input": "node_modules/@ionic/angular/css/normalize.css"
+              },
+              {
+                "input": "node_modules/@ionic/angular/css/structure.css"
+              },
+              {
+                "input": "node_modules/@ionic/angular/css/core.css"
+              },
+              {
+                "input": "projects/warehouse/src/theme/variables.css"
+              }
+            ],
+            "scripts": [],
+            "customWebpackConfig": {
+              "path": "webpack.config.js"
+            },
+            "allowedCommonJsDependencies": [
+              "simplebar",
+              "highlight.js",
+              "faker",
+              "showdown",
+              "core-js/modules/es.string.match",
+              "core-js/modules/es.array.for-each",
+              "core-js/modules/es.string.replace",
+              "core-js/modules/es.regexp.exec",
+              "core-js/modules/es.function.name",
+              "core-js/modules/es.string.name",
+              "core-js/modules/es.array.reduce",
+              "core-js/modules/web.dom-collections.iterator",
+              "core-js/modules/es.string.iterator",
+              "core-js/modules/es.weak-map",
+              "core-js/modules/es.parse-int",
+              "core-js/modules/es.object.to-string",
+              "core-js/modules/es.object.assign",
+              "core-js/modules/es.array.iterator",
+              "core-js/modules/es.array.filter",
+              "core-js/modules/web.dom-collections.for-each",
+              "dom-set",
+              "dom-plane",
+              "angular-calendar/date-adapters/date-fns",
+              "calendar-utils/date-adapters/date-fns",
+              "@mattlewis92/dom-autoscroller"
+            ]
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/warehouse/src/environments/environment.ts",
+                  "with": "projects/warehouse/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "3mb",
+                  "maximumError": "5mb"
+                }
+              ],
+              "customWebpackConfig": {
+                "path": "webpack.prod.config.js"
+              },
+              "serviceWorker": true,
+              "ngswConfigPath": "projects/warehouse/ngsw-config.json"
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-builders/custom-webpack:dev-server",
+          "options": {
+            "browserTarget": "warehouse:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "warehouse:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "warehouse:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-builders/custom-webpack:karma",
+          "options": {
+            "main": "projects/warehouse/src/test.ts",
+            "polyfills": "projects/warehouse/src/polyfills.ts",
+            "tsConfig": "projects/warehouse/tsconfig.spec.json",
+            "karmaConfig": "projects/warehouse/karma.conf.js",
+            "assets": [
+              "projects/warehouse/src/favicon.ico",
+              "projects/warehouse/src/assets",
+              "projects/warehouse/src/manifest.webmanifest"
+            ],
+            "styles": [
+              "projects/warehouse/src/styles.scss"
+            ],
+            "scripts": [],
+            "customWebpackConfig": {
+              "path": "webpack.config.js"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/warehouse/tsconfig.app.json",
+              "projects/warehouse/tsconfig.spec.json",
+              "projects/warehouse/e2e/tsconfig.json",
+              "projects/warehouse/tsconfig.server.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        },
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "projects/warehouse/e2e/protractor.conf.js",
+            "devServerTarget": "warehouse:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "warehouse:serve:production"
+            }
+          }
+        },
+        "server": {
+          "builder": "@angular-devkit/build-angular:server",
+          "options": {
+            "outputPath": "dist/warehouse/server",
+            "main": "projects/warehouse/server.ts",
+            "tsConfig": "projects/warehouse/tsconfig.server.json"
+          },
+          "configurations": {
+            "production": {
+              "outputHashing": "media",
+              "fileReplacements": [
+                {
+                  "replace": "projects/warehouse/src/environments/environment.ts",
+                  "with": "projects/warehouse/src/environments/environment.prod.ts"
+                }
+              ],
+              "sourceMap": false,
+              "optimization": true
+            }
+          }
+        },
+        "serve-ssr": {
+          "builder": "@nguniversal/builders:ssr-dev-server",
+          "options": {
+            "browserTarget": "warehouse:build",
+            "serverTarget": "warehouse:server"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "warehouse:build:production",
+              "serverTarget": "warehouse:server:production"
+            }
+          }
+        },
+        "prerender": {
+          "builder": "@nguniversal/builders:prerender",
+          "options": {
+            "browserTarget": "warehouse:build:production",
+            "serverTarget": "warehouse:server:production",
+            "routes": [
+              "/"
+            ]
+          },
+          "configurations": {
+            "production": {}
+          }
+        },
+        "ionic-cordova-serve": {
+          "builder": "@ionic/angular-toolkit:cordova-serve",
+          "options": {
+            "cordovaBuildTarget": "warehouse:ionic-cordova-build",
+            "devServerTarget": "warehouse:serve"
+          },
+          "configurations": {
+            "production": {
+              "cordovaBuildTarget": "warehouse:ionic-cordova-build:production",
+              "devServerTarget": "warehouse:serve:production"
+            }
+          }
+        },
+        "ionic-cordova-build": {
+          "builder": "@ionic/angular-toolkit:cordova-build",
+          "options": {
+            "browserTarget": "warehouse:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "warehouse:build:production"
+            }
+          }
+        }
+      }
+    },
+    "spbadmin": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      },
+      "root": "projects/spbadmin",
+      "sourceRoot": "projects/spbadmin/src",
+      "prefix": "gomco",
+      "architect": {
+        "build": {
+          "builder": "@angular-builders/custom-webpack:browser",
+          "options": {
+            "outputPath": "dist/spbadmin/browser",
+            "index": "projects/spbadmin/src/index.html",
+            "main": "projects/spbadmin/src/main.ts",
+            "polyfills": "projects/spbadmin/src/polyfills.ts",
+            "tsConfig": "projects/spbadmin/tsconfig.app.json",
+            "aot": true,
+            "assets": [
+              "projects/spbadmin/src/favicon.ico",
+              "projects/spbadmin/src/assets",
+              "projects/spbadmin/src/_redirects",
+              "projects/spbadmin/src/manifest.webmanifest",
+              {
+                "glob": "**/*.svg",
+                "input": "node_modules/ionicons/dist/ionicons/svg",
+                "output": "./svg"
+              }
+            ],
+            "styles": [
+              "@vex/styles/tailwind.scss",
+              "projects/spbadmin/src/styles.scss",
+              {
+                "input": "node_modules/@ionic/angular/css/normalize.css"
+              },
+              {
+                "input": "node_modules/@ionic/angular/css/structure.css"
+              },
+              {
+                "input": "node_modules/@ionic/angular/css/core.css"
+              },
+              {
+                "input": "projects/spbadmin/src/theme/variables.css"
+              }
+            ],
+            "scripts": [],
+            "customWebpackConfig": {
+              "path": "webpack.config.js"
+            },
+            "allowedCommonJsDependencies": [
+              "simplebar",
+              "highlight.js",
+              "faker",
+              "showdown",
+              "core-js/modules/es.string.match",
+              "core-js/modules/es.array.for-each",
+              "core-js/modules/es.string.replace",
+              "core-js/modules/es.regexp.exec",
+              "core-js/modules/es.function.name",
+              "core-js/modules/es.string.name",
+              "core-js/modules/es.array.reduce",
+              "core-js/modules/web.dom-collections.iterator",
+              "core-js/modules/es.string.iterator",
+              "core-js/modules/es.weak-map",
+              "core-js/modules/es.parse-int",
+              "core-js/modules/es.object.to-string",
+              "core-js/modules/es.object.assign",
+              "core-js/modules/es.array.iterator",
+              "core-js/modules/es.array.filter",
+              "core-js/modules/web.dom-collections.for-each",
+              "dom-set",
+              "dom-plane",
+              "angular-calendar/date-adapters/date-fns",
+              "calendar-utils/date-adapters/date-fns",
+              "@mattlewis92/dom-autoscroller"
+            ]
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/spbadmin/src/environments/environment.ts",
+                  "with": "projects/spbadmin/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "3mb",
+                  "maximumError": "5mb"
+                }
+              ],
+              "customWebpackConfig": {
+                "path": "webpack.prod.config.js"
+              },
+              "serviceWorker": true,
+              "ngswConfigPath": "projects/spbadmin/ngsw-config.json"
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-builders/custom-webpack:dev-server",
+          "options": {
+            "browserTarget": "spbadmin:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "spbadmin:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "spbadmin:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-builders/custom-webpack:karma",
+          "options": {
+            "main": "projects/spbadmin/src/test.ts",
+            "polyfills": "projects/spbadmin/src/polyfills.ts",
+            "tsConfig": "projects/spbadmin/tsconfig.spec.json",
+            "karmaConfig": "projects/spbadmin/karma.conf.js",
+            "assets": [
+              "projects/spbadmin/src/favicon.ico",
+              "projects/spbadmin/src/assets",
+              "projects/spbadmin/src/manifest.webmanifest"
+            ],
+            "styles": [
+              "projects/spbadmin/src/styles.scss"
+            ],
+            "scripts": [],
+            "customWebpackConfig": {
+              "path": "webpack.config.js"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/spbadmin/tsconfig.app.json",
+              "projects/spbadmin/tsconfig.spec.json",
+              "projects/spbadmin/e2e/tsconfig.json",
+              "projects/spbadmin/tsconfig.server.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        },
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "projects/spbadmin/e2e/protractor.conf.js",
+            "devServerTarget": "spbadmin:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "spbadmin:serve:production"
+            }
+          }
+        },
+        "server": {
+          "builder": "@angular-devkit/build-angular:server",
+          "options": {
+            "outputPath": "dist/spbadmin/server",
+            "main": "projects/spbadmin/server.ts",
+            "tsConfig": "projects/spbadmin/tsconfig.server.json"
+          },
+          "configurations": {
+            "production": {
+              "outputHashing": "media",
+              "fileReplacements": [
+                {
+                  "replace": "projects/spbadmin/src/environments/environment.ts",
+                  "with": "projects/spbadmin/src/environments/environment.prod.ts"
+                }
+              ],
+              "sourceMap": false,
+              "optimization": true
+            }
+          }
+        },
+        "serve-ssr": {
+          "builder": "@nguniversal/builders:ssr-dev-server",
+          "options": {
+            "browserTarget": "spbadmin:build",
+            "serverTarget": "spbadmin:server"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "spbadmin:build:production",
+              "serverTarget": "spbadmin:server:production"
+            }
+          }
+        },
+        "prerender": {
+          "builder": "@nguniversal/builders:prerender",
+          "options": {
+            "browserTarget": "spbadmin:build:production",
+            "serverTarget": "spbadmin:server:production",
+            "routes": [
+              "/"
+            ]
+          },
+          "configurations": {
+            "production": {}
+          }
+        },
+        "ionic-cordova-serve": {
+          "builder": "@ionic/angular-toolkit:cordova-serve",
+          "options": {
+            "cordovaBuildTarget": "spbadmin:ionic-cordova-build",
+            "devServerTarget": "spbadmin:serve"
+          },
+          "configurations": {
+            "production": {
+              "cordovaBuildTarget": "spbadmin:ionic-cordova-build:production",
+              "devServerTarget": "spbadmin:serve:production"
+            }
+          }
+        },
+        "ionic-cordova-build": {
+          "builder": "@ionic/angular-toolkit:cordova-build",
+          "options": {
+            "browserTarget": "spbadmin:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "spbadmin:build:production"
+            }
+          }
+        }
+      }
+    },
     "gomco": {
       "projectType": "application",
       "schematics": {

@@ -1,0 +1,60 @@
+<div fxLayout="column" fxLayoutAlign="space-between start" fxLayoutGap="20px" class="mb-8">
+  <h4>Here you can check status of your service requests</h4>
+  <button type="button" class="mat-focus-indicator mat-raised-button w-auto mat-button-base mat-primary">
+    <a [routerLink]="'admin_helpfeedback_list' | namedRoutePipe"><span class="mat-button-wrapper">Get Support</span></a>
+    <span matripple="" class="mat-ripple mat-button-ripple"></span>
+    <span class="mat-button-focus-overlay"></span>
+  </button>
+</div>
+
+<ng-template #rowTemplate let-row="row" let-selection="selection">
+
+  <a [routerLink]="'admin_servicerequests_detail' | namedRoutePipe: {id: row['@id']}">
+    <mat-card>
+      <div fxLayout="column" fxLayout.gt-sm="row" fxLayoutAlign="space-between left" fxLayoutAlign.gt-sm="space-between center" fxLayoutGap="0px" fxLayoutGap.gt-sm="10px">
+
+        <div  fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="20px">
+          <div *ngIf="row.order"><img class="pr-3 h-12" src="{{row.order.channel.logoUrl}}"></div>
+          <div *ngIf="!row.order"><img class="pr-3 h-12" src="./assets/images/placeholder.png"></div>
+
+          <div><h4 class="font-normal"> #{{row.id}}</h4></div>
+        </div>
+
+
+        <div fxFlex="60"><h6 class="mb-2 sm:mb-0"> {{row.subject}} </h6></div>
+
+        <div *ngIf="row.order" fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="20px">
+          <span class="item-badge bg-red text-contrast-white  pl-3 pr-3 br-50">{{row.status.code}}</span>
+          <span>{{row.updatedAt | date: 'MMM d, y'}}</span>
+        </div>
+        <div *ngIf="!row.order">
+          <span class="item-badge pl-3 pb-2 pt-1 pr-3 br-50"></span>
+        </div>
+
+      </div>
+      <div class="mb-2">
+      </div>
+
+    </mat-card>
+  </a>
+</ng-template>
+
+<ng-template #noDataTamplete>
+
+  <mat-card fxLayoutGap="40px" class="text-center mt-5 pt-20 pb-12" fxLayout="column" fxLayoutAlign="center">
+
+    <h3>Welcome to Shopping Manager!</h3>
+    <img class="w-64 mx-auto" src="./assets/images/ticket-support.png">
+
+    <p class="text-base">No ticket found. <br>Looks like you haven't raised any complaint yet.</p>
+
+
+
+  </mat-card>
+
+</ng-template>
+
+<gomco-common-list [label]="'Tickets'" [filters]="fields" [resourcePath]="resourcePath" [resource]="resource"
+                   [rowTemplate]="rowTemplate" [noDataTemplate]="noDataTamplete"
+                   [showHeader]="false" [bulk]="false">
+</gomco-common-list>

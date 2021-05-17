@@ -18,6 +18,7 @@ import { SidebarComponent } from '@vexs/components/sidebar/sidebar.component';
 export class CustomLayoutComponent implements OnInit {
 
   @Input() contentRef: TemplateRef<any>;
+  @Input() footerRef: TemplateRef<any>;
 
   sidenavCollapsed$ = this.layoutService.sidenavCollapsed$;
   isFooterVisible$ = this.configService.config$.pipe(map(config => config.footer.visible));

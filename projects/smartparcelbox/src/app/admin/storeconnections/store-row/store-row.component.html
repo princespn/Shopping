@@ -1,0 +1,34 @@
+<mat-card fxLayout="row"  fxLayoutAlign="space-between center">
+
+  <div fxLayout="row" fxLayoutAlign=" center" >
+    <img class="pr-3 h-12"   src="{{row.channel.logoUrl}}">
+    <div fxLayout="column" fxLayoutAlign=" start" >
+      <h4 class="font-normal">{{row.channel.name}}</h4>
+      <h6 *ngIf="row.emailSent && !row.valid" class="font-normal">Email sent to verify, awaiting verification</h6>
+      <div *ngIf="row.valid">
+        <h6 class="font-normal text-green" >Connected</h6>
+      </div>
+    </div>
+  </div>
+
+  <ng-template #dialogueContent let-dialogRef="dialogRef">
+
+    <gomco-formly-form [subscribeRoute]="false" formClass="pb-4" [model]="model" [successCallback]="rowUpdated" successMessage="Email sent to verify, awaiting verification" [dialogRef]="dialogRef"
+                       [debug]="false" [fields]="fields"
+                       [resource]="resource" [param]="{id: row['@id']}" [update]="true" ></gomco-formly-form>
+  </ng-template>
+
+  <div >
+
+    <gomco-dialog-button  [buttonDisable]="isDisabled" *ngIf="!row.valid" [matConfirmDialogData]="{dialogueContent: dialogueContent, showActionButtons: false, title: 'Connect'}"  [label]="row.emailSent ? 'Resend' : 'Connect'" ></gomco-dialog-button>
+    <p *ngIf="isDisabled">Wait for: {{this.timeLeft}} sec</p>
+
+    <gomco-update-button  [matConfirmDialogData]="{dialogueContent: disconnectConfirmMessage, title: 'Disconnect'}" [showConfirmDialog]="true" (updated)="rowUpdated($event, false)" *ngIf="row.valid" [row]="row" [data]="{connect: false}" label="Disconnect">
+
+    </gomco-update-button>
+
+  </div>
+
+</mat-card>
+
+<ng-template #disconnectConfirmMessage>Do you want to disconnect this channel {{row.channel.name}}? </ng-template>

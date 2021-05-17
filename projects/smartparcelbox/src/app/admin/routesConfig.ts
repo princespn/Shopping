@@ -1,23 +1,22 @@
 import {RoutesConfig as AccountRoutesConfig} from '@app/admin/account/routesConfig';
 import {RoutesConfig as UserRoutesConfig} from '@app/admin/user/routesConfig';
-import {RoutesConfig as UserGroupRoutesConfig} from '@app/admin/user-group/routesConfig';
 import {RoutesConfig as PagesRoutesConfig} from '@app/admin/page/routesConfig';
-import {RoutesConfig as ChannelsRoutesConfig} from '@app/admin/channel/routesConfig';
-import {RoutesConfig as ChannelProductsRoutesConfig} from '@app/admin/channel-product/routesConfig';
-import {RoutesConfig as ChannelSettingsRoutesConfig} from '@app/admin/channel-setting/routesConfig';
-import {RoutesConfig as SupplierSettingsRoutesConfig} from '@app/admin/supplier-setting/routesConfig';
-import {RoutesConfig as SupplierProductsRoutesConfig} from '@app/admin/supplier-product/routesConfig';
-import {RoutesConfig as SupplierRoutesConfig} from '@app/admin/supplier/routesConfig';
-import {RoutesConfig as ProductsRoutesConfig} from '@app/admin/product/routesConfig';
-import {RoutesConfig as FeedsRoutesConfig} from '@app/admin/feed/routesConfig';
-import {RoutesConfig as CronLogRoutesConfig} from '@app/admin/cron-log/routesConfig';
-import {RoutesConfig as ChannelRequestLogRoutesConfig} from '@app/admin/channel-request-log/routesConfig';
+import {RoutesConfig as OrderRoutesConfig} from '@app/admin/orders/routesConfig';
+import {RoutesConfig as OrderItemSelectionRoutingConfig} from '@app/admin/order-item-selection/routesConfig';
+import {RoutesConfig as ServicerequestsConfig} from '@app/admin/servicerequests/routesConfig';
+import {RoutesConfig as StoreconnectionsConfig} from '@app/admin/storeconnections/routesConfig';
+import {RoutesConfig as SettingsConfig} from '@app/admin/settings/routesConfig';
+import {RoutesConfig as SignoutConfig} from '@app/admin/signout/routesConfig';
+import {RoutesConfig as HelpfeedbackConfig} from '@app/admin/helpfeedback/routesConfig';
+import {RoutesConfig as SmartParcelBoxRoutesConfig} from '@app/admin/smart-parcel-box/routesConfig';
+import {RoutesConfig as FaqsRoutesConfig} from '@app/admin/faqs/routesConfig';
+import {RoutesConfig as AboutUsRoutesConfig} from '@app/admin/about-us/routesConfig';
 
 export const RoutesConfig = {
   dashboard: {
     path: 'dash',
     data: {
-      // children: InventoryRoutesConfig
+      children: OrderRoutesConfig
     },
   },
   account: {
@@ -32,76 +31,111 @@ export const RoutesConfig = {
       children: UserRoutesConfig
     },
   },
-  user_group: {
-    path: 'userGroups',
+  order: {
+    path: 'orders',
     data: {
-      children: UserGroupRoutesConfig
+      children: OrderRoutesConfig,
+      toolBarTitle: 'My Shopping',
+      meta: {
+        title: 'All Orders',
+        description: 'Shopping manager integrates all your shipments into a single app'
+      },
     },
   },
-  channels: {
-    path: 'channels',
+  orderItemSelection: {
+    path: 'order-item-selection',
     data: {
-      children: ChannelsRoutesConfig
+      children: OrderItemSelectionRoutingConfig
     },
   },
-  channelProducts: {
-    path: 'channel-products',
+  servicerequests: {
+    path: 'servicerequests',
     data: {
-      children: ChannelProductsRoutesConfig
+      children: ServicerequestsConfig,
+      toolBarTitle: 'Service Requests',
+      meta: {
+        title: 'Service Requests',
+        description: 'Shopping manager integrates all your shipments into a single app'
+      }
     },
   },
-  channelSettings: {
-    path: 'channel-settings',
+  storeconnections: {
+    path: 'storeconnections',
     data: {
-      children: ChannelSettingsRoutesConfig
+      children: StoreconnectionsConfig,
+      toolBarTitle: 'Contact Retailer',
+      meta: {
+        title: 'Connect Retailer',
+        description: 'Shopping manager integrates all your shipments into a single app'
+      }
     },
   },
-  supplierSettings: {
-    path: 'supplier-settings',
+  settingsrequests: {
+    path: 'settings',
     data: {
-      children: SupplierSettingsRoutesConfig
+      children: SettingsConfig,
+      toolBarTitle: 'Settings',
+      meta: {
+        title: 'Account Setting',
+        description: 'Shopping manager integrates all your shipments into a single app'
+      }
     },
   },
-  supplierProducts: {
-    path: 'supplier-products',
+  signoutrequests: {
+    path: 'signout',
     data: {
-      children: SupplierProductsRoutesConfig
+      children: SignoutConfig,
+      toolBarTitle: 'Sign Out'
     },
   },
-  supplier: {
-    path: 'suppliers',
+  helpfeedbackrequests: {
+    path: 'helpfeedback',
     data: {
-      children: SupplierRoutesConfig
+      children: HelpfeedbackConfig,
+      toolBarTitle: 'Help & Feedback',
+      meta: {
+        title: 'Help & Feedback ',
+        description: 'Shopping manager integrates all your shipments into a single app'
+      }
     },
   },
-  products: {
-    path: 'products',
+  faqs: {
+    path: 'faqs',
     data: {
-      children: ProductsRoutesConfig
+      children: FaqsRoutesConfig,
+      meta: {
+        title: 'Frequently Asked Questions ',
+        description: 'Shopping manager integrates all your shipments into a single app'
+      }
+    },
+  },
+  smartParcelBox: {
+    path: 'smart-parcel-box',
+    data: {
+      children: SmartParcelBoxRoutesConfig,
+      toolBarTitle: 'Smart Parcel Box',
+      meta: {
+        title: 'Smart Parcel Box ',
+        description: 'Shopping manager integrates all your shipments into a single app'
+      }
     },
   },
   pages: {
     path: 'pages',
     data: {
-      children: PagesRoutesConfig
+      children: PagesRoutesConfig,
+      toolBarTitle: 'Help & Feedback',
+      meta: {
+        title: 'Help & Feedback',
+        description: 'Shopping manager integrates all your shipments into a single app'
+      }
     },
   },
-  cronLogs: {
-    path: 'cron-logs',
+  adminAboutUs: {
+    path: 'about-us',
     data: {
-      children: CronLogRoutesConfig
-    },
-  },
-  feeds: {
-    path: 'feeds',
-    data: {
-      children: FeedsRoutesConfig
-    },
-  },
-  channelRequestLogs: {
-    path: 'channel-request-logs',
-    data: {
-      children: ChannelRequestLogRoutesConfig
+      children: AboutUsRoutesConfig,
+      toolBarTitle: 'About us',
     },
   }
 };

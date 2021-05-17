@@ -1,0 +1,7 @@
+<ng-template #template let-data="data">
+  <spb-back-button [label]="data.title | titlecase"></spb-back-button>
+  <mat-card *ngIf="data" [innerHTML]="data.content">
+</mat-card>
+</ng-template>
+
+<gomco-detail-component [template]="template" [resource]="resource" [metaTitleField]="metaTitleField" ></gomco-detail-component>

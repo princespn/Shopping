@@ -1,0 +1,64 @@
+<ng-template #rowTemplate  let-row="row">
+
+  <ng-template #imagesList>
+
+    <mat-dialog-content>
+      <ng-template #templateRef let-galleryImages='galleryImages'>
+        <div *ngIf="galleryImages?.length > 0" fxLayout="column" fxFlex.lt-md="100" fxFlex.gt-sm="calc(30%)"
+             fxLayoutAlign="start center">
+          <ngx-gallery [options]="galleryOptions" [images]="galleryImages"
+                       class="ngx-gallery"></ngx-gallery>
+        </div>
+      </ng-template>
+      <gomco-detail-component [manualQueryParams]="{id: row.id}" [template]="templateRef"
+                              [resource]="resource"></gomco-detail-component>
+    </mat-dialog-content>
+  </ng-template>
+
+  <gomco-dialog-button
+    [matConfirmDialogData]="{dialogueContent: imagesList, title: 'All Images', showActionButtons: false}"
+    [label]="'Images'" [textColor]="'primary'" [isButton]="false"
+    [icon]="'perm_media'"></gomco-dialog-button>
+
+</ng-template>
+
+<ng-template let-row="row" let-value="value" #containerNumberRefrence>
+
+  <ng-template #itemList>
+    <mat-dialog-content>
+      <gomco-common-list [subscribeRoute]="false" [defaultFilterParam]="{container: row['@id']}" [createButton]="false"
+                         [label]="'Container Items'" [resourcePath]="itemResourcePath" [resource]="itemResource"
+                         [columns]="itemColumns"
+                         [showHeader]="false" [bulk]="false" [actions]="[]">
+      </gomco-common-list>
+    </mat-dialog-content>
+  </ng-template>
+
+  <gomco-dialog-button
+    [matConfirmDialogData]="{dialogueContent: itemList, title: 'Container ' + row.number + ' contains following items', showActionButtons: false}"
+    [label]="value" [textColor]="'primary'" [isButton]="false"></gomco-dialog-button>
+</ng-template>
+
+<ng-template #editButtonTemplate let-row="row" let-rowIndex="index" let-updateRowConst="updateRowConst">
+
+  <ng-template #editForm let-dialogRef="dialogRef">
+    <gomco-formly-form [model]="row" (successful)="updateRowConst(rowIndex, $event)" [subscribeRoute]="false" [dialogRef]="dialogRef"
+                       [debug]="false" [fields]="editFields"
+                       [resource]="resource" [param]="{id: row['@id']}" [update]="true" [showDeleteButton]="false"></gomco-formly-form>
+  </ng-template>
+
+
+  <gomco-dialog-button
+    [matConfirmDialogData]="{dialogueContent: editForm, title: 'Edit Container', showActionButtons: false}"
+    [label]="'Edit'" [textColor]="'primary'" ></gomco-dialog-button>
+</ng-template>
+<ng-template #createForm let-dialogRef="dialogRef">
+  <gomco-formly-form (successful)="listComponent.addRow($event)" formClass="" [subscribeRoute]="false" [dialogRef]="dialogRef"
+                     [debug]="false" [fields]="editFields"
+                     [resource]="resource" [showDeleteButton]="false"></gomco-formly-form>
+</ng-template>
+
+<gomco-common-list #listComponent
+  [resourcePath]="resourcePath" [templates]="{images: rowTemplate, number: containerNumberRefrence}"
+  [filters]="filterFields" [resource]="resource" [columns]="columns" [createNewDialogTemplate]="createForm" createButtonName="Add Container" [actions]="[{type: 'template', template: editButtonTemplate}, {type: 'delete'}]">
+</gomco-common-list>

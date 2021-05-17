@@ -8,7 +8,6 @@ import {MatInputModule} from '@angular/material/input';
 import {FlexLayoutModule} from '@angular/flex-layout';
 import {MatGridListModule} from '@angular/material/grid-list';
 import {MatButtonModule} from '@angular/material/button';
-// import {ReactiveFormsModule} from "@angular/forms";
 import {MatExpansionModule} from '@angular/material/expansion';
 import {ContainerModule} from '@vexs/directives/container/container.module';
 import {RelativeDateTimeModule} from '@vexs/pipes/relative-date-time/relative-date-time.module';
@@ -22,7 +21,6 @@ import {CustomLayoutModule} from '@app/custom-layout/custom-layout.module';
 import {LayoutComponent} from '@app/guest/layout/layout.component';
 import {NgxPaginationModule} from 'ngx-pagination';
 import {ContentLoaderModule} from '@netbasal/ngx-content-loader';
-import {HomeComponent} from '@app/home/home.component';
 import {NamedRouteModule} from '@gomcodoctor/_helper/named-route/named-route.module';
 import {GenericDoseChipsModule} from '@gomcodoctor/gomco-common/generic-dose-chips/generic-dose-chips.module';
 import {AgmCoreModule} from '@agm/core';
@@ -45,9 +43,13 @@ import {GoogleMapLocationModule} from '@gomcodoctor/gomco-common/google-map-loca
 import {BarRatingModule} from 'ngx-bar-rating';
 import {GoogleMapSelectLocationModule} from '@gomcodoctor/gomco-common/google-map-select-location/google-map-select-location.module';
 import {GoogleMapDirectionModule} from '@gomcodoctor/gomco-common/google-map-direction/google-map-direction.module';
+import {SpbCommonModule} from '@app/spb-common/spb-common.module';
+import { ResendEmailComponent } from './auth/resend-email/resend-email.component';
+
+
 
 @NgModule({
-    declarations: [HomeComponent, LayoutComponent],
+    declarations: [ LayoutComponent, ResendEmailComponent ],
     imports: [
         SharedModule,
         CommonModule,
@@ -91,6 +93,7 @@ import {GoogleMapDirectionModule} from '@gomcodoctor/gomco-common/google-map-dir
         GoogleMapSelectLocationModule,
         GoogleMapDirectionModule,
         BarRatingModule,
+        SpbCommonModule,
     ]
 })
 export class GuestModule { }

@@ -1,0 +1,31 @@
+
+//.list-color p {
+//  color: rgb(var(--color-primary));
+//}
+.publish-btn {
+  color: rgb(var(--color-primary));
+}
+
+.un-publish-btn {
+  color: rgb(var(--color-warn));
+}
+
+.no-activity p {
+  padding: 0 0 0 10px;
+}
+
+.no-activity {
+  color: #999;
+  background: #fafafa;
+}
+
+.forum-border {
+  border-bottom: 1px solid #E5E5E5;
+  padding: 10px 0;
+}
+
+.forum-border mat-icon {
+  font-size: 16px;
+  color: #999999;
+  cursor: pointer;
+}

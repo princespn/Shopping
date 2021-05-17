@@ -51,24 +51,6 @@ export const SignupModelForm = [
       },
     ],
   },
-  {
-    key: 'privacy',
-    type: 'checkbox',
-    className: 'checkbox',
-    templateOptions: {
-      label: 'Accept terms In order to proceed, please accept terms Accept terms In order to proceed, please accept terms,',
-      // description: 'In order to proceed, please accept terms Accept terms In order to proceed, please accept terms',
-      pattern: 'true',
-      required: true,
-      value: false,
-      appearance: 'standard',
-    },
-    validation: {
-      messages: {
-        pattern: 'Please accept the terms',
-      },
-    },
-  },
 ];
 
 export const SignupDataModel = {

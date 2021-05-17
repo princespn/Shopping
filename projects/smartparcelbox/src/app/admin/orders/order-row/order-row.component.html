@@ -1,0 +1,111 @@
+<a [routerLink]="'admin_orders_detail' | namedRoutePipe: {id: row['@id']}">
+  <mat-card fxLayout="row" fxLayoutAlign="space-between top">
+
+
+    <div>
+      <div fxLayout="row" fxLayoutAlign="space-between center" class="mb-3">
+
+        <div fxLayout="row" fxLayoutAlign=" center">
+
+          <img *ngIf="row.channel" class="pr-3 h-8" src="{{row.channel.logoUrl}}">
+          <h4>#{{row.channelOrderId | titlecase }}</h4>
+          <span class="pl-3">{{row.createdAt | date:'d MMM, y'}}</span>
+
+        </div>
+      </div>
+
+      <h6 class="mb-3">{{row.shortDescription}}</h6>
+
+      <div fxLayout="column">
+
+<!--        <h5 *ngIf="row?.shipments && row?.shipments[0]?.courierTracking?.checkpoints"-->
+<!--            class="text-secondary mb-3 -mt-3">{{row?.shipments[0]?.courierTracking?.checkpoints[0]?.message}}</h5>-->
+        <div fxLayout="row" fxLayoutAlign=" center" [ngSwitch]="row.orderStatus?.code">
+
+          <span *ngSwitchCase="'in-transit'"
+                class="bg-warn-light text-warn font-medium text-sm  pl-2 pr-2 mr-3 br-50 lh-20">
+            {{row.orderStatus?.name}}
+          </span>
+          <span *ngSwitchCase="'return-requested'"
+                class="bg-green-light font-medium text-green text-sm  pl-2 pr-2 mr-3 br-50 lh-20">
+            {{row.orderStatus?.name}}
+          </span>
+          <span *ngSwitchCase="'pending'"
+                class="bg-gray-light  text-sm font-medium text-black pl-2 pr-2 mr-3 br-50 lh-20">
+            {{row.orderStatus?.name}}
+          </span>
+          <span *ngSwitchCase="'expired'" class="bg-red-light text-sm font-medium text-red  pl-2 pr-2 mr-3 br-50 lh-20">
+            {{row.orderStatus?.name}}
+          </span>
+          <span *ngSwitchCase="'delivered'"
+                class="bg-green text-sm font-medium text-contrast-white  pl-2 pr-2 mr-3 br-50 lh-20">
+            {{row.orderStatus?.name}}
+          </span>
+          <span *ngSwitchCase="'out-for-delivery'"
+                class="bg-purple text-sm font-medium text-contrast-white  pl-2 pr-2 mr-3 br-50 lh-20">
+            {{row.orderStatus?.name}}
+          </span>
+          <span *ngSwitchCase="'canceled'"
+                class="bg-red text-sm font-medium text-contrast-white  pl-2 pr-2 mr-3 br-50 lh-20">
+            {{row.orderStatus?.name}}
+          </span>
+          <span *ngSwitchCase="'refunded'"
+                class="bg-black text-sm font-medium text-contrast-white  pl-2 pr-2 mr-3 br-50 lh-20">
+            {{row.orderStatus?.name}}
+          </span>
+          <span *ngSwitchCase="'processing'"
+                class="bg-black text-sm font-medium text-contrast-white  pl-2 pr-2 mr-3 br-50 lh-20">
+            {{row.orderStatus?.name}}
+          </span>
+          <span *ngSwitchDefault
+                class="bg-black text-sm font-medium text-contrast-white  pl-2 pr-2 mr-3 br-50 lh-20">
+            {{row.orderStatus?.name}}
+          </span>
+
+          <p class="text-xs"> {{row.finalUpdatedAt | date:'d MMM, y hh:mm a'}}</p>
+        </div>
+      </div>
+
+    </div>
+    <div fxLayout="column" fxLayoutAlign="space-between end">
+      <h4 class="font-medium"
+          *ngIf="row.total > 0"> {{multiplayer.multiplay(row.total) | currency: row.finalCurrencyCode}}</h4>
+
+      <span *ngIf="!row.managed && row.items.length == 0">
+        <mat-icon [icIcon]="icNoteAdd"></mat-icon>
+      </span>
+
+      <!--    <ng-container *ngIf="!row.managed">
+            <ng-template #addItemForm let-dialogRef="dialogRef">
+              <gomco-formly-form  formClass="" [redirectPath]="'admin_orders_detail' | namedRoutePipe: {id: row['@id']}" [subscribeRoute]="false" [dialogRef]="dialogRef"
+                                 [debug]="false" [fields]="addItemFields"    [modelModifierBeforeCall]="itemModelModifierBeforeCall"
+                                 [resource]="itemResource" [model]="{order: row['@id']}"></gomco-formly-form>
+            </ng-template>
+
+
+            <gomco-dialog-button icon="add"
+                                 [matConfirmDialogData]="{dialogueContent: addItemForm, title: 'Add Item', showActionButtons: false}"
+                                 [label]="'Add Item'" [textColor]="'primary'" ></gomco-dialog-button>
+          </ng-container>-->
+
+      <!--   <div>
+
+           <ng-container *ngIf="!row.managed">
+             <ng-template #editForm let-dialogRef="dialogRef">
+               <gomco-formly-form (deleted)="onDeletion(index, row)" formClass="" [model]="row" (successful)="updateRowConst(index, $event)" [subscribeRoute]="false" [dialogRef]="dialogRef"
+                                  [debug]="false" [fields]="editFields"  [modelModifier]="modelModifier" [showDeleteButton]="true" metaTitleField="channelOrderId"
+                                  [resource]="resource" [param]="{id: row['@id']}" [update]="true" ></gomco-formly-form>
+             </ng-template>
+
+
+             <gomco-dialog-button icon="edit" [successMessage]="'Edit Order Details Successfully'"
+                                  [matConfirmDialogData]="{dialogueContent: editForm, title: 'Edit Order Details', showActionButtons: false}"
+                                  [label]="'Edit'" [textColor]="'primary'" ></gomco-dialog-button>
+           </ng-container>
+
+         </div>-->
+
+
+    </div>
+  </mat-card>
+</a>

@@ -23,8 +23,7 @@ export class ResetPasswordComponent implements OnInit {
         label: 'New Password',
         required: true,
         placeholder: 'Enter New Password',
-        appearance: 'outline',
-        // type: 'password',
+        appearance: 'outline'
       },
     },
     {
@@ -35,8 +34,7 @@ export class ResetPasswordComponent implements OnInit {
         label: 'Confirm password',
         required: true,
         placeholder: 'Confirm Password',
-        appearance: 'outline',
-        // type: 'password',
+        appearance: 'outline'
       }
     }
   ];

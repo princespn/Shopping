@@ -5,14 +5,14 @@ import { trackByValue } from '../../utils/track-by';
 @Component({
   selector: 'vex-breadcrumbs',
   template: `
-    <div class="flex items-center">
-      <vex-breadcrumb>
-        <a [routerLink]="['/']">
+    <div class="flex items-center mb-3">
+      <vex-breadcrumb class="text-success">
+        <a [routerLink]="['/admin']">
           <ic-icon [icon]="icHome" inline="true" size="20px"></ic-icon>
         </a>
       </vex-breadcrumb>
       <ng-container *ngFor="let crumb of crumbs; trackBy: trackByValue">
-        <div class="w-1 h-1 bg-gray rounded-full ltr:mr-2 rtl:ml-2"></div>
+        <mat-icon class="mr-1 text-secondary">keyboard_arrow_right</mat-icon>
         <vex-breadcrumb>
           <a [routerLink]="[]">{{ crumb }}</a>
         </vex-breadcrumb>

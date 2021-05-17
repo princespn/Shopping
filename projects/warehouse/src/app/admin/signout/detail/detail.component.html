@@ -1,0 +1,12 @@
+<mat-card  fxLayoutAlign="center center" fxLayout="column" fxLayoutGap="15px">
+  <div fxLayout="column" fxLayoutGap="15px">
+    <h2>Are you sure</h2>
+    <h4>You want to sign out?</h4>
+  </div>
+  <mat-card-actions fxLayoutGap="15px">
+
+    <button mat-raised-button color="accent" (click)="backClicked()">Cancel</button>
+    <button mat-raised-button color="primary" (click)="logout()" [routerLink]="['/login']">Sign out</button>
+
+  </mat-card-actions>
+</mat-card>

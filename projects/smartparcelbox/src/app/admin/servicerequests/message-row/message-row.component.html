@@ -1,0 +1,9 @@
+    <div *ngIf="row.me==true" class="max-w-3/4 me mb-4" fxLayoutAlign="end center"  fxLayout="row">
+      <div class="m-1 mr-0 py-2 px-4 shadow-1 rounded-full bg-card">{{ row.message }}
+      <span class="pl-3">{{row.createdAt | date:'MMM d, y hh:mm'}}</span></div>
+    </div>
+    <div *ngIf="row.me==false"  class="max-w-3/4 partner" fxLayoutAlign="start center" fxLayout="row">
+      <div class="m-1 mr-0 py-2 px-4 shadow-1 rounded-full bg-primary text-primary-contrast">{{ row.message }}
+        <span class="pl-3">{{row.createdAt | date:'MMM d, y hh:mm'}} </span></div>
+    </div>
+

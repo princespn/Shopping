@@ -14,6 +14,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import {FormlyModule} from '@ngx-formly/core';
 import {FormlyFormModule} from '@gomcodoctor/gomco-common/formly-form/formly-form.module';
+import {LoadingModule} from '@gomcodoctor/gomco-common/loading/loading.module';
 
 
 @NgModule({
@@ -31,7 +32,8 @@ import {FormlyFormModule} from '@gomcodoctor/gomco-common/formly-form/formly-for
         MatButtonModule,
         MatCheckboxModule,
         FormlyModule,
-        FormlyFormModule
+        FormlyFormModule,
+        LoadingModule
     ]
 })
 export class LoginModule {

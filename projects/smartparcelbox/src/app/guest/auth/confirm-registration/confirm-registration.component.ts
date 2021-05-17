@@ -21,20 +21,16 @@ import {STEPPER_GLOBAL_OPTIONS} from '@angular/cdk/stepper';
 })
 
 export class ConfirmRegistrationComponent implements OnInit {
+
   private queryParams: Params;
-
   confirmed = false;
-
   resource = 'pharmacies';
-
-  formGroup = new FormGroup({});
 
   fields: FormlyFieldConfig[] = [
     {
       key: 'name',
       type: 'input',
       templateOptions: {
-        // label: 'query',
         label: 'Pharmacy Name',
         placeholder: 'Pharmacy Name',
         required: true,
@@ -45,7 +41,6 @@ export class ConfirmRegistrationComponent implements OnInit {
       key: 'address',
       type: 'textarea',
       templateOptions: {
-        // label: 'query',
         label: 'Address',
         placeholder: 'Address',
         required: true,
@@ -60,7 +55,6 @@ export class ConfirmRegistrationComponent implements OnInit {
       type: 'checkbox',
       className: 'checkbox',
       templateOptions: {
-        // label: 'query',
         label: 'Do you own this store? if yes then you can manage products listed under store',
         placeholder: 'Do you own this store? if yes then you can manage products listed under store',
         required: false,
@@ -77,7 +71,6 @@ export class ConfirmRegistrationComponent implements OnInit {
               key: 'firstName',
               type: 'input',
               templateOptions: {
-                // label: 'query',
                 label: 'Contact person first name',
                 placeholder: 'Contact person first name',
                 required: true,
@@ -89,7 +82,6 @@ export class ConfirmRegistrationComponent implements OnInit {
               key: 'lastName',
               type: 'input',
               templateOptions: {
-                // label: 'query',
                 label: 'Contact person last name',
                 placeholder: 'Contact person last name',
                 required: true,
@@ -102,7 +94,6 @@ export class ConfirmRegistrationComponent implements OnInit {
           key: 'email',
           type: 'input',
           templateOptions: {
-            // label: 'query',
             label: 'Contact Email',
             placeholder: 'Contact Email',
             required: false,
@@ -113,7 +104,6 @@ export class ConfirmRegistrationComponent implements OnInit {
           key: 'description',
           type: 'textarea',
           templateOptions: {
-            // label: 'query',
             label: 'Description About store',
             placeholder: 'e.g. we are doing business since 10 year, give minimum 10% discount all products with no question return policy',
             required: false,
@@ -127,7 +117,6 @@ export class ConfirmRegistrationComponent implements OnInit {
           key: 'discount',
           type: 'input',
           templateOptions: {
-            // label: 'query',
             type: 'number',
             label: 'Min discount on all products of store',
             placeholder: 'Min discount on all products of store',
@@ -146,7 +135,6 @@ export class ConfirmRegistrationComponent implements OnInit {
     key: 'locationArray',
     type: 'google-map-location',
     templateOptions: {
-      // label: 'query',
       label: 'Location',
       placeholder: 'Location',
       required: true,
@@ -161,7 +149,6 @@ export class ConfirmRegistrationComponent implements OnInit {
         key: 'images',
         type: 'file',
         templateOptions: {
-          // label: 'query',
           resource: 'pharmacyimages',
           label: 'Images',
           placeholder: 'Images',
@@ -174,14 +161,13 @@ export class ConfirmRegistrationComponent implements OnInit {
   }];
 
   pharmacy: any = {};
-
   isLinear = false;
-
   pharmacyRegistered = (model) => {
     this.pharmacy = model;
   }
 
 
+  // tslint:disable-next-line:max-line-length
   constructor(protected _route: ActivatedRoute, private baseService: BaseService, private router: Router, protected readonly auth: AuthService) {
 
   }
@@ -192,7 +178,7 @@ export class ConfirmRegistrationComponent implements OnInit {
       if (this.queryParams && this.queryParams.token){
         this.baseService.post(this.queryParams, 'emailconfirm').subscribe((response) => {
           this.confirmed = true;
-          // this.auth.redirectUrl = 'account/edit';
+          this.auth.redirectUrl = 'admin/settings/list';
           this.auth.authenticate(response);
           // this.router.navigate(['/login'], {queryParams: {registered: true}});
         });

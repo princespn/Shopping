@@ -1,0 +1,21 @@
+<ng-template let-row="row" let-value="value" #quantityDelivered>
+
+  <ng-template #itemList>
+    <mat-dialog-content>
+      <gomco-common-list [subscribeRoute]="false" [defaultFilterParam]="{orderItem: row.id}" [createButton]="false"
+                         [label]="'Supplier Order Items'" [resourcePath]="itemResourcePath" [resource]="itemResource"
+                         [columns]="itemColumns"
+                         [showHeader]="true" [bulk]="false" [actions]="[]">
+      </gomco-common-list>
+    </mat-dialog-content>
+  </ng-template>
+
+  <gomco-dialog-button
+    [matConfirmDialogData]="{dialogueContent: itemList, title: row.sku + ' delivery log', showActionButtons: false}"
+    [label]="value" [textColor]="'primary'" [isButton]="false"></gomco-dialog-button>
+</ng-template>
+
+<gomco-common-list [defaultFilterParam]="{'id': param.id}" [createButton]="false" [label]="'Supplier Order Items'" [filters]="fields" [resourcePath]="resourcePath" [resource]="resource"
+                   [columns]="columns" [templates]="{quantityDelivered: quantityDelivered}"
+                   [showHeader]="" [bulk]="false" [actions]="[]">
+</gomco-common-list>

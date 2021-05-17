@@ -1,17 +1,18 @@
-<div *ngIf="user !== null; else guest" #originRef
+<div *ngIf="user; else guest" #originRef
      (click)="showPopover(originRef)"
      [class.bg-hover]="dropdownOpen"
-     class="heading-img cursor-pointer"
+     class="flex items-center rounded cursor-pointer relative trans-ease-out select-none py-1 pr-1 pl-3 hover:bg-hover"
      matRipple>
+  <div class="body-1 font-medium leading-snug ltr:mr-3 rtl:ml-3"><p>Hi {{user?.firstName}}</p></div>
     <div class="dropdown-heading-icon" fxLayoutAlign="center center">
         <!--user-image-->
         <!--        <img src="assets/img/avatars/account-thumbnail.svg" alt="user-image"/>-->
-        <img [src]="user.profilePicUrl ? user.profilePicUrl : 'assets/img/avatars/account-thumbnail.svg'" alt="user-image"/>
+        <img [src]="user?.profilePicUrl ? user?.profilePicUrl : 'assets/img/avatars/account-thumbnail.svg'" alt="user-image"/>
     </div>
 </div>
 
 <ng-template #guest>
-    <button [routerLink]="'login' | namedRoutePipe" mat-button>Login</button>
-    <button [routerLink]="'register' | namedRoutePipe" mat-button>Register</button>
+    <button [routerLink]="'login' | namedRoutePipe" mat-button>Sign in</button>
+    <button [routerLink]="'register' | namedRoutePipe" mat-button>Sign up</button>
 </ng-template>
 

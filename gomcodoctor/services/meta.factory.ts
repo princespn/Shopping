@@ -4,7 +4,7 @@ export function metaFactory(): MetaLoader {
     return new MetaStaticLoader({
         pageTitlePositioning: PageTitlePositioning.PrependPageTitle,
         pageTitleSeparator: ' - ',
-        applicationName: 'Genericpedia',
+        applicationName: 'Shopping Manager',
         defaults: {
             title: 'Loading...',
             description: 'Mighty Mouse is an animated superhero mouse character',

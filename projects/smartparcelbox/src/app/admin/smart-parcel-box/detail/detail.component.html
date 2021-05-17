@@ -1,0 +1,60 @@
+<ng-template #templateRef let-data="data" let-error="error">
+  <mat-card *ngIf="data && registered" fxLayout="row" fxLayoutGap="15px" fxLayoutAlign="space-between start">
+    <a [routerLink]="'admin_smart-parcel-box_edit' | namedRoutePipe: {id: data['@id']}">
+
+      <div fxLayout="row" fxLayoutGap="25px">
+        <img class="rounded h-20 w-20 center-cropped" src="{{data.boxImageUrl}}">
+        <div>
+          <p class="text-secondary font-medium"><span class="text-black">Location : </span>{{data.landmark}} </p>
+          <p class="text-secondary font-medium"><span class="text-black">Barcode : </span> {{data.barcode}} </p>
+        </div>
+      </div>
+
+    </a>
+
+    <div fxLayout="row" fxLayoutAlign="top">
+
+      <a class="text-secondary mr-3"
+         [routerLink]="'admin_smart-parcel-box_edit' | namedRoutePipe: {id: data['@id']}">
+        <mat-icon [icIcon]="icEdit"></mat-icon>
+      </a>
+      <gomco-delete-button [id]="{id: 'me'}" [resource]="resource" (deleted)="registered = false"></gomco-delete-button>
+    </div>
+
+  </mat-card>
+
+  <mat-card *ngIf="!registered || error">
+    <h3 class="font-medium mb-3">Why Should you register your Smart Parcel Box?</h3>
+    <p>This app helps you to send instruction to the courier to deliver your package to the smart parcel box. It also authorises couriers and indemnifies them from handing over the package personally.
+      <br><br>
+      Its Unique barcode and location information differentiates each parcel box and the couriers may use them as an alternative to signatures for proof of delivery.</p>
+
+    <a [routerLink]="'admin_smart-parcel-box_edit' | namedRoutePipe: {id: 'me'}">
+      <button type="button"
+              class="mat-focus-indicator mat-raised-button mat-button-base mt-5 mb-10 bg-primary text-contrast-white"
+              style="margin-right: 12px;">
+        <span class="mat-button-wrapper">Register your Smart Parcel Box</span>
+        <span matripple="" class="mat-ripple mat-button-ripple"></span>
+        <span class="mat-button-focus-overlay"></span>
+      </button>
+    </a>
+
+    <h3 class="font-medium mt-5 mb-3">Don't own a Smart Parcel Box?</h3>
+    <p>Smart Parcel Box is the largest parcel delivery box brand in Europe with tens of thousands of installations in the UK & Europe. Available in a range of models, sizes and colours to suite all needs. No more “Sorry we missed you” cards and failed deliveries with a Smart Parcel Box at home.
+      <br><br>
+      Now supported with this Shopping Manager app to help you manage and stay on top your online shopping with great ease</p>
+
+    <a type="button" href="https://www.smartparcelbox.co.uk/buy-online.html" target="_blank"
+       class="mat-focus-indicator mat-raised-button mat-button-base mt-5 mb-10 bg-primary text-contrast-white"
+       style="margin-right: 12px;">
+      <span class="mat-button-wrapper">Explore Smart Parcel Box</span>
+      <span matripple="" class="mat-ripple mat-button-ripple"></span>
+      <span class="mat-button-focus-overlay"></span>
+    </a>
+
+  </mat-card>
+
+</ng-template>
+
+<gomco-detail-component [template]="templateRef" [resource]="resource" [manualQueryParams]="queryParams" ></gomco-detail-component>
+

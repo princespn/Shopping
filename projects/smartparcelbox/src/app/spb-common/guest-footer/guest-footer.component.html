@@ -1,0 +1,91 @@
+<!--footer-->
+<footer id="footer" class="container-fluid bg-gray-light pt-12 pl-1 pr-1 pb-8">
+  <div class="container">
+
+    <div fxLayout="row" fxLayout.xs="column" fxLayout.sm="column" fxLayoutAlign="space-between" class="mb-10">
+
+      <div fxLayout="column" fxLayoutGap="5px">
+        <h3>Company Information</h3>
+        <ul>
+          <li>
+            <a class="text-sm text-secondary" [routerLink]="'about-us'">About us</a>
+          </li>
+          <li>
+            <a class="text-sm text-secondary"
+               [routerLink]="'pages_page_detail' | namedRoutePipe: {id: 'terms-and-condtions'}">
+              Terms & Conditions
+            </a>
+          </li>
+          <li>
+            <a class="text-sm text-secondary"
+               [routerLink]="'pages_page_detail' | namedRoutePipe: {id: 'privacy-policy'}">
+              Privacy & Cookies
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <div fxLayout="column" fxLayoutGap="5px">
+        <h3>Smart Parcel Box</h3>
+        <ul>
+          <li>
+            <a class="text-sm text-secondary" [routerLink]="'register-smart-parcel-box'"> Register Smart Parcel Box </a>
+          </li>
+          <li>
+            <a class="text-sm text-secondary" [routerLink]="'buy-smart-parcel-box'"> Buy Smart Parcel Box </a>
+          </li>
+        </ul>
+      </div>
+
+      <div fxLayout="column" fxLayoutGap="15px">
+        <h3>App User Assistance</h3>
+        <ul>
+          <li>
+            <a class="text-sm text-secondary" [routerLink]="'contact-us'">Contact us</a>
+          </li>
+          <li>
+            <a class="text-sm text-secondary" [routerLink]="'faqs'">Faqs</a>
+          </li>
+          <li>
+            <a class="text-sm text-secondary" [routerLink]="'supported-couriers'">Supported Couriers</a>
+          </li>
+          <li>
+            <a class="text-sm text-secondary" [routerLink]="'linked-retailers'">Linked Retailers</a>
+          </li>
+          <li>
+            <a class="text-sm text-secondary" [routerLink]="'security'">Your Privacy & Security</a>
+          </li>
+        </ul>
+
+
+      </div>
+
+      <div fxLayout="column" fxLayoutGap="5px">
+        <h6> Follow us on social platform</h6>
+
+        <div fxLayout="row" fxLayoutGap="15px">
+
+          <a class="bg-facebook text-white rounded-full mt-2 p-3">
+            <ic-icon [icon]="faFacebook" size="20px"></ic-icon>
+          </a>
+
+          <a class="bg-twitter text-white rounded-full mt-2 p-3">
+            <ic-icon [icon]="faTwitter" size="20px"></ic-icon>
+          </a>
+
+          <a class="bg-instagram text-white rounded-full mt-2 p-3">
+            <ic-icon [icon]="faInstagram" size="20px"></ic-icon>
+          </a>
+
+        </div>
+      </div>
+
+    </div>
+
+
+    <div fxLayoutAlign="space-between center" fxLayout="column">
+      <h6 class="text-xs  md:text-sm text-secondary">© Copyright 2021, All rights reserved to Shopping Manager</h6>
+    </div>
+
+  </div>
+</footer>

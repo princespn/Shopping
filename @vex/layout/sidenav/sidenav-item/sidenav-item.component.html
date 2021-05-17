@@ -6,8 +6,8 @@
    fxLayout="row"
    matRipple
    routerLinkActive="active">
-  <mat-icon *ngIf="level === 0" [icIcon]="item.icon" class="item-icon" fxFlex="none"></mat-icon>
-  <span class="item-label" fxFlex="auto">{{ item.label }}</span>
+  <mat-icon *ngIf="level === 0 && item.icon" [icIcon]="item.icon" class="item-icon" fxFlex="none"></mat-icon>
+  <span class="item-label text-white" fxFlex="auto">{{ item.label }}</span>
   <span *ngIf="item.badge"
         [ngClass]="[item.badge.bgClass, item.badge.textClass]"
         class="item-badge"
@@ -20,7 +20,7 @@
      fxLayout="row"
      matRipple
      routerLinkActive="active">
-  <mat-icon *ngIf="level === 0" [icIcon]="item.icon" class="item-icon" fxFlex="none"></mat-icon>
+  <mat-icon *ngIf="level === 0 && item.icon" [icIcon]="item.icon" class="item-icon" fxFlex="none"></mat-icon>
   <span class="item-label" fxFlex="auto">{{ item.label }}</span>
   <span *ngIf="item.badge"
         [ngClass]="[item.badge.bgClass, item.badge.textClass]"
@@ -35,7 +35,7 @@
        class="item"
        fxLayout="row"
        matRipple>
-    <mat-icon *ngIf="level === 0" [icIcon]="item.icon" class="item-icon" fxFlex="none"></mat-icon>
+    <mat-icon *ngIf="level === 0 && item.icon" [icIcon]="item.icon" class="item-icon" fxFlex="none"></mat-icon>
     <span class="item-label" fxFlex="auto">{{ item.label }}</span>
     <span *ngIf="item.badge"
           [ngClass]="[item.badge.bgClass, item.badge.textClass]"

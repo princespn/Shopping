@@ -1,0 +1,11 @@
+.about-banner{
+  background-image: url("../../../assets/images/img/about.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  min-height: 350px;
+  padding: 0 30px !important;
+  margin-bottom: 15px;
+}
+.about-banner h1{
+  color: rgb(var(--color-primary));
+}

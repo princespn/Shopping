@@ -1,6 +1,7 @@
 // @formatter:off
 :root {
   // Generic
+  $dark-primary-text:#343434;
   --padding-gutter: 1rem;
   --padding: 1.5rem;
   --padding-16: 1rem;
@@ -8,13 +9,13 @@
   --padding-8: 0.5rem;
   --padding-4: 0.25rem;
 
-  --color-primary: 50, 174, 177;
+  --color-primary: 63, 81, 173;
   --color-primary-contrast: 255, 255, 255;
 
   --color-accent: 255, 64, 129;
   --color-accent-contrast: 255, 255, 255;
 
-  --color-warn: 244, 67, 54;
+  --color-warn: 255, 159, 67;
   --color-warn-contrast: 255, 255, 255;
 
   @screen lg {
@@ -102,8 +103,8 @@
   --sidenav-item-background-active: #{darken($sidenav-background, 3)};
   --sidenav-item-color: #A1A2B6;
   --sidenav-item-color-active: #{$light-primary-text};
-  --sidenav-item-icon-color: #494B74;
-  --sidenav-item-icon-color-active: rgb(var(--color-primary));
+  --sidenav-item-icon-color: rgb(var(--color-warn-contrast));
+  --sidenav-item-icon-color-active: rgb(var(--color-warn));
   --sidenav-item-icon-gap: 16px;
   --sidenav-item-icon-size: 24px;
   --sidenav-item-border-color: transparent;

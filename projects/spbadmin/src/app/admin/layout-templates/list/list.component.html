@@ -1,0 +1,27 @@
+<!--Edit Reasons-->
+<ng-template #editButtonTemplate let-row="row" let-rowIndex="index" let-updateRowConst="updateRowConst">
+
+  <ng-template #editForm let-dialogRef="dialogRef">
+    <gomco-formly-form formClass="" [model]="row" (successful)="updateRowConst(rowIndex, $event)" [subscribeRoute]="false" [dialogRef]="dialogRef"
+                       [debug]="false" [fields]="fields"
+                       [resource]="resource" [param]="{id: row['@id']}" [update]="true" [showDeleteButton]="false"></gomco-formly-form>
+  </ng-template>
+
+
+  <gomco-dialog-button
+    [matConfirmDialogData]="{dialogueContent: editForm, title: 'Edit Layout', showActionButtons: false}"
+    [label]="'Edit'" [textColor]="'primary'" ></gomco-dialog-button>
+</ng-template>
+<!--Edit Reasons-->
+
+<!--Reason List-->
+<ng-template #createForm let-dialogRef="dialogRef">
+  <gomco-formly-form  (successful)="listComponent.addRow($event)" [subscribeRoute]="false" [fields]="fields"
+                      [dialogRef]="dialogRef" [successMessage]="'Add  Successfully'"
+                      [debug]="false"
+                      [resource]="resource"></gomco-formly-form>
+</ng-template>
+<gomco-common-list #listComponent
+  [resourcePath]="resourcePath" [createNewDialogTemplate]="createForm" [actions]="[{type: 'template', template: editButtonTemplate}, {type: 'delete'}]"
+  [filters]="searchFields" [resource]="resource" class="w-full" [createButtonName]="'Add Layout'" [columns]="columns">
+</gomco-common-list>

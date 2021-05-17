@@ -1,1 +1,19 @@
-<button [disabled]="loading" [class.spinner]="loading" (click)="delete()" mat-button class="mat-accent">{{label}}</button>
+<ng-container *ngIf="!matMenu">
+
+<button *ngIf="!label" type="button" [disabled]="loading" [class.spinner]="loading"
+        (click)="delete()" class="mat-accent text-red">
+  <mat-icon [icIcon]="icDeleteForever"></mat-icon>
+</button>
+
+<button *ngIf="label" type="button" [disabled]="loading" [class.spinner]="loading"
+        (click)="delete()" class="mat-default bg-gray-light text-red ml-5" mat-button>
+  {{label}}
+</button>
+</ng-container>
+
+<ng-container *ngIf="matMenu">
+  <button mat-menu-item *ngIf="label" type="button" [disabled]="loading" [class.spinner]="loading"
+          (click)="delete()" >
+    {{label}}
+  </button>
+</ng-container>

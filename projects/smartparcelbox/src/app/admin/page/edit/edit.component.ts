@@ -1,5 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import {BaseComponent} from '@app/BaseComponent';
+import {Component} from '@angular/core';
 import {Fields} from '@app/admin/page/edit/fields';
 
 @Component({
@@ -8,7 +7,7 @@ import {Fields} from '@app/admin/page/edit/fields';
   styleUrls: ['./edit.component.scss']
 })
 
-export class EditComponent extends BaseComponent implements OnInit {
+export class EditComponent  {
 
   fetchData = false;
   fields = Fields;

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {ConfigService} from '@vexs/services/config.service';
 import {ConfigName} from '@vexs/interfaces/config-name.model';
 import {Style, StyleService} from '@vexs/services/style.service';
@@ -11,6 +11,7 @@ import {NavigationItemProviderService} from '@gomcodoctor/services/route/navigat
 })
 export class LayoutComponent implements OnInit {
 
+  titleToolBar;
   constructor(private configService: ConfigService, private styleService: StyleService,
               private navigationItemProviderService: NavigationItemProviderService) {
     this.configService.setConfig(ConfigName.zeus);

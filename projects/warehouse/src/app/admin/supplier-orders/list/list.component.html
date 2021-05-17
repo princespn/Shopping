@@ -1,0 +1,36 @@
+<div>
+  <ng-template #uploadPopup let-dialogRef="dialogRef">
+    <gomco-upload [dialogRef]="dialogRef"></gomco-upload>
+  </ng-template>
+
+  <div fxLayout="column" fxLayoutAlign="space-between end"  >
+    <gomco-dialog-button  [buttonBg]="true" [label]="'Upload'"
+                         [matConfirmDialogData]="{dialogueContent: uploadPopup, title: 'Upload files', showActionButtons: false}">Upload
+    </gomco-dialog-button>
+  </div>
+
+  <ng-template let-row="row" let-value="value" #supplierReferenceNumber>
+
+    <ng-template #itemList>
+      <mat-dialog-content>
+        <gomco-common-list [subscribeRoute]="false" [defaultFilterParam]="{order: row.id}" [createButton]="false"
+                           [label]="'Supplier Order Items'" [resourcePath]="itemResourcePath" [resource]="itemResource"
+                           [columns]="itemColumns" [filters]="itemFields"
+                           [showHeader]="true" [bulk]="false" [actions]="[]">
+        </gomco-common-list>
+      </mat-dialog-content>
+    </ng-template>
+
+    <gomco-dialog-button
+      [matConfirmDialogData]="{dialogueContent: itemList, title: row.externalInvoiceNumber + ' contains following items', showActionButtons: false}"
+      [label]="value" [textColor]="'primary'" [isButton]="false"></gomco-dialog-button>
+  </ng-template>
+
+
+  <gomco-common-list [templates]="{externalInvoiceNumber: supplierReferenceNumber}" [createButton]="false"
+                     [label]="'Supplier Orders'" [filters]="fields" [resourcePath]="resourcePath" [resource]="resource"
+                     [columns]="columns"
+                     [showHeader]="" [bulk]="false" [actions]="[]">
+  </gomco-common-list>
+
+</div>

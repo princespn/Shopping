@@ -1,0 +1,6 @@
+<div fxLayout="row" fxLayoutGap="15px" *ngFor="let row of row.files">
+  <span *ngIf="row.fileUrl.length >0">
+    <p><img class="rounded h-24 w-24" src="{{row.fileUrl}}"></p>
+    </span>
+</div>
+

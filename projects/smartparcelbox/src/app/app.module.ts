@@ -2,7 +2,7 @@ import {NgModule} from '@angular/core';
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {VexModule} from '@vexs/vex.module';
-import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClient, HttpClientModule} from '@angular/common/http';
 import {CustomLayoutModule} from './custom-layout/custom-layout.module';
 import {FormlyModule} from '@ngx-formly/core';
 import {FormlyMaterialModule} from '@ngx-formly/material';
@@ -76,6 +76,19 @@ import {AdminItems} from '@app/_helper/admin-navigation-items';
 import {GuestItems} from '@app/_helper/guest-navigation-items';
 import {MatConfirmDialogModule} from '@gomcodoctor/gomco-common/mat-confirm-dialog/mat-confirm-dialog.module';
 import {ConfirmationDialogService} from '@gomcodoctor/services/confirmation-dialog/confirmation-dialog.service';
+import { FormlyMatDatepickerModule } from '@ngx-formly/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import {NavigationService} from '@gomcodoctor/services/navigationservice/navigation.service';
+import {BreadcrumbService} from '@gomcodoctor/services/breadcrumb/breadcrumb.service';
+import {ToolbarTitleMetaGuard} from '@gomcodoctor/services/ToolbarTitleMetaGuard';
+import {DropDownToolbarNavigationItems} from '@app/_helper/drop-down-toolbar-navigation-items';
+import { GlobalConfig} from '@helper/globalConfig';
+import { APP_GLOBAL_CONFIG} from '@gomcodoctor/_helper/globalConfig';
+// @ts-ignore
+import {TranslateModule, TranslateLoader} from '@ngx-translate/core';
+// @ts-ignore
+import {TranslateHttpLoader} from '@ngx-translate/http-loader';
+
 
 const customConfig: ShareButtonsConfig = {
     // include: ['facebook', 'twitter', 'google'],
@@ -86,6 +99,11 @@ const customConfig: ShareButtonsConfig = {
     sharerMethod: SharerMethod.Window,
     sharerTarget: '_blank',
 };
+
+export function createTranslateLoader(http: HttpClient) {
+  return new TranslateHttpLoader(http, './assets/i18n/', '.json');
+}
+
 
 @NgModule({
     declarations: [AppComponent, PrefixSuffixWrapperComponent, AuthLayoutComponent],
@@ -177,16 +195,27 @@ const customConfig: ShareButtonsConfig = {
         ShareButtonsModule.withConfig(customConfig),
         ShareIconsModule,
         IonicModule.forRoot(),
-        MatConfirmDialogModule
+        MatConfirmDialogModule,
+        FormlyMatDatepickerModule,
+        MatNativeDateModule,
+        TranslateModule.forRoot({
+          loader: {
+            provide: TranslateLoader,
+            useFactory: (createTranslateLoader),
+            deps: [HttpClient]
+          },
+          defaultLanguage: 'en'
+        })
     ],
     providers: [NamedRoutesService, AccountService, BaseService,
-      NavigationItemProviderService, GeolocationService, SchemaService, ConfirmationDialogService,
+      NavigationItemProviderService, GeolocationService, SchemaService, ConfirmationDialogService, NavigationService, BreadcrumbService, ToolbarTitleMetaGuard,
         { provide: HTTP_INTERCEPTORS, useClass: ErrorHttpInterceptor, multi: true },
         { provide: HTTP_INTERCEPTORS, useClass: BackendInterceptor, multi: true },
         { provide: RECAPTCHA_V3_SITE_KEY, useValue: 'eeeee' },
-        { provide: APP_NAV_CONFIG, useValue: {GuestItems, AdminItems} },
+      { provide: APP_GLOBAL_CONFIG, useValue: GlobalConfig },
+      { provide: APP_NAV_CONFIG, useValue: {GuestItems, AdminItems, DropDownToolbarNavigationItems } },
         {provide: RECAPTCHA_SETTINGS, useValue: { siteKey: 'eeeee' } as RecaptchaSettings},
-        { provide: 'loginDefaultRedirect', useValue: 'admin' }
+        { provide: 'loginDefaultRedirect', useValue: 'admin/orders/list' }
     ],
     // bootstrap: [AppComponent]
 })

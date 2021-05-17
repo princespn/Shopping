@@ -1,4 +1,12 @@
-import {Component, ElementRef, HostBinding, Input, OnInit, ViewEncapsulation} from '@angular/core';
+import {
+  ChangeDetectionStrategy, ChangeDetectorRef,
+  Component,
+  ElementRef,
+  HostBinding,
+  Input,
+  OnInit,
+  ViewEncapsulation
+} from '@angular/core';
 import {LayoutService} from '../../services/layout.service';
 import icBookmarks from '@iconify/icons-ic/twotone-bookmarks';
 import emojioneUS from '@iconify/icons-emojione/flag-for-flag-united-states';
@@ -18,17 +26,19 @@ import icArrowDropDown from '@iconify/icons-ic/twotone-arrow-drop-down';
 import {PopoverService} from '../../components/popover/popover.service';
 import {MegaMenuComponent} from '../../components/mega-menu/mega-menu.component';
 import icSearch from '@iconify/icons-ic/twotone-search';
+import {BreadcrumbService} from '../../../gomcodoctor/services/breadcrumb/breadcrumb.service';
 
 @Component({
   selector: 'vex-toolbar',
   templateUrl: './toolbar.component.html',
   styleUrls: ['./toolbar.component.scss'],
   // encapsulation: ViewEncapsulation.None
+  // changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ToolbarComponent implements OnInit {
 
   @Input() mobileQuery: boolean;
-
+  titleToolBar;
   @Input()
   @HostBinding('class.shadow-b')
   hasShadow: boolean;
@@ -59,11 +69,14 @@ export class ToolbarComponent implements OnInit {
   constructor(private layoutService: LayoutService,
               private configService: ConfigService,
               private navigationService: NavigationService,
-              private popoverService: PopoverService) { }
+              private popoverService: PopoverService, public breadcrumbService: BreadcrumbService) { }
 
   ngOnInit() {
     this.navigationService.navigationItemsSubject.subscribe((items) => {
       this.navigationItems = items;
+    });
+    this.breadcrumbService.titleObserver.subscribe((queryParams: any) => {
+      this.titleToolBar =  queryParams;
     });
   }
 

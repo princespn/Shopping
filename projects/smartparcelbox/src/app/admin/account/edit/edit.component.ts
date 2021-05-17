@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import {FormlyFieldConfig} from '@ngx-formly/core';
 
 @Component({
@@ -6,22 +6,24 @@ import {FormlyFieldConfig} from '@ngx-formly/core';
   templateUrl: './edit.component.html',
   styleUrls: ['./edit.component.scss']
 })
-export class EditComponent implements OnInit {
+export class EditComponent {
 
   fields: FormlyFieldConfig[] = [
     {
       key: 'profilePic',
       type: 'file',
       templateOptions: {
-        // label: 'query',
         resource: 'articleimages',
         label: 'Pic',
         placeholder: 'Pic',
         preview: true,
         enableAutoUpload: false,
+        profilePic: true,
         multiple: false,
         required: false,
-        appearance: 'outline'
+        appearance: 'legacy',
+        accept: '.jpg, .png, .jpeg',
+        fileExtensions: ['jpg', 'jpeg', 'png']
       },
     },
     {
@@ -36,7 +38,7 @@ export class EditComponent implements OnInit {
             label: 'First Name',
             placeholder: 'First Name',
             required: true,
-            appearance: 'outline'
+            appearance: 'legacy'
           },
         },
         {
@@ -48,52 +50,40 @@ export class EditComponent implements OnInit {
             label: 'Last Name',
             placeholder: 'Last Name',
             required: true,
-            appearance: 'outline'
+            appearance: 'legacy'
           },
         }
       ],
     },
     {
-      key: 'qualification',
-      type: 'input',
+      key: 'country',
+      type: 'typehead',
       templateOptions: {
-        // label: 'query',
-        label: 'Qualification',
-        placeholder: 'Qualification',
+        label: 'Country',
+        placeholder: 'Country',
         required: true,
-        appearance: 'outline'
+        appearance: 'legacy',
+        optionsResource: 'countries',
+        bindLabel: 'name',
+        searchVariable: 'name',
+        defaultFilter: {active: true},
+        bindValue: 'code',
+        getIntialList: true
       },
     },
     {
-      key: 'headline',
-      type: 'input',
+      key: 'locale',
+      type: 'select',
       templateOptions: {
-        // label: 'query',
-        label: 'Headline',
-        placeholder: 'Headline',
+        label: 'Language',
+        disabled: true,
+        placeholder: 'Language',
         required: true,
-        appearance: 'outline'
-      },
-    },
-    {
-      key: 'summary',
-      type: 'textarea',
-      templateOptions: {
-        // label: 'query',
-        label: 'summary',
-        placeholder: 'summary',
-        required: true,
-        appearance: 'outline',
-        autosize: true,
-        autosizeMinRows: 3,
-        autosizeMaxRows: 10,
+        appearance: 'legacy',
+        options: [{label: 'English', value: 'en-US'}],
       },
     }
   ];
 
-  constructor() { }
-
-  ngOnInit(): void {
-  }
 
 }

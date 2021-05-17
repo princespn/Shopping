@@ -1,0 +1,38 @@
+<div fxLayout="column" fxLayoutGap="20px" fxLayoutAlign="space-between start" class="mt-3">
+  <p>{{item()?.title}}</p>
+<!--  <div fxLayoutGap="15px" fxLayout="row" fxLayoutAlign="space-between center">-->
+<!--    <label>Qty to return </label> <span class="w-24 qty"><ng-container #fieldComponent></ng-container></span>-->
+<!--  </div>-->
+</div>
+
+<formly-validation-message [field]="field"></formly-validation-message>
+
+<ng-template let-dialogRef='dialogRef' #reasons>
+  <gomco-formly-form [form]="reasonForm"  [options]="reasonOptions" [dialogRef]="dialogRef" [model]="reasonModel" [fields]="reasonFields"
+                     [submitCallback]="submit" formClass="w-full" [debug]="true"></gomco-formly-form>
+</ng-template>
+
+
+<gomco-dialog-button *ngIf="!reasonModel.message" (dialogClosed)="dialogClosed($event)" class="w-full float-left p-0 m-auto  mt-3 mb-8" [isButton]="false"
+                     [matConfirmDialogData]="{dialogueContent: reasons, title: 'Choose reason for return', showActionButtons: false}"
+                     [label]="'Choose reason for return'" [rightIcon]="true">
+</gomco-dialog-button>
+<gomco-dialog-button *ngIf="reasonModel.message" (dialogClosed)="dialogClosed($event)" class="w-full float-left p-0 m-auto  mt-3 mb-8" [isButton]="false"
+                     [matConfirmDialogData]="{dialogueContent: reasons, title: 'Change reason for return', showActionButtons: false}"
+                     [label]="'Change reason for return'" [rightIcon]="true">
+</gomco-dialog-button>
+
+<div *ngIf="reasonModel.reason" class="mb-5">
+  <h6 *ngIf="reason">
+    <label class="w-24 inline-block font-medium">Reason </label> : {{reason?.name}}
+  </h6>
+  <h6 *ngIf="condition">
+    <label class="w-24 inline-block font-medium">Condition </label> : {{condition.name}}
+  </h6>
+  <h6 *ngIf="reasonModel.resolutionRequired">
+    <label class="w-24 inline-block font-medium">Resolution </label> : {{reasonModel.resolutionRequired}}
+  </h6>
+  <h6 *ngIf="reasonModel.message">
+    <label class="w-24 inline-block font-medium">Message </label> : {{reasonModel.message}}
+  </h6>
+</div>

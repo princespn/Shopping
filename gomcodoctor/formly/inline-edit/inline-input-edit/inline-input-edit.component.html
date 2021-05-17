@@ -1,9 +1,9 @@
 <div>
-	<mat-form-field>
+	<mat-form-field appearance="standard">
 		<mat-label>{{label}}</mat-label>
 		<span matPrefix [innerHTML]="prefix"></span>
 
-		<input #inlineEditControl (click)="edit()" [readonly]="!editing" matInput [required]="required" (keypress)="keypress($event)" [formControl]="control" type="number"/>
+		<input  #inlineEditControl (click)="edit()" [readonly]="!editing" matInput [required]="required" (keypress)="keypress($event)" [formControl]="control" type="number"/>
 
 		<span matSuffix fxLayout="row"  *ngIf="editing && !processing">
 			<button mat-icon-button [color]="confirmColor" (click)="confirm($event)"><mat-icon>done</mat-icon></button>

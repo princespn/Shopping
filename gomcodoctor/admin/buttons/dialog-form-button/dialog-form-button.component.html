@@ -1,0 +1,33 @@
+<ng-container *ngIf="isButton">
+  <button [ngClass]="buttonClass" type="button" *ngIf="buttonBg" [disabled]="loading  || buttonDisable" [class.spinner]="loading"
+          (click)="openForm()" mat-flat-button color="{{textColor}}">{{label}}</button>
+  <button [ngClass]="buttonClass" type="button" *ngIf="!buttonBg" [disabled]="loading || buttonDisable" [class.spinner]="loading"
+          (click)="openForm()" mat-button color="{{textColor}}">
+    <mat-icon *ngIf="icon">{{icon}}</mat-icon>
+    {{label}}
+  </button>
+</ng-container>
+
+<ng-container *ngIf="!isButton">
+
+  <a (click)="openForm()" class="cursor-pointer">
+    <h6  *ngIf="buttonBg" [ngClass]="buttonClass"  [class.spinner]="loading"
+        class="text-{{textColor}}">{{label}}</h6>
+  </a>
+  <a (click)="openForm()" class="cursor-pointer">
+    <div  *ngIf="!rightIcon" fxLayout="row">
+    <mat-icon class="mr-2" *ngIf="icon">{{icon}}</mat-icon>
+    <h6  *ngIf="!buttonBg" [class.spinner]="loading"
+        class="text-{{textColor}}">
+      {{label}}
+    </h6>
+    </div>
+
+    <div  *ngIf="rightIcon" fxLayout="row" fxLayoutAlign="space-between center" class="mt-4 mb-4 bg-gray-light pt-1 pb-1 pr-0 pl-3">
+    <span class="font-medium"  *ngIf="!buttonBg" [class.spinner]="loading">
+        {{label}}
+    </span>
+      <ic-icon [icon]="icKeyboardArrowRight" size="20px">{{icKeyboardArrowRight}}</ic-icon>
+    </div>
+  </a>
+</ng-container>

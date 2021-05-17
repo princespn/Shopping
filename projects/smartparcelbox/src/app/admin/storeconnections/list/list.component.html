@@ -1,0 +1,21 @@
+<ng-template #rowTemplate let-row="row">
+
+  <ng-template>{{setAnyConnected(row.valid)}}</ng-template>
+
+  <gomco-store-row [row]="row"></gomco-store-row>
+
+
+</ng-template>
+
+<mat-card *ngIf="!anyConnected" class="mb-4">
+  <h3 class="font-medium mb-3">Why to connect with retailer?</h3>
+  <ul style="list-style: disc" class="ml-4">
+    <li *ngFor="let item of items">
+      <span>{{item}}</span>
+    </li>
+  </ul>
+</mat-card>
+
+<gomco-common-list [resourcePath]="resourcePath" [resource]="resource" metaTitle="Connect Retailer" [rowTemplate]="rowTemplate" [showHeader]="false"
+                   [showNavigation]="false" [bulk]="false">
+</gomco-common-list>

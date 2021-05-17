@@ -1,0 +1,30 @@
+<div class="max-w-md" [@fadeInUp]>
+    <ng-container *ngIf="!success">
+        <div class="text-center my-4">
+            <h5>Create your account</h5>
+            <p>Fill in the form below to get instant access</p>
+        </div>
+        <gomco-formly-form [wrapButton]="false" label="Register"  [fields]="fields"
+                           [resource]="signupResource" [successCallback]="successCallBack"></gomco-formly-form>
+
+        <p class="text-center py-1 mt-4">
+            Already have an account?<br/>
+            <a class="link-text font-bold" [routerLink]="['/login']">Sign in here</a>
+        </p>
+    </ng-container>
+    <ng-container *ngIf="success">
+        <div class="text-center my-4">
+            <mat-icon color="primary" class="done-icon">check_circle_outline</mat-icon>
+            <h5>Thanks for Sign Up!</h5>
+            <p>A verification link has been sent to your email<br><br>Please Click on the link that has just been sent
+                to your email account to verify your email and continue the registration process. If you don't receive
+                the email, then click on below
+                link<br>
+                <br><a href="#" class="link-text font-bold">I didn't receive the email</a></p>
+        </div>
+        <p class="text-center create-account pt-4">
+            Already have an account?<br/>
+            <a class="link-text font-bold" [routerLink]="['/login']">Sign in here</a>
+        </p>
+    </ng-container>
+</div>

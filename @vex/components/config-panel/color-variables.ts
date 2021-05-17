@@ -36,8 +36,8 @@ export const colorVariables: Record<string, ColorVariable> = {
     contrast: 'rgb(0, 0, 0)'
   },
   green: {
-    light: 'rgba(76, 175, 80, 0.1)',
-    default: 'rgb(76, 175, 80)',
+    light: 'rgba(40, 199, 111, 0.1)',
+    default: 'rgb(40, 199, 111)',
     contrast: 'rgb(255, 255, 255)',
   },
   teal: {

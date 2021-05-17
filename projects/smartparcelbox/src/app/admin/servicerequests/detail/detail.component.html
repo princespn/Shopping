@@ -1,0 +1,48 @@
+<ng-template #template let-data="data" let-queryParams="queryParams">
+<ng-template #rowTemplate let-index="index" let-row="row">
+  <ng-template>{{getOrderId(row.ticket['@id'])}}</ng-template>
+  <gomco-order-row *ngIf="row.orderItems.length >0" [row]="row" [index]="index"></gomco-order-row>
+
+  <gomco-images-row *ngIf="row.files" [row]="row" [index]="index"></gomco-images-row>
+  <gomco-massage-row *ngIf="row.message" [row]="row" [index]="index"></gomco-massage-row>
+
+</ng-template>
+
+
+<mat-card>
+  <gomco-common-list #ticketMessageList [defaultFilterParam]="{'ticket': queryParams.id}" [label]="'Tickets'"
+                     [filters]="" [resourcePath]="resourcePath" [resource]="resource"
+                     [rowTemplate]="rowTemplate"
+                     [showHeader]="false" [bulk]="false" [showNavigation]="false">
+  </gomco-common-list>
+  <ng-template #uploadPopup let-dialogRef="dialogRef">
+    <gomco-file-upload [dialogRef]="dialogRef"></gomco-file-upload>
+  </ng-template>
+
+  <div class="p-4 bg-app-bar border-t">
+    <div class="border rounded-full text-hint overflow-hidden bg-card ltr:pl-6 rtl:pr-6"
+         fxFlex="auto"
+         fxLayout="row"
+         fxLayoutAlign="start center">
+      <input #message class="border rounded-full text-hint overflow-hidden bg-card ltr:pl-6 rtl:pr-6"
+             fxFlex="auto"
+             placeholder="Your massages type here...."
+             type="text">
+      <div fxLayout="column" fxLayoutAlign="space-between end">
+        <gomco-dialog-button [buttonBg]="true" [label]="'Upload'"
+                             [matConfirmDialogData]="{dialogueContent: uploadPopup, title: 'Upload files', showActionButtons: false}">
+
+        </gomco-dialog-button>
+      </div>
+      <button [class.text-primary]=""
+              class="ltr:mr-4 rtl:ml-1 ltr:ml-0 rtl:mr-3"
+              mat-icon-button type="submit"
+              (click)="postMessage(message)">
+        <mat-icon [icIcon]="icSend"></mat-icon>
+      </button>
+    </div>
+
+  </div>
+</mat-card>
+</ng-template>
+<gomco-detail-component #detailRef [template]="template" [resource]="resource"  ></gomco-detail-component>

@@ -1,0 +1,4 @@
+<gomco-rect-loading *ngIf="loading"></gomco-rect-loading>
+
+<ng-container *ngIf="data || !fetchData" [ngTemplateOutletContext]="{error: error, data: data, queryParams: queryParams, galleryImages: galleryImages, galleryOptions: galleryOptions }"
+              [ngTemplateOutlet]="template"></ng-container>

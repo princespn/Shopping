@@ -1,0 +1,26 @@
+<div class="max-w-md" [@fadeInUp]>
+    <div *ngIf="!queryParams.registered" class="text-center my-4">
+        <h5>Warehouse!</h5>
+        <p>Please sign in to your account</p>
+    </div>
+
+    <div *ngIf="queryParams.registered" class="text-center mt-4">
+        <h2 class="title m-0">Thanks for Signup</h2>
+        <h4 class="body-2 text-secondary m-0">You can login now</h4>
+    </div>
+
+    <gomco-formly-form [snackbar]="false" [successCallback]="successCallback" [captcha]="false" [wrapButton]="false"
+                       label="Login" [fields]="fields" resource="login_check"></gomco-formly-form>
+
+    <div fxLayout="row" fxLayoutAlign="space-between center" class="my-4">
+        <mat-checkbox>Remember Me</mat-checkbox>
+<!--        <a [routerLink]="['/forgot-password']" class="caption link-text">Forgot Password?</a>-->
+    </div>
+
+<!--    <p class="text-center create-account pt-4 pb-1">-->
+<!--        Don't have an account?<br/>-->
+<!--        <a class="link-text font-bold" [routerLink]="['/register']">Create an account</a>-->
+<!--    </p>-->
+    <p class="mt-3 text-center"><small>By logging in, you agree to our </small><a href="#" class="link-text"><small>Terms and Conditions</small></a>
+    </p>
+</div>

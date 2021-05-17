@@ -1,8 +1,10 @@
-import {Component, OnInit, ViewEncapsulation} from '@angular/core';
+import {Component, Input, OnInit, ViewEncapsulation} from '@angular/core';
 import {FieldType} from '@ngx-formly/core';
 import {DemoFilePickerAdapter} from '@gomcodoctor/services/mock-file-picker.adapter';
 import {FilePickerService, FilePreviewModel, UploaderCaptions} from 'ngx-awesome-uploader';
 import {BaseService} from '@gomcodoctor/services/base.service';
+
+import faCamera from '@iconify/icons-fa-solid/Camera';
 
 @Component({
     selector: 'formly-file-upload-type',
@@ -15,14 +17,15 @@ export class FileUploadTypeComponent extends FieldType implements OnInit {
 
     enableAutoUpload = true;
     preview = false;
-
+    profilePic = false;
     singleFileSrc;
+    faCamera = faCamera;
 
     captions: UploaderCaptions = {
         dropzone: {
-            title: 'Drop Image',
+            title: 'Add a photo',
             or: 'or',
-            browse: 'Browse or Click Image'
+            browse: 'Browse Image'
         },
         cropper: {
             crop: 'Kəs',
@@ -43,6 +46,7 @@ export class FileUploadTypeComponent extends FieldType implements OnInit {
     ngOnInit() {
         this.adapter = new  DemoFilePickerAdapter(this.baseService, this.to.resource);
         this.enableAutoUpload = this.to.enableAutoUpload ?? true;
+        this.profilePic = this.to.profilePic ?? true;
         this.preview = this.to.preview ?? false;
         // this.formControlValue = this.formControl.value;
         // console.log(this.formControl.value);

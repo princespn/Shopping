@@ -1,0 +1,14 @@
+$breakpoint-mobile: 639px;
+
+.tracking-details {
+  min-width: auto;
+}
+
+@media (max-width: $breakpoint-mobile) {
+  .tracking-details {
+    min-width: auto;
+  }
+}
+.content{
+  overflow: auto !important;
+}

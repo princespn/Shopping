@@ -1,15 +1,15 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {Fields} from './fields';
-import {BaseComponent} from '@app/BaseComponent';
 import {map} from 'rxjs/operators';
+import {BaseService} from '@gomcodoctor/services/base.service';
 
 @Component({
   selector: 'gomco-user-edit',
   templateUrl: './edit.component.html',
   styleUrls: ['./edit.component.scss'],
 })
-export class EditComponent extends BaseComponent implements OnInit {
-
+export class EditComponent  {
+  constructor(protected apiService: BaseService) {}
   fetchData = false;
 
   groups: any = this.apiService.getList({}, 'usergroups').pipe(map(

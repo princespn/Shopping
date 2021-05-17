@@ -1,46 +1,95 @@
 <ng-template #soleButtonTemplate>
-    <button [class.spinner]="loading" [disabled]="(!updateOnSubmit && form.invalid) || loading" [color]="color" mat-raised-button type="submit">
-        {{label}}
+  <div fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="space-between center" class="w-full">
+    <button [class.spinner]="loading" [disabled]="(!updateOnSubmit && form.invalid) || loading" [color]="color"
+            mat-raised-button type="submit" class="{{buttonWidth}}">
+      {{label}}
     </button>
+    <gomco-delete-button (deleted)="deleted.emit(true) || (dialogRef && dialogRef.close())" label="Delete"
+                         [redirectToPreviousPage]="redirectToPreviousPage" [resource]="resource"
+                         *ngIf="showDeleteButton && model && model['@id']" [row]="model"></gomco-delete-button>
+  </div>
 </ng-template>
 
 <ng-template #button>
-    <ng-container *ngIf="captcha; else soleButtonTemplate;">
-        <re-captcha
-            #captchaRef
-            size="invisible"
-            (resolved)="$event && submitWithCaptcha($event)"
-        ></re-captcha>
-        <button (click)="captchaRef.execute()" [class.spinner]="loading" [disabled]="(!updateOnSubmit && form.invalid) || loading" [color]="color" mat-raised-button type="button">
-            {{label}}
-        </button>
-    </ng-container>
+  <ng-container *ngIf="captcha; else soleButtonTemplate;">
+    <re-captcha
+      #captchaRef
+      size="invisible"
+      (resolved)="$event && submitWithCaptcha($event)"
+      (resolved)="$event && submitWithCaptcha($event)"
+    ></re-captcha>
+    <button (click)="captchaRef.execute()" [class.spinner]="loading"
+            [disabled]="(!updateOnSubmit && form.invalid) || loading" [color]="color" mat-raised-button type="button">
+      {{label}}
+    </button>
+  </ng-container>
 </ng-template>
 
 <ng-template #loadingTemplate>
-  <gomco-rect-loading></gomco-rect-loading>
+  <gomco-rect-loading *ngIf="!isSuccessFull"></gomco-rect-loading>
 </ng-template>
 
-<form *ngIf="!dataLoading; else loadingTemplate" [formGroup]="form" (ngSubmit)="submit()" [ngClass]="formClass"
+<form *ngIf="!dataLoading && !isSuccessFull; else loadingTemplate" [formGroup]="form" (ngSubmit)="submit()"
+      [ngClass]="formClass"
       [fxLayout]="fxLayoutDir" [fxLayoutGap]="fxLayoutGapForm" [fxLayoutAlign]="fxLayoutAlignForm">
-    <formly-form [fxFlex]="formlyFxFlex" [form]="form" [fields]="fields" [model]="model" [options]="options" ></formly-form>
 
-    <ng-container *ngIf="!stepper && showButton">
-        <div *ngIf="wrapButton; else button">
-            <ng-template [ngTemplateOutlet]="button"></ng-template>
-        </div>
-    </ng-container>
+  <ng-template #formlyForm>
+    <formly-form class="w-full" [fxFlex]="formlyFxFlex" [form]="form" [fields]="fields" [model]="model"
+                 [options]="options"></formly-form>
+  </ng-template>
 
-    <ng-container *ngIf="stepper">
-        <div fxLayout="row" fxLayoutAlign="end end" fxLayoutGap="20px">
-            <button mat-stroked-button (click)="stepper.previous()">Back</button>
-            <button [class.spinner]="loading" [disabled]="(!updateOnSubmit && form.invalid) || loading" mat-flat-button [color]="color" type="submit">Next</button>
-            <button *ngIf="skipStep" (click)="stepper.next()" mat-flat-button [color]="color" type="button">Skip</button>
-        </div>
-    </ng-container>
+  <div *ngIf="scrollable">
+    <mat-dialog-content class="content" *ngIf="dialogRef; else formlyForm">
+      <ng-template [ngTemplateOutlet]="formlyForm"></ng-template>
+    </mat-dialog-content>
+  </div>
+  <div *ngIf="!scrollable">
+    <mat-dialog-content *ngIf="dialogRef; else formlyForm">
+      <ng-template [ngTemplateOutlet]="formlyForm"></ng-template>
+    </mat-dialog-content>
+  </div>
 
-    <ng-container *ngIf="buttonTemplate">
-        <ng-template [ngTemplateOutletContext]="{form: form, submit: submitCall, soleButtonTemplate: soleButtonTemplate}" [ngTemplateOutlet]="buttonTemplate">
-        </ng-template>
-    </ng-container>
+
+  <ng-container *ngIf="!stepper && !dialogRef && showButton">
+    <div *ngIf="wrapButton; else button">
+      <ng-template [ngTemplateOutlet]="button"></ng-template>
+    </div>
+  </ng-container>
+
+  <ng-container *ngIf="stepper">
+    <ng-template #stepperButtons>
+      <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="10px" class="w-full">
+        <button type="button" mat-raised-button class="bg-gray-light" (click)="stepper.previous()">Back</button>
+        <button [class.spinner]="loading" [disabled]="(!updateOnSubmit && form.invalid) || loading" mat-flat-button
+                [color]="color" type="submit">Submit
+        </button>
+        <button *ngIf="skipStep" (click)="stepper.next()" mat-flat-button [color]="color" type="button">Skip</button>
+      </div>
+    </ng-template>
+
+    <div *ngIf="dialogRef; else stepperButtons" mat-dialog-actions class="pt-6 pb-6 pl-0 pr-0  min-h-0" fxLayout="row"
+         fxLayoutAlign="space-between center">
+      <ng-template [ngTemplateOutlet]="stepperButtons"></ng-template>
+    </div>
+
+  </ng-container>
+
+  <ng-container *ngIf="!stepper && dialogRef">
+    <mat-dialog-actions fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="10px" class="w-full"
+                        class="pt-6 pb-6 pl-0 pr-0  min-h-0">
+
+      <ng-template [ngTemplateOutlet]="button"></ng-template>
+
+    </mat-dialog-actions>
+  </ng-container>
+
+  <ng-container *ngIf="buttonTemplate" fxLayoutAlign="end end">
+    <ng-template [ngTemplateOutletContext]="{form: form, submit: submitCall, soleButtonTemplate: soleButtonTemplate}"
+                 [ngTemplateOutlet]="buttonTemplate">
+    </ng-template>
+  </ng-container>
 </form>
+
+<div *ngIf="isSuccessFull && successMessageInline && !loading">
+  {{successMessageInline}}
+</div>

@@ -1,11 +1,13 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { trackByRoute } from '../../utils/track-by';
-import { NavigationService } from '../../services/navigation.service';
+import {Component, Inject, Input, OnInit} from '@angular/core';
+import { trackByRoute } from '@vex/utils/track-by';
+import { NavigationService } from '@vex/services/navigation.service';
 import icRadioButtonChecked from '@iconify/icons-ic/twotone-radio-button-checked';
 import icRadioButtonUnchecked from '@iconify/icons-ic/twotone-radio-button-unchecked';
-import { LayoutService } from '../../services/layout.service';
-import { ConfigService } from '../../services/config.service';
+import { LayoutService } from '@vex/services/layout.service';
+import { ConfigService } from '@vex/services/config.service';
 import { map } from 'rxjs/operators';
+import icReply from '@iconify/icons-ic/twotone-reply';
+import {APP_GLOBAL_CONFIG} from '@gomcodoctor/_helper/globalConfig';
 
 @Component({
   selector: 'vex-sidenav',
@@ -14,6 +16,7 @@ import { map } from 'rxjs/operators';
 })
 export class SidenavComponent implements OnInit {
 
+  icReply = icReply;
   @Input() collapsed: boolean;
   collapsedOpen$ = this.layoutService.sidenavCollapsedOpen$;
   title$ = this.configService.config$.pipe(map(config => config.sidenav.title));
@@ -26,7 +29,7 @@ export class SidenavComponent implements OnInit {
 
   constructor(private navigationService: NavigationService,
               private layoutService: LayoutService,
-              private configService: ConfigService) { }
+              private configService: ConfigService, @Inject(APP_GLOBAL_CONFIG) public globalConfig) {}
 
   ngOnInit() {
     this.navigationService.navigationItemsSubject.subscribe((items) => {

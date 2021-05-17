@@ -3,7 +3,11 @@ import {SelectionModel} from '@angular/cdk/collections';
 import {NamedRoutesService} from '@gomcodoctor/services/route/named-routes.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {BaseService} from '@gomcodoctor/services/base.service';
-import {MatSort, MatSortable, Sort} from '@angular/material/sort';
+import {MatSort, Sort} from '@angular/material/sort';
+import {BehaviorSubject} from 'rxjs/internal/BehaviorSubject';
+import {MetaService} from '@ngx-meta/core';
+import icSearch from '@iconify/icons-ic/twotone-search';
+import {isEmpty} from 'lodash';
 
 @Component({
   selector: 'gomco-common-list',
@@ -13,11 +17,13 @@ import {MatSort, MatSortable, Sort} from '@angular/material/sort';
 
 })
 export class ListComponent implements OnInit, AfterViewInit {
-
+  icSearch = icSearch;
   @Input() fields = [];
   @Input() filters = [];
   @Input() templates;
   @Input() rowTemplate;
+  @Input() noDataTemplate;
+  @Input() noSearchResultTemplate;
   @Input() resourcePath;
   @Input() batchActions;
   @Input() batchActionsTemplate;
@@ -27,62 +33,92 @@ export class ListComponent implements OnInit, AfterViewInit {
   @Input() label;
   @Input() showNavigation = true;
   @Input() showHeader = true;
+  @Input() showHeading = false;
   @Input() subscribeRoute = true;
   @Input() bulk = true;
-  @Input() actions = [{type: 'edit'}, {type: 'delete'}];
+  @Input() defaultFilterParam = {};
+  @Input() actions: any = [{type: 'edit'}, {type: 'delete'}];
   @Input() createNewRouteName;
-
+  @Input() createButtonName: string;
+  @Input() createNewDialogTemplate: any;
+  @Input() createButton = false;
+  @Input() dataList;
+  @Input() metaTitle;
+  @Input() setMetaTitle = true;
+  @Input() isItemCheckBoxDisabled;
+  @Input() listClass = '';
   columnsKeys = [];
-
   @ViewChild(MatSort, {static: true}) sort: MatSort;
 
+  // For multiple selection
   initialSelection = [];
-
   allowMultiSelect = true;
   selection: SelectionModel<any>;
+  // For multiple selection
 
-  public params: any = { page: 1, perPage: 10};
-
+  // public params: any = { page: 1, perPage: 10};
+  public params: any = {};
   products = [];
   total = 0;
   loading = true;
+  searchItem = false;
+  inlineNavigationSubscriber = new BehaviorSubject({});
 
   constructor(
-      private baseService: BaseService,
-      private activatedRoute: ActivatedRoute,
-      private router: Router,
-      private namedRoutesService: NamedRoutesService,
+    private baseService: BaseService,
+    private activatedRoute: ActivatedRoute,
+    private router: Router,
+    private namedRoutesService: NamedRoutesService,
+    protected readonly meta: MetaService
   ) {
     this.selection = new SelectionModel<any>(this.allowMultiSelect, this.initialSelection);
+    // this.selection.changed.subscribe((value) => console.log(value));
   }
 
   ngOnInit(): void {
     if (this.subscribeRoute){
       this.activatedRoute.queryParams.subscribe(params => {
-        this.params = {...{ page: 1, perPage: 10}, ...JSON.parse(params.query || '{}')};
-        this.getList();
+        this.handleNewParams(params);
       });
     }
-    else { this.getList(); }
+    else if (!this.dataList) {
+      this.inlineNavigationSubscriber.subscribe(params => {
+        this.handleNewParams(params);
+      });
+    }
+
+    if (this.dataList) {
+      this.products = this.dataList;
+      this.loading = false;
+    }
 
     if (this.columns){
       this.columnsKeys = [...this.columns];
     }
 
-    if (!this.batchActions && this.bulk) { this.batchActions = [{type: 'delete'}]; }
+    if (!this.batchActions && this.bulk && !this.batchActionsTemplate) { this.batchActions = [{type: 'delete'}]; }
 
     if (!this.routeName) { this.routeName = 'admin_' + this.resourcePath + '_list'; }
-    if (!this.createNewRouteName) { this.createNewRouteName = 'admin_' + this.resourcePath + '_create'; }
-    if (!this.filters) { this.filters = this.fields; }
+    if (!this.createNewRouteName && this.createButton) { this.createNewRouteName = 'admin_' + this.resourcePath + '_create'; }
+    if (this.filters.length === 0) { this.filters = this.fields; }
 
     if (this.bulk) { this.columnsKeys.unshift({key: 'bulk', label: 'bulk'}); }
-    if (this.actions) { this.columnsKeys.push({key: 'actions', label: 'actions'}); }
+    if (this.actions.length > 0) { this.columnsKeys.push({key: 'actions', label: 'Actions'}); }
 
     this.columnsKeys.forEach((value) => {
       value.visible = true;
     });
     // this.sort.sort(({ id: 'stock', start: 'asc'}) as MatSortable);
 
+    if (!this.metaTitle) { this.metaTitle = this.resource; }
+    if (this.setMetaTitle && this.metaTitle) { this.meta.setTitle(`${this.metaTitle}`); }
+
+  }
+
+  private handleNewParams(params) {
+    this.searchItem = !isEmpty(params);
+    this.params = {...{ page: 1, perPage: 10}, ...JSON.parse(params.query || '{}')};
+    this.getList();
   }
 
   get visibleColumns() {
@@ -103,7 +139,9 @@ export class ListComponent implements OnInit, AfterViewInit {
 
   getList() {
     this.loading = true;
-    this.baseService.getList(this.params, this.resource).subscribe((response) => {
+    this.products = [];
+
+    this.baseService.getList({...this.defaultFilterParam, ...this.params}, this.resource).subscribe((response) => {
       this.products = response.data;
       this.total = response.count;
       this.loading = false;
@@ -120,7 +158,9 @@ export class ListComponent implements OnInit, AfterViewInit {
   /** Selects all rows if they are not all selected; otherwise clear selection. */
   masterToggle() {
     this.isAllSelected() ?
-        this.selection.clear() : this.products.forEach(row => this.selection.select(row['@id']));
+      this.selection.clear() : this.products.forEach(row => {
+        if (!this.isItemCheckBoxDisabled || !this.isItemCheckBoxDisabled(row)) { this.selection.select(row['@id']); }
+      });
   }
 
   nextPage(event){
@@ -133,12 +173,27 @@ export class ListComponent implements OnInit, AfterViewInit {
 
   public navigate(queryParam): void
   {
-    this.router.navigate([this.namedRoutesService.getRoute(this.routeName)],
-        {queryParams: {query: JSON.stringify({...this.params, ...queryParam},
-                (key, value) => {
-                  if (!value && value !== false) { return undefined; }
-                  return value;
-                })}});
+    this.emitNewParams({
+      query: JSON.stringify({...this.params, ...queryParam},
+        (key, value) => {
+          if (!value && value !== false) {
+            return undefined;
+          }
+          return value;
+        })
+    });
+  }
+
+  private emitNewParams(params){
+    if (this.subscribeRoute) {
+      this.router.navigate([this.namedRoutesService.getRoute(this.routeName)],
+        {
+          queryParams: params
+        });
+    }
+    else {
+      this.inlineNavigationSubscriber.next(params);
+    }
   }
 
   onSubmit = (model) => {
@@ -151,12 +206,12 @@ export class ListComponent implements OnInit, AfterViewInit {
     });
 
     this.baseService.postBulk(finalData, resource ?? this.resource).subscribe(
-        {
-          next: value => {
-            this.getList();
-            this.selection.clear();
-          }
+      {
+        next: value => {
+          this.getList();
+          this.selection.clear();
         }
+      }
     );
   }
 
@@ -165,10 +220,21 @@ export class ListComponent implements OnInit, AfterViewInit {
     this.selection.deselect(row['@id']);
   }
 
+  addRow = (row) => {
+    this.products.unshift(row);
+    this.products = [...this.products];
+  }
+
+  onDelete = (i, row) => {
+    this.removeRow(i, row);
+  }
+
   updateRow(i, row) {
     this.products[i] = row;
     this.products = [...this.products];
   }
+
+  updateRowConst = (i, row) => this.updateRow(i, row);
 
   clearSelectionAndRefresh(){
     this.selection.clear();

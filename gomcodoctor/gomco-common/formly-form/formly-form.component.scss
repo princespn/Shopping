@@ -2,6 +2,10 @@ mat-checkbox {
   display: block;
 }
 
+.content{
+  overflow: auto !important;
+}
+
 @media only screen and (min-width: 600px) {
   .display-flex {
     display: flex;

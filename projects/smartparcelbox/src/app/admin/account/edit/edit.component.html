@@ -1,5 +1,8 @@
 <mat-card>
-    <gomco-formly-form [multipart]="true" [update]="true" [param]="{id: 'me'}" [reset]="false"
+    <gomco-formly-form [redirect]="'admin_' + 'settings' +'_list'" [multipart]="true" [update]="true"  [subscribeRoute]="false" [param]="{id: 'me'}" [reset]="false"
                        [resource]="'myprofile'"
-                       formClass="" fxLayoutDir="column" [fields]="fields"></gomco-formly-form>
+                       formClass="" fxLayoutDir="column" [showDeleteButton]="false" [fields]="fields"></gomco-formly-form>
 </mat-card>
+
+
+

@@ -1,0 +1,12 @@
+<ng-template #templateRef let-data="data">
+  <div fxLayout="column" fxLayoutGap="30px" class="container pb-8 pt-8">
+
+
+    <h1 class="text-center text-2xl mb-3">{{data.title}}</h1>
+
+    <div class="container" *ngIf="data" [innerHTML]="data.content"></div>
+
+  </div>
+</ng-template>
+
+<gomco-detail-component [resource]="resource" [template]="templateRef"></gomco-detail-component>

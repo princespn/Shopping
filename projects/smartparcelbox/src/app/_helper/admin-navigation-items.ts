@@ -1,5 +1,12 @@
 import icAssigment from '@iconify/icons-ic/twotone-assignment';
+import icAssistant from '@iconify/icons-ic/twotone-assistant';
+import icSettings from '@iconify/icons-ic/twotone-settings';
+import icHelp from '@iconify/icons-ic/twotone-help';
 import {NavigationItem} from '@vex/interfaces/navigation-item.interface';
+import icShoppingCart from '@iconify/icons-ic/twotone-shopping-cart';
+import icWifi from '@iconify/icons-ic/twotone-wifi';
+import icQuestionAnswer from '@iconify/icons-ic/twotone-question-answer';
+import icExitToApp from '@iconify/icons-ic/twotone-exit-to-app';
 
 export const AdminItems = (namedRoutesService, user = true): NavigationItem[] => {
     const items: NavigationItem[] = [
@@ -7,102 +14,42 @@ export const AdminItems = (namedRoutesService, user = true): NavigationItem[] =>
     if (user){
         items.push(
           {
-            type: 'subheading',
-            label: 'Products',
-            children: [
-              {
-                type: 'link',
-                label: 'Products',
-                route: namedRoutesService.getRoute('admin_products_list'),
-                icon: icAssigment
-              },
-              {
-                type: 'link',
-                label: 'Supplier Products',
-                route: namedRoutesService.getRoute('admin_supplier-products_list'),
-                icon: icAssigment
-              },
-              {
-                type: 'link',
-                label: 'Channel Products',
-                route: namedRoutesService.getRoute('admin_channel-products_list'),
-                icon: icAssigment
-              },
-
-            ]
+            type: 'link',
+            label: 'My Shopping',
+            route: namedRoutesService.getRoute('admin_orders_list'),
+            icon: icShoppingCart
           },
           {
             type: 'link',
-            label: 'Feeds',
-            route: namedRoutesService.getRoute('admin_feeds_list'),
+            label: 'Smart Parcel Box',
+            route: namedRoutesService.getRoute('admin_smart-parcel-box_detail', {id: 'me'}),
             icon: icAssigment
           },
           {
-          type: 'subheading',
-          label: 'Config',
-          children: [
-            {
-              type: 'link',
-              label: 'Channels',
-              route: namedRoutesService.getRoute('admin_channels_list'),
-              icon: icAssigment
-            },
-            {
-              type: 'link',
-              label: 'Channel Settings',
-              route: namedRoutesService.getRoute('admin_channel-settings_list'),
-              icon: icAssigment
-            },
-            {
-              type: 'link',
-              label: 'Suppliers',
-              route: namedRoutesService.getRoute('admin_suppliers_list'),
-              icon: icAssigment
-            },
-            {
-              type: 'link',
-              label: 'Supplier Settings',
-              route: namedRoutesService.getRoute('admin_supplier-settings_list'),
-              icon: icAssigment
-            },
-          ]
-        },
+            type: 'link',
+            label: 'Connect Retailer',
+            route: namedRoutesService.getRoute('admin_storeconnections_list'),
+            icon: icWifi
+          },
           {
-            type: 'subheading',
-            label: 'Admin',
-            children: [
-                {
-                    type: 'link',
-                    label: 'Users',
-                    route: namedRoutesService.getRoute('admin_users_list'),
-                    icon: icAssigment
-                },
-              {
-                type: 'link',
-                label: 'User Groups',
-                route: namedRoutesService.getRoute('admin_userGroups_list'),
-                icon: icAssigment
-              }
-            ]
-        },
+            type: 'link',
+            label: 'Settings',
+            route: namedRoutesService.getRoute('admin_settings_list'),
+            icon: icSettings
+          },
           {
-            type: 'subheading',
-            label: 'Log',
-            children: [
-              {
-                type: 'link',
-                label: 'Cron Log',
-                route: namedRoutesService.getRoute('admin_cron-logs_list'),
-                icon: icAssigment
-              },
-              {
-                type: 'link',
-                label: 'Channel Request Log',
-                route: namedRoutesService.getRoute('admin_channel-request-logs_list'),
-                icon: icAssigment
-              }
-            ]
-          });
+            type: 'link',
+            label: 'Help & Feedback',
+            route: namedRoutesService.getRoute('admin_pages_list'),
+            icon: icHelp
+          },
+          {
+            type: 'link',
+            label: 'Sign Out',
+            route: namedRoutesService.getRoute('signout_detail'),
+            icon: icExitToApp
+          }
+          );
     }
     return items;
 };

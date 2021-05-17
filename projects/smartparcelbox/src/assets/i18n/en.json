@@ -1,0 +1,103 @@
+{
+  "HELLO": "hello {{value}}",
+  "register": {
+    "post": {
+      "success": "Thank you for signing up"
+    }
+  },
+  "profile": {
+    "update": {
+      "success": "You password has been reset!"
+    }
+  },
+  "myprofile": {
+    "update": {
+      "success": "Your profile has been updated successfully "
+    }
+  },
+  "myspbox": {
+    "update": {
+      "success": "Address & Location Updated Successfully"
+    },
+    "delete": {
+      "success": "Smart Parcel Box deleted successfully"
+    }
+  },
+  "orders": {
+    "update": {
+      "success": "Order updated successfully"
+    },
+    "post": {
+      "success": "Order added successfully"
+    },
+    "delete": {
+      "success": "Order deleted successfully"
+    }
+  },
+  "orderitems": {
+    "update": {
+      "success": "Item updated successfully"
+    },
+    "post": {
+      "success": "Item added successfully"
+    },
+    "delete": {
+      "success": "Item deleted successfully"
+    }
+  },
+  "shipments": {
+    "update": {
+      "success": "Tracking updated successfully"
+    },
+    "post": {
+      "success": "Tracking added successfully"
+    },
+    "delete": {
+      "success": "Tracking deleted successfully"
+    }
+  },
+  "tickets": {
+    "update": {
+      "success": "Process return updated successfully"
+    },
+    "post": {
+      "success": "Process return added successfully"
+    },
+    "delete": {
+      "success": "Process return deleted successfully"
+    }
+  },
+  "forgotpassword": {
+    "update": {
+      "success": "Process return updated successfully"
+    },
+    "post": {
+      "success": "Reset mail has been sent"
+    },
+    "delete": {
+      "success": "Process return deleted successfully"
+    }
+  },
+  "resetpassword": {
+    "update": {
+      "success": "Process return updated successfully"
+    },
+    "post": {
+      "success": "Password reset successfully"
+    },
+    "delete": {
+      "success": "Process return deleted successfully"
+    }
+  },
+  "channelaccesstokens": {
+    "update": {
+      "success": "Connected successfully"
+    },
+    "post": {
+      "success": "Connected successfully"
+    },
+    "delete": {
+      "success": "Deleted successfully"
+    }
+  }
+}
